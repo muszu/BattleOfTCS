@@ -22,7 +22,7 @@ public class HexMapElement implements GameObject {
     public boolean isRed;
     public boolean isGreen;
     public boolean isYellow;
-    public boolean inRangeOfShot;
+    public Boolean inRangeOfShot;
     public final static Image imgHexRed = new ImageIcon(Menu.class.getResource("images/hexred.png")).getImage();
     public final static Image imgHexYellow = new ImageIcon(Menu.class.getResource("images/hexyellow.png")).getImage();
     public final static Image imgHexGreen = new ImageIcon(Menu.class.getResource("images/hexgreen.png")).getImage();
@@ -56,6 +56,7 @@ public class HexMapElement implements GameObject {
 	    isGreen = false;
 	    isYellow = false;
 	    isShadow = false;
+	    inRangeOfShot=false;
 	}
 	
 	public HexMapElement(boolean center, int centerX, int centerY) {
@@ -70,6 +71,7 @@ public class HexMapElement implements GameObject {
 	    isGreen = false;
 	    isYellow = false;
 	    isShadow = false;
+	    inRangeOfShot=false;
 	}
 	
 	public boolean contains(int x, int y) {
@@ -89,24 +91,28 @@ public class HexMapElement implements GameObject {
 		else
 			isShadow=false;
 	}
+	
 	public void red(boolean yesOrNo) {
 		if(yesOrNo)
 			isRed=true;
 		else
 			isRed=false;
 	}
+	
 	public void green(boolean yesOrNo) {
 		if(yesOrNo)
 			isGreen=true;
 		else
 			isGreen=false;
 	}
+	
 	public void yellow(boolean yesOrNo) {
 		if(yesOrNo)
 			isYellow=true;
 		else
 			isYellow=false;
 	}
+	
 	public void clearColor(){
 		isRed = false;
 		isGreen = false;
@@ -155,6 +161,9 @@ public class HexMapElement implements GameObject {
 
 	public int getHeight() {
 		return img.getHeight(null);
+	}
+	public void inRangeOfShot(){
+		inRangeOfShot=true;
 	}
 	
 	public void drawIt(Graphics g){

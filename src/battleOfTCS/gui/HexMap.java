@@ -119,7 +119,7 @@ public class HexMap {
 			HexMapElement hex = hexes.get(id);
 			if(hex.unit != null && hex.unit.getOwner() != cell.unit.getOwner()){
 				hex.yellow(true);
-				hex.inRangeOfShot=true;
+				hex.inRangeOfShot();
 			}
 			
 			for(HexMapElement neigh : hex.Neighbours) {

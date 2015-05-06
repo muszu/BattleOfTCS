@@ -158,6 +158,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			if(clickUnit != null){
 				game.refresh();
 				panel.repaint();
+
 				for(HexMapElement hex : map.hexes){
 					if( hex.inRangeOfShot && hex.contains(x, y) ){
 						hex.unit.attack(clickUnit.getAttack());
@@ -183,6 +184,8 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				this.units.add(this.clickUnit);
 				clickUnit=null;
 			}
+			for(HexMapElement hex : map.hexes)
+				hex.inRangeOfShot=false;
 
 		}
 		else{ //select unit
