@@ -127,7 +127,5 @@ public class HexMap {
 				}
 			}			
 		}
-		
-		cell.setImage(HexMapElement.imgHexMarked);
 	}
 }
