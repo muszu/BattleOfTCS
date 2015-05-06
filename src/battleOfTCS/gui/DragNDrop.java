@@ -59,7 +59,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 	public void mouseReleased(MouseEvent evt) {
 		if(dragUnit!=null){
 			for(HexMapElement hex : map.hexes){
-				if( hex.contains(evt.getX(), evt.getY()) && hex.getImage().toString().equals(HexMapElement.imgHexNeigh.toString())){
+				if( hex.contains(evt.getX(), evt.getY()) && hex.isRed ){
 					if(lastHex!=null){
 						lastHexPosition.shadow(false);
 						lastHexPosition.unit=null;
@@ -72,7 +72,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					this.dragUnit.setY(hex.getCenterY()-dragUnit.getHeight()/2);
 					this.dragUnit=null;
 					for(HexMapElement hexik : map.hexes){
-						hexik.setImage(HexMapElement.imgHex);
+						hexik.clearColor();
 						hexik.shadow(false);
 					}
 					break;
@@ -84,7 +84,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				dragUnit=null;
 				clickUnit=null;
 				for(HexMapElement hexik : map.hexes){
-					hexik.setImage(HexMapElement.imgHex);
+					hexik.clearColor();
 					hexik.shadow(false);
 				}
 			}
@@ -128,14 +128,14 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			clickUnit=null;
 			lastHexPosition=null;
 			for(HexMapElement hexik : map.hexes){
-				hexik.setImage(HexMapElement.imgHex);
+				hexik.clearColor();
 				hexik.shadow(false);
 			}
 		}
 		else
 		if(this.clickUnit != null){ //move unit
 			for(HexMapElement hex : map.hexes){
-				if( hex.contains(x, y)  && hex.getImage().toString().equals(HexMapElement.imgHexNeigh.toString()) ){
+				if( hex.contains(x, y)  && hex.isRed ){
 					if(lastHexPosition!=null){
 						lastHexPosition.occupied=false;
 						lastHexPosition.unit=null;
@@ -148,28 +148,28 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					this.clickUnit.setY(hex.getCenterY()-clickUnit.getHeight()/2);
 					this.clickUnit=null;
 					for(HexMapElement hexik : map.hexes){
-						hexik.setImage(HexMapElement.imgHex);
+						hexik.clearColor();
 						hexik.shadow(false);
 					}
 					break;
 				}	
 			}
 			//atack
-			if(this.clickUnit != null){
+			if(clickUnit != null){
+				game.refresh();
+				panel.repaint();
 				for(HexMapElement hex : map.hexes){
-					if( hex.contains(x, y)  && hex.unit!=null ){
-						if(hex.unit.getOwner()!=game.getTurn()){
-							hex.unit.attack(clickUnit.getAttack());
-							hex.unit.setMyHex(hex);
-							game.turnList.remove(clickUnit);
-							game.refresh();
-							panel.repaint();
-						}
+					if( hex.inRangeOfShot && hex.contains(x, y) ){
+						hex.unit.attack(clickUnit.getAttack());
+						hex.unit.setMyHex(hex);
+						game.turnList.remove(clickUnit);
+						game.refresh();
+						panel.repaint();
 						break;
 					}
 				}
 				for(HexMapElement hexik : map.hexes){
-					hexik.setImage(HexMapElement.imgHex);
+					hexik.clearColor();
 					hexik.shadow(false);
 				}
 			
@@ -225,13 +225,6 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					if(lastHex!=null){
 						hex.shadow(true);
 						lastHex.shadow(false);
-						/*
-						 * Test colors :)
-						 * 
-						 */
-						hex.red(true);
-						//hex.yellow(true);
-						//hex.green(true);
 						lastHex=hex;
 					}
 					else{

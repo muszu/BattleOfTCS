@@ -86,7 +86,7 @@ public class HexMap {
 				break;
 			
 			HexMapElement hex = hexes.get(id);
-			hex.setImage(HexMapElement.imgHexNeigh);
+			hex.red(true);
 			
 			for(HexMapElement neigh : hex.Neighbours) {
 				if(dist.get(neigh.id).equals(-1) && neigh.occupied == false) {
@@ -117,8 +117,10 @@ public class HexMap {
 				break;
 			
 			HexMapElement hex = hexes.get(id);
-			if(hex.unit != null && hex.unit.getOwner() != cell.unit.getOwner())
-				hex.setImage(HexMapElement.imgHexShot);
+			if(hex.unit != null && hex.unit.getOwner() != cell.unit.getOwner()){
+				hex.yellow(true);
+				hex.inRangeOfShot=true;
+			}
 			
 			for(HexMapElement neigh : hex.Neighbours) {
 				if(dist.get(neigh.id).equals(-1)) {

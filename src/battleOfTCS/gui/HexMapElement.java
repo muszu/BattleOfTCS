@@ -22,6 +22,7 @@ public class HexMapElement implements GameObject {
     public boolean isRed;
     public boolean isGreen;
     public boolean isYellow;
+    public boolean inRangeOfShot;
     public final static Image imgHexRed = new ImageIcon(Menu.class.getResource("images/hexred.png")).getImage();
     public final static Image imgHexYellow = new ImageIcon(Menu.class.getResource("images/hexyellow.png")).getImage();
     public final static Image imgHexGreen = new ImageIcon(Menu.class.getResource("images/hexgreen.png")).getImage();
@@ -51,6 +52,10 @@ public class HexMapElement implements GameObject {
 		this.centerX = this.x + width/2;
 		this.centerY = this.y + side;
 		this.occupied = false;
+		isRed  = false;
+	    isGreen = false;
+	    isYellow = false;
+	    isShadow = false;
 	}
 	
 	public HexMapElement(boolean center, int centerX, int centerY) {
@@ -61,6 +66,10 @@ public class HexMapElement implements GameObject {
 		this.x = this.centerX - width/2;
 		this.y = this.centerY - side;
 		this.occupied = false;
+	    isRed  = false;
+	    isGreen = false;
+	    isYellow = false;
+	    isShadow = false;
 	}
 	
 	public boolean contains(int x, int y) {
@@ -73,18 +82,6 @@ public class HexMapElement implements GameObject {
 		else return false;
 	}
 	
-	public void switchImgs() {
-		if(this.img == imgHex) {
-			this.img = imgHexMarked;
-			for(HexMapElement neigh : Neighbours)
-				neigh.setImage(imgHexNeigh);
-		}
-		else {
-			this.img = imgHex;
-			for(HexMapElement neigh : Neighbours)
-				neigh.setImage(imgHex);
-		}
-	}
 	
 	public void shadow(boolean yesOrNo) {
 		if(yesOrNo)
@@ -109,6 +106,11 @@ public class HexMapElement implements GameObject {
 			isYellow=true;
 		else
 			isYellow=false;
+	}
+	public void clearColor(){
+		isRed = false;
+		isGreen = false;
+		isYellow = false;
 	}
 	
 	public Image getImage() {

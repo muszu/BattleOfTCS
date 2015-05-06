@@ -260,14 +260,10 @@ public class Menu {
 		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeKeyStroke, "ESCAPE");
 		frame.getRootPane().getActionMap().put("ESCAPE", escapeAction);
 		
-		ImageIcon sourceBackGround = new ImageIcon(Menu.class.getResource("images/backbroundmenuv3.jpg"));
-		ImageIcon sourceBackGroundGame = new ImageIcon(Menu.class.getResource("images/backbroundmenu.png"));
-		ImageIcon sourceBackGroundPrim = new ImageIcon(Menu.class.getResource("images/backbroundmenuprim.png"));
-        final Image backGround = sourceBackGround.getImage();
-        final Image backGroundGame = sourceBackGroundGame.getImage();
-        final Image backGroundPrim = sourceBackGroundPrim.getImage();
-        ImageIcon sourceOlaBackGround = new ImageIcon(Menu.class.getResource("images/background.png"));
-        final Image olaBackGround = sourceOlaBackGround.getImage();
+        final Image backGround = new ImageIcon(Menu.class.getResource("images/backbroundmenuv3.jpg")).getImage();
+        final Image backGroundGame = new ImageIcon(Menu.class.getResource("images/backbroundmenu.png")).getImage();
+        final Image backGroundPrim =  new ImageIcon(Menu.class.getResource("images/backbroundmenuprim.png")).getImage();
+        final Image olaBackGround = new ImageIcon(Menu.class.getResource("images/background.png")).getImage();
         
         @SuppressWarnings("serial")
 		class JPanelBackground extends JPanel{
@@ -280,12 +276,10 @@ public class Menu {
         				g.drawImage(backGround, 0, 0, this.getWidth(), this.getHeight(), this);
         			if(mode==3){
         				g.drawImage(olaBackGround, 0, 0, this.getWidth(), this.getHeight(), this);
-        				for (HexMapElement hex : map.hexes){
+        				for (HexMapElement hex : map.hexes)
         					hex.drawIt(g);
-        				}
-        				for (Unit unit : units) {
+        				for (Unit unit : units)
         					unit.drawIt(g,true);
-        				}
         				game.paint(g);
         			}
         			if(mode==4)
