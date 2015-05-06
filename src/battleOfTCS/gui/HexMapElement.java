@@ -1,5 +1,6 @@
 package battleOfTCS.gui;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
 
@@ -18,6 +19,12 @@ public class HexMapElement implements GameObject {
     private static ImageIcon sourceHexShadow = new ImageIcon(Menu.class.getResource("images/hexshadow.png"));
     public final static Image imgHexShadow = sourceHexShadow.getImage();
     public boolean isShadow;
+    public boolean isRed;
+    public boolean isGreen;
+    public boolean isYellow;
+    public final static Image imgHexRed = new ImageIcon(Menu.class.getResource("images/hexred.png")).getImage();
+    public final static Image imgHexYellow = new ImageIcon(Menu.class.getResource("images/hexyellow.png")).getImage();
+    public final static Image imgHexGreen = new ImageIcon(Menu.class.getResource("images/hexgreen.png")).getImage();
     
     private static int idCounter = 0;
 	public static int width = imgHex.getWidth(null);
@@ -79,11 +86,29 @@ public class HexMapElement implements GameObject {
 		}
 	}
 	
-	public void shadow() {
-		if(isShadow)
-			isShadow=false;
-		else
+	public void shadow(boolean yesOrNo) {
+		if(yesOrNo)
 			isShadow=true;
+		else
+			isShadow=false;
+	}
+	public void red(boolean yesOrNo) {
+		if(yesOrNo)
+			isRed=true;
+		else
+			isRed=false;
+	}
+	public void green(boolean yesOrNo) {
+		if(yesOrNo)
+			isGreen=true;
+		else
+			isGreen=false;
+	}
+	public void yellow(boolean yesOrNo) {
+		if(yesOrNo)
+			isYellow=true;
+		else
+			isYellow=false;
 	}
 	
 	public Image getImage() {
@@ -128,6 +153,18 @@ public class HexMapElement implements GameObject {
 
 	public int getHeight() {
 		return img.getHeight(null);
+	}
+	
+	public void drawIt(Graphics g){
+		g.drawImage(img, x, y, null);
+		if(isShadow)
+			g.drawImage(HexMapElement.imgHexShadow, x,y, null);
+		if(isRed)
+			g.drawImage(HexMapElement.imgHexRed, x,y, null);
+		if(isGreen)
+			g.drawImage(HexMapElement.imgHexGreen, x,y, null);
+		if(isYellow)
+			g.drawImage(HexMapElement.imgHexYellow, x,y, null);
 	}
 
 }

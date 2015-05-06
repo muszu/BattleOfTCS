@@ -1,5 +1,4 @@
 package battleOfTCS.gui;
-
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -62,7 +61,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			for(HexMapElement hex : map.hexes){
 				if( hex.contains(evt.getX(), evt.getY()) && hex.getImage().toString().equals(HexMapElement.imgHexNeigh.toString())){
 					if(lastHex!=null){
-						lastHexPosition.shadow();
+						lastHexPosition.shadow(false);
 						lastHexPosition.unit=null;
 						lastHexPosition.occupied=false;
 						lastHexPosition=null;
@@ -74,8 +73,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					this.dragUnit=null;
 					for(HexMapElement hexik : map.hexes){
 						hexik.setImage(HexMapElement.imgHex);
-						if(hexik.isShadow)
-							hexik.shadow();
+						hexik.shadow(false);
 					}
 					break;
 				}
@@ -87,8 +85,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				clickUnit=null;
 				for(HexMapElement hexik : map.hexes){
 					hexik.setImage(HexMapElement.imgHex);
-					if(hexik.isShadow)
-						hexik.shadow();
+					hexik.shadow(false);
 				}
 			}
 			this.panel.repaint();
@@ -108,12 +105,12 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			if(hex.contains(x, y)) {
 				if(lastHex!=hex){
 					if(lastHex!=null){
-						hex.shadow();
-						lastHex.shadow();
+						hex.shadow(true);
+						lastHex.shadow(false);
 						lastHex=hex;
 					}
 					else{
-						hex.shadow();
+						hex.shadow(true);
 						lastHex=hex;
 					}
 					this.panel.repaint();
@@ -132,8 +129,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			lastHexPosition=null;
 			for(HexMapElement hexik : map.hexes){
 				hexik.setImage(HexMapElement.imgHex);
-				if(hexik.isShadow)
-					hexik.shadow();
+				hexik.shadow(false);
 			}
 		}
 		else
@@ -153,8 +149,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					this.clickUnit=null;
 					for(HexMapElement hexik : map.hexes){
 						hexik.setImage(HexMapElement.imgHex);
-						if(hexik.isShadow)
-							hexik.shadow();
+						hexik.shadow(false);
 					}
 					break;
 				}	
@@ -175,8 +170,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				}
 				for(HexMapElement hexik : map.hexes){
 					hexik.setImage(HexMapElement.imgHex);
-					if(hexik.isShadow)
-						hexik.shadow();
+					hexik.shadow(false);
 				}
 			
 				
@@ -229,12 +223,19 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				if(lastHex!=hex){
 					Game.selectedUnit=hex.unit;
 					if(lastHex!=null){
-						hex.shadow();
-						lastHex.shadow();
+						hex.shadow(true);
+						lastHex.shadow(false);
+						/*
+						 * Test colors :)
+						 * 
+						 */
+						hex.red(true);
+						//hex.yellow(true);
+						//hex.green(true);
 						lastHex=hex;
 					}
 					else{
-						hex.shadow();
+						hex.shadow(true);
 						lastHex=hex;
 					}
 					this.panel.repaint();

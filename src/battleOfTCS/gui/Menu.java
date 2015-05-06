@@ -281,10 +281,7 @@ public class Menu {
         			if(mode==3){
         				g.drawImage(olaBackGround, 0, 0, this.getWidth(), this.getHeight(), this);
         				for (HexMapElement hex : map.hexes){
-        					g.drawImage(hex.getImage(), hex.getX(), hex.getY(), null);
-        					if(hex.isShadow){
-        						g.drawImage(HexMapElement.imgHexShadow, hex.getX(), hex.getY(), null);
-        					}
+        					hex.drawIt(g);
         				}
         				for (Unit unit : units) {
         					unit.drawIt(g,true);
