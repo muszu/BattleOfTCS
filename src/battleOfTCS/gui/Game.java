@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.LinkedList;
 
-//import java.awt.Image;
-//import javax.swing.ImageIcon;
 
 public class Game {
 	private static int turn;
@@ -15,9 +13,6 @@ public class Game {
 	private int win;
 	private LinkedList<Unit> units;
 	public LinkedList<Unit> turnList;
-	
-	/*ImageIcon boardIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
-    Image boardImg = testImgIcon.getImage();*/
 	
 	public Game(LinkedList<Unit> unitsList){
 		win=0;
@@ -37,7 +32,6 @@ public class Game {
 	
 	public void refresh(){ //need to refresh panel
 		if(turnList.isEmpty()){
-			System.out.println("Change!");
 			for(Unit unit : units){
 				unit.rest();
 			}
