@@ -64,8 +64,10 @@ public class HexMap {
 		hex.setNeighbours(Neighbours);
 	}
 	
-	public void markAvailableBFS(HexMapElement cell, int access) {
-		
+	public void markAvailableBFS(HexMapElement cell, int moveRange, int shotRange) {
+		/*
+		 *  Highlighting cells in the range of move
+		 */
 		ArrayList<Integer> dist = new ArrayList<Integer>();
 		for(int i=0; i<hexes.size(); i++)
 			dist.add(-1);
@@ -80,7 +82,7 @@ public class HexMap {
 				id = queue.removeFirst();
 			else break;
 			
-			if(dist.get(id) > access)
+			if(dist.get(id) > moveRange)
 				break;
 			
 			HexMapElement hex = hexes.get(id);
@@ -93,5 +95,39 @@ public class HexMap {
 				}
 			}			
 		}
+		
+		/*
+		 * Highlighting cells in the range of shot
+		 */
+		
+		queue.clear();
+		dist.clear();
+		for(int i=0; i<hexes.size(); i++)
+			dist.add(-1);
+		dist.set(cell.id, 0);
+		queue.add(cell.id);
+		
+		while(true) {
+			Integer id;
+			if(queue.size() > 0)
+				id = queue.removeFirst();
+			else break;
+			
+			if(dist.get(id) > shotRange)
+				break;
+			
+			HexMapElement hex = hexes.get(id);
+			if(hex.unit != null && hex.unit.getOwner() != cell.unit.getOwner())
+				hex.setImage(HexMapElement.imgHexShot);
+			
+			for(HexMapElement neigh : hex.Neighbours) {
+				if(dist.get(neigh.id).equals(-1)) {
+					dist.set(neigh.id, dist.get(id) + 1);
+					queue.add(neigh.id);
+				}
+			}			
+		}
+		
+		cell.setImage(HexMapElement.imgHexMarked);
 	}
 }

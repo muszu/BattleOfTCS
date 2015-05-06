@@ -99,6 +99,7 @@ public class Game {
 			g.drawString("Unit owner " + this.getOwnerName(selectedUnit.getOwner()), 30, 30);
 			g.drawString("Atack: " + selectedUnit.getAttack(), 30, 40);
 			g.drawString("Move: " + selectedUnit.getMaxMovePoint(), 30, 50);
+			g.drawString("Shot range: " + selectedUnit.getRange(), 30, 60);
 		}
 	}
 

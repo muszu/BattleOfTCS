@@ -15,14 +15,16 @@ public class Unit implements GameObject {
 	private int owner;
 	private int maxMovePoint;
 	private int movePoint;
+	private int range;
 	private HexMapElement myHex;
 
-	public Unit(Image img, int x, int y, int maxHealth) {
+	public Unit(Image img, int x, int y, int maxHealth, int range) {
 		this.img = img;
 		this.x = x;
 		this.y = y;
 		this.maxHealth = maxHealth;
 		this.health = maxHealth;
+		this.range = range;
 	}
 	
 	public Image getImage() {
@@ -99,6 +101,11 @@ public class Unit implements GameObject {
 	public int getMovePoint() {
 		return movePoint;
 	}
+	
+	public int getRange() {
+		return range;
+	}
+	
 	void substractMovePoint(int substracter) {
 		movePoint=movePoint--;
 	}

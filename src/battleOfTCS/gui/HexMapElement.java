@@ -13,6 +13,8 @@ public class HexMapElement implements GameObject {
     public final static Image imgHexMarked = sourceHexMarked.getImage();
     private static ImageIcon sourceHexNeigh = new ImageIcon(Menu.class.getResource("images/hexneigh.png"));
     public final static Image imgHexNeigh = sourceHexNeigh.getImage();
+    private static ImageIcon sourceHexShot = new ImageIcon(Menu.class.getResource("images/hexshot.png"));
+    public final static Image imgHexShot = sourceHexShot.getImage();
     private static ImageIcon sourceHexShadow = new ImageIcon(Menu.class.getResource("images/hexshadow.png"));
     public final static Image imgHexShadow = sourceHexShadow.getImage();
     public boolean isShadow;

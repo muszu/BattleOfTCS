@@ -42,7 +42,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				this.dragOffsetX = x - dragUnit.getX();
 				this.dragOffsetY = y - dragUnit.getY();
 				this.dragUnit = hex.unit;
-				map.markAvailableBFS(hex, dragUnit.getMovePoint());		
+				map.markAvailableBFS(hex, dragUnit.getMovePoint(), dragUnit.getRange());		
 				break;
 			}
 		}
@@ -198,7 +198,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					if(game.turnList.contains(hex.unit)){
 						lastHexPosition=hex;
 						this.clickUnit = hex.unit;
-						map.markAvailableBFS(hex, clickUnit.getMovePoint());	
+						map.markAvailableBFS(hex, clickUnit.getMovePoint(), clickUnit.getRange());	
 						break;
 					}
 				}
