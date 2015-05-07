@@ -3,11 +3,13 @@ package battleOfTCS.gui;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
 public class HexMapElement implements GameObject {
 	
+	Random generator = new Random();
 	private static ImageIcon sourceHex = new ImageIcon(Menu.class.getResource("images/hex.png"));
     public final static Image imgHex = sourceHex.getImage();
     private static ImageIcon sourceHexMarked = new ImageIcon(Menu.class.getResource("images/hexmarked.png"));
@@ -26,6 +28,11 @@ public class HexMapElement implements GameObject {
     public final static Image imgHexRed = new ImageIcon(Menu.class.getResource("images/hexred.png")).getImage();
     public final static Image imgHexYellow = new ImageIcon(Menu.class.getResource("images/hexyellow.png")).getImage();
     public final static Image imgHexGreen = new ImageIcon(Menu.class.getResource("images/hexgreen.png")).getImage();
+    public final static Image imgHexForest = new ImageIcon(Menu.class.getResource("images/hex_forest.png")).getImage();
+    public final static Image imgHexHill = new ImageIcon(Menu.class.getResource("images/hex_hill.png")).getImage();
+    public final static Image imgHexGrass1 = new ImageIcon(Menu.class.getResource("images/hex_grass1.png")).getImage();
+    public final static Image imgHexGrass2 = new ImageIcon(Menu.class.getResource("images/hex_grass2.png")).getImage();
+    
     
     private static int idCounter = 0;
 	public static int width = imgHex.getWidth(null);
@@ -42,7 +49,7 @@ public class HexMapElement implements GameObject {
 	private int centerY;
 	public LinkedList<HexMapElement> Neighbours;
 	public boolean occupied;
-
+	
 	public HexMapElement(int x, int y) {
 		this.id = idCounter ++;
 		this.unit=null;
@@ -61,7 +68,24 @@ public class HexMapElement implements GameObject {
 	
 	public HexMapElement(boolean center, int centerX, int centerY) {
 		this.id = idCounter ++;
-		this.img = imgHex;
+		int choosing = generator.nextInt(4);
+		switch (choosing) {
+		case 0:
+			this.img = imgHexGrass1;
+			break;
+		case 1:
+			this.img = imgHexGrass2;
+			break;
+		case 2:
+			this.img = imgHexHill;
+			break;
+		case 3:
+			this.img = imgHexForest;
+			break;
+		default:
+			this.img = imgHex;
+			break;
+		}
 		this.centerX = centerX;
 		this.centerY = centerY;
 		this.x = this.centerX - width/2;
