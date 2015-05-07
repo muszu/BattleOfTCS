@@ -31,6 +31,14 @@ public class Game {
 	}
 	
 	public void refresh(){ //need to refresh panel
+		for(Unit unit : units){
+			if(unit.getHealth()<=0){
+				unit.getMyHex().occupied=false;
+				unit.getMyHex().unit=null;
+				units.remove(unit);
+				break;
+			}
+		}
 		if(turnList.isEmpty()){
 			for(Unit unit : units){
 				unit.rest();
@@ -50,14 +58,6 @@ public class Game {
 						turnList.add(addme);
 				if(turnList.isEmpty())
 					win=2;
-			}
-		}
-		for(Unit unit : units){
-			if(unit.getHealth()<=0){
-				unit.getMyHex().occupied=false;
-				unit.getMyHex().unit=null;
-				units.remove(unit);
-				turnList.remove(unit);
 			}
 		}
 		int winA,winB;
