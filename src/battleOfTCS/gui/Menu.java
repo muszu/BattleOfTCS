@@ -24,7 +24,7 @@ import net.miginfocom.swing.MigLayout;
 public class Menu {
 	public static int mode;
 		
-	static LinkedList<Unit> units = new LinkedList<>();
+	static LinkedList<Unit> units;
 	private HexMap map = new HexMap();
 	private JFrame frame;
 	private Game game;
@@ -167,6 +167,7 @@ public class Menu {
 	
 	
 	void modeGame(final JPanel panel){
+		units = new LinkedList<>();
 		mode=3;
 		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
         Image testImg = testImgIcon.getImage();
@@ -226,7 +227,7 @@ public class Menu {
                 modeMenu(panel);
             }
 	    	});
-			//panel.add(btnBack,  "cell 0 2, width 150:250:300, height 30:50:80");
+			panel.add(btnBack,  "cell 0 2, width 150:250:300, height 30:50:80");
 			panel.invalidate();
 		    panel.validate();
 		    panel.repaint();

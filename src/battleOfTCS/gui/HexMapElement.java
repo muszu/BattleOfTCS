@@ -4,35 +4,30 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
 
 public class HexMapElement implements GameObject {
 	
 	Random generator = new Random();
-	private static ImageIcon sourceHex = new ImageIcon(Menu.class.getResource("images/hex.png"));
-    public final static Image imgHex = sourceHex.getImage();
-    private static ImageIcon sourceHexMarked = new ImageIcon(Menu.class.getResource("images/hexmarked.png"));
-    public final static Image imgHexMarked = sourceHexMarked.getImage();
-    private static ImageIcon sourceHexNeigh = new ImageIcon(Menu.class.getResource("images/hexneigh.png"));
-    public final static Image imgHexNeigh = sourceHexNeigh.getImage();
-    private static ImageIcon sourceHexShot = new ImageIcon(Menu.class.getResource("images/hexshot.png"));
-    public final static Image imgHexShot = sourceHexShot.getImage();
-    private static ImageIcon sourceHexShadow = new ImageIcon(Menu.class.getResource("images/hexshadow.png"));
-    public final static Image imgHexShadow = sourceHexShadow.getImage();
+	
     public boolean isShadow;
     public boolean isRed;
     public boolean isGreen;
     public boolean isYellow;
-    public Boolean inRangeOfShot;
+    public boolean inRangeOfShot;
+    
+    public final static Image imgHex =new ImageIcon(Menu.class.getResource("images/hex.png")).getImage();
+    public final static Image imgHexMarked =  new ImageIcon(Menu.class.getResource("images/hexmarked.png")).getImage();
+    public final static Image imgHexNeigh =new ImageIcon(Menu.class.getResource("images/hexneigh.png")).getImage();
+    public final static Image imgHexShot = new ImageIcon(Menu.class.getResource("images/hexshot.png")).getImage();
+    public final static Image imgHexShadow = new ImageIcon(Menu.class.getResource("images/hexshadow.png")).getImage();
     public final static Image imgHexRed = new ImageIcon(Menu.class.getResource("images/hexred.png")).getImage();
     public final static Image imgHexYellow = new ImageIcon(Menu.class.getResource("images/hexyellow.png")).getImage();
     public final static Image imgHexGreen = new ImageIcon(Menu.class.getResource("images/hexgreen.png")).getImage();
-    public final static Image imgHexForest = new ImageIcon(Menu.class.getResource("images/hex_forest.png")).getImage();
+    public final static Image imgHexForest = new ImageIcon(Menu.class.getResource("images/hex_forest1.png")).getImage();
     public final static Image imgHexHill = new ImageIcon(Menu.class.getResource("images/hex_hill.png")).getImage();
-    public final static Image imgHexGrass1 = new ImageIcon(Menu.class.getResource("images/hex_grass1.png")).getImage();
-    public final static Image imgHexGrass2 = new ImageIcon(Menu.class.getResource("images/hex_grass2.png")).getImage();
-    
+    public final static Image imgHexGrass1 = new ImageIcon(Menu.class.getResource("images/hex_grass6.png")).getImage();
+    public final static Image imgHexGrass2 = new ImageIcon(Menu.class.getResource("images/hex_grass6.png")).getImage();
     
     private static int idCounter = 0;
 	public static int width = imgHex.getWidth(null);
