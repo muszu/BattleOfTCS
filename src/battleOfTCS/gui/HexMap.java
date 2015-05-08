@@ -76,17 +76,12 @@ public class HexMap {
 		LinkedList<Integer> queue = new LinkedList<Integer>();
 		queue.add(cell.id);
 		
-		while(true) {
-			Integer id;
-			if(queue.size() > 0)
-				id = queue.removeFirst();
-			else break;
-			
-			if(dist.get(id) > moveRange)
-				break;
-			
+		while(!queue.isEmpty()) {
+			Integer id = queue.removeFirst();
 			HexMapElement hex = hexes.get(id);
-			hex.red(true);
+			
+			if(dist.get(id) <= moveRange)
+				hex.red(true);
 			
 			for(HexMapElement neigh : hex.Neighbours) {
 				if(dist.get(neigh.id).equals(-1) && neigh.occupied == false) {

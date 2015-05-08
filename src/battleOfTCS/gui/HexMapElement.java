@@ -44,6 +44,7 @@ public class HexMapElement implements GameObject {
 	private int centerY;
 	public LinkedList<HexMapElement> Neighbours;
 	public boolean occupied;
+	public Integer distance;
 	
 	public HexMapElement(int x, int y) {
 		this.id = idCounter ++;
@@ -54,6 +55,7 @@ public class HexMapElement implements GameObject {
 		this.centerX = this.x + width/2;
 		this.centerY = this.y + side;
 		this.occupied = false;
+		this.distance = null;
 		isRed  = false;
 	    isGreen = false;
 	    isYellow = false;
@@ -86,6 +88,7 @@ public class HexMapElement implements GameObject {
 		this.x = this.centerX - width/2;
 		this.y = this.centerY - side;
 		this.occupied = false;
+		this.distance = null;
 	    isRed  = false;
 	    isGreen = false;
 	    isYellow = false;
