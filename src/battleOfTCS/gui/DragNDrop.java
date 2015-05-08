@@ -88,10 +88,12 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			//atack
 			if(dragUnit != null){
 				for(HexMapElement hex : map.hexes){
-					if( hex.inRangeOfShot && hex.contains(x, y) ){
-						hex.unit.attack(dragUnit.getAttack());
-						hex.unit.setMyHex(hex);
-						game.turnList.remove(dragUnit);
+					if( hex.contains(x, y) && hex.unit!=null ){
+						if(hex.inRangeOfShot && hex.unit.getOwner() != dragUnit.getOwner()){
+							hex.unit.attack(dragUnit.getAttack());
+							hex.unit.setMyHex(hex);
+							game.turnList.remove(dragUnit);
+						}
 						break;
 					}
 				}
@@ -176,12 +178,14 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			//atack
 			if(clickUnit != null){
 				for(HexMapElement hex : map.hexes){
-					if( hex.inRangeOfShot && hex.contains(x, y) ){
-						hex.unit.attack(clickUnit.getAttack());
-						hex.unit.setMyHex(hex);
-						game.turnList.remove(clickUnit);
-						game.refresh();
-						panel.repaint();
+					if(  hex.contains(x, y) && hex.unit!=null ){
+						if(hex.inRangeOfShot && hex.unit.getOwner() != clickUnit.getOwner()){
+							hex.unit.attack(clickUnit.getAttack());
+							hex.unit.setMyHex(hex);
+							game.turnList.remove(clickUnit);
+							game.refresh();
+							panel.repaint();
+						}
 						break;
 					}
 				}
