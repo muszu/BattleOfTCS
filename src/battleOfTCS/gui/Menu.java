@@ -177,7 +177,7 @@ public class Menu {
 		units.get(0).setAttack(25);;
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,105,220,999,6));
+		units.add(new Unit(testImg,105,220,999,1));
 		units.get(1).setMaxMovePoint(5);
 		units.get(1).setOwner(1);
 		units.get(1).setAttack(42);;
