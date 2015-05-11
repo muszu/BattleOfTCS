@@ -136,14 +136,25 @@ public class Unit implements GameObject {
 	
 	public void attack(Unit attacker){
 		int hit = (int) attacker.getAttack()/(attacker.getMaxMovePoint()/attacker.getMovePoint());
+		// if unit's range is not greater than 1 that means its a meele unit
 		if(hit==0)
 			hit=1;
-		if(myHex.getTerrainType() == HILL)
-			health-=hit*0.8;
-		else if(myHex.getTerrainType() == FOREST)
-			health-=hit*0.6;
-		else
-			health-=hit;
+		if(attacker.range>1){
+			if(myHex.getTerrainType() == FOREST)
+				health-=hit*0.5;
+			else
+				health-=hit;	
+		}
+		else{
+			if(hit==0)
+				hit=1;
+			if(myHex.getTerrainType() == HILL)
+				health-=hit*0.6;
+			else if(myHex.getTerrainType() == FOREST)
+				health-=hit*0.8;
+			else
+				health-=hit;
+		}
 	}	
 
 	public HexMapElement getMyHex() {

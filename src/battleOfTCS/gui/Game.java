@@ -1,8 +1,12 @@
 package battleOfTCS.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.LinkedList;
+
+import javax.swing.ImageIcon;
 
 
 public class Game {
@@ -15,6 +19,13 @@ public class Game {
 	private LinkedList<Unit> units;
 	public LinkedList<Unit> turnList;
 	private HexMap map;
+	
+	public final static Image imgBoard150 =new ImageIcon(Menu.class.getResource("images/board150.png")).getImage();
+	public final static Image imgBoard200 =new ImageIcon(Menu.class.getResource("images/board200.png")).getImage();
+	public final static Image imgBoard250 =new ImageIcon(Menu.class.getResource("images/board250.png")).getImage();
+	
+	private static Font smallFont = new Font ("Garamond", Font.BOLD, 15);
+	private static Font bigFont = new Font ("Garamond", Font.BOLD, 40);
 	
 	public Game(LinkedList<Unit> unitsList, HexMap map){
 		win=0;
@@ -98,14 +109,24 @@ public class Game {
 	
 	public void paint(Graphics g){
 		g.setColor(new Color(90, 90, 90));
-		g.fillRect(412, 20, 200, 40);
+		
+		g.setFont(bigFont);
+		
+		g.drawImage(imgBoard250, 405, 0, null);
 		g.setColor(new Color(255, 255, 255));
 		if(win!=0)
-			g.drawString( win == 1 ? playerA + "'s vicotry!" : playerB + "'s vicotry!", 512, 40);
-		else
-			g.drawString( turn == 1 ? playerA : playerB, 512, 40);
+			g.drawString( win == 1 ? playerA + "'s vicotry!" : playerB + "'s vicotry!", 460, 50);
+		else{
+			if(turn == 1)
+				g.drawString( playerA , 500-(playerA.length()*5), 50);
+			else
+				g.drawString(  playerB, 500-(playerB.length()*5), 50);
+		}
 		g.setColor(new Color(90, 90, 90));
-		g.fillRect(20, 20, 130, 50);
+		g.drawImage(imgBoard200, 5, 5,null);
+		
+		g.setFont(smallFont);
+		
 		g.setColor(new Color(255, 255, 255));
 		if(selectedUnit!=null){
 			g.drawString("Unit owner " + this.getOwnerName(selectedUnit.getOwner()), 30, 30);
