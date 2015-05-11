@@ -13,11 +13,13 @@ public class Game {
 	private int win;
 	private LinkedList<Unit> units;
 	public LinkedList<Unit> turnList;
+	private HexMap map;
 	
-	public Game(LinkedList<Unit> unitsList){
+	public Game(LinkedList<Unit> unitsList, HexMap map){
 		win=0;
 		turnList = new LinkedList<Unit>();
 		this.units=unitsList;
+		this.map = map;
 		for(Unit unit : units){
 			unit.rest();
 		}
@@ -73,6 +75,13 @@ public class Game {
 			win=1;
 		if(winB==1)
 			win=2;
+		
+		for(Unit unit : turnList) {
+			for(HexMapElement hex : map.hexes)
+				if(hex.unit != null && hex.unit.equals(unit))
+					hex.green(true);
+		}
+		
 	}
 	
 	

@@ -193,7 +193,7 @@ public class Menu {
 		units.get(3).setMaxMovePoint(4);
 		units.get(3).setOwner(1);
 		units.get(3).setAttack(30);
-		game = new Game( units );
+		game = new Game( units, map );
 		for( Unit setUnit : units){
 			for(HexMapElement hex : map.hexes){
 				if( hex.contains( setUnit.getX()+setUnit.getWidth()/2, setUnit.getY()+setUnit.getHeight()/2) ){
