@@ -24,8 +24,8 @@ public class Game {
 	public final static Image imgBoard200 =new ImageIcon(Menu.class.getResource("images/board200.png")).getImage();
 	public final static Image imgBoard250 =new ImageIcon(Menu.class.getResource("images/board250.png")).getImage();
 	
-	private static Font smallFont = new Font ("Garamond", Font.BOLD, 15);
-	private static Font bigFont = new Font ("Garamond", Font.BOLD, 40);
+	private static Font smallFont = new Font ("Arial", Font.BOLD, 15);
+	private static Font bigFont = new Font ("Arial", Font.BOLD, 40);
 	
 	public Game(LinkedList<Unit> unitsList, HexMap map){
 		win=0;
@@ -118,9 +118,9 @@ public class Game {
 			g.drawString( win == 1 ? playerA + "'s vicotry!" : playerB + "'s vicotry!", 460, 50);
 		else{
 			if(turn == 1)
-				g.drawString( playerA , 500-(playerA.length()*5), 50);
+				g.drawString( playerA , 502-(playerA.length()*6), 50);
 			else
-				g.drawString(  playerB, 500-(playerB.length()*5), 50);
+				g.drawString(  playerB, 502-(playerB.length()*6), 50);
 		}
 		g.setColor(new Color(90, 90, 90));
 		g.drawImage(imgBoard200, 5, 5,null);
