@@ -25,6 +25,7 @@ public class Game {
 	public final static Image imgBoard250 =new ImageIcon(Menu.class.getResource("images/board250.png")).getImage();
 	
 	private static Font smallFont = new Font ("Arial", Font.BOLD, 15);
+	private static Font mediumFont = new Font ("Arial", Font.BOLD, 25);
 	private static Font bigFont = new Font ("Arial", Font.BOLD, 40);
 	
 	public Game(LinkedList<Unit> unitsList, HexMap map){
@@ -109,14 +110,14 @@ public class Game {
 	
 	public void paint(Graphics g){
 		g.setColor(new Color(90, 90, 90));
-		
-		g.setFont(bigFont);
-		
 		g.drawImage(imgBoard250, 405, 0, null);
 		g.setColor(new Color(255, 255, 255));
-		if(win!=0)
-			g.drawString( win == 1 ? playerA + "'s vicotry!" : playerB + "'s vicotry!", 460, 50);
+		if(win!=0){
+			g.setFont(mediumFont);
+			g.drawString( win == 1 ? playerA + "'s vicotry!" : playerB + "'s vicotry!", 440, 50);
+		}
 		else{
+			g.setFont(bigFont);
 			if(turn == 1)
 				g.drawString( playerA , 502-(playerA.length()*6), 50);
 			else
