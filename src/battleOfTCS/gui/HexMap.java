@@ -73,6 +73,7 @@ public class HexMap {
 			dist.add(-1);
 		
 		dist.set(cell.id, 0);
+		cell.distance = 0;
 		LinkedList<Integer> queue = new LinkedList<Integer>();
 		queue.add(cell.id);
 		
@@ -86,6 +87,7 @@ public class HexMap {
 			for(HexMapElement neigh : hex.Neighbours) {
 				if(dist.get(neigh.id).equals(-1) && neigh.occupied == false) {
 					dist.set(neigh.id, dist.get(id) + 1);
+					neigh.distance = dist.get(neigh.id);
 					queue.add(neigh.id);
 				}
 			}			

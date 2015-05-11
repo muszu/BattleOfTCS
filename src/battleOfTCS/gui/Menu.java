@@ -171,9 +171,22 @@ public class Menu {
 		mode=3;
 		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
         Image testImg = testImgIcon.getImage();
+<<<<<<< HEAD
 		units.add(new Unit(testImg,625,390,50,7,6,25,2));
         testImg = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png")).getImage();
 		units.add(new Unit(testImg,105,220,999,1,5,42,1));
+=======
+		units.add(new Unit(testImg,625,390,50,7));
+		units.get(0).setMaxMovePoint(6);
+		units.get(0).setOwner(2);
+		units.get(0).setAttack(25);;
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,105,220,999,1));
+		units.get(1).setMaxMovePoint(5);
+		units.get(1).setOwner(1);
+		units.get(1).setAttack(42);;
+>>>>>>> origin/master
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
         testImg = testImgIcon.getImage();
 		units.add(new Unit(testImg,675,320,43,5,3,5,2));
