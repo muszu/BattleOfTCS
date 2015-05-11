@@ -242,6 +242,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			if(hex.contains(x, y)) {
 				if(lastHex!=hex){
 					Game.selectedUnit=hex.unit;
+					Game.selectedHex=hex;
 					if(lastHex!=null){
 						hex.shadow(true);
 						lastHex.shadow(false);

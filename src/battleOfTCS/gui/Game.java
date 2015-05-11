@@ -10,6 +10,7 @@ public class Game {
 	private String playerA;
 	private String playerB;
 	public static Unit selectedUnit;
+	public static HexMapElement selectedHex;
 	private int win;
 	private LinkedList<Unit> units;
 	public LinkedList<Unit> turnList;
@@ -103,6 +104,10 @@ public class Game {
 			g.drawString("Atack: " + selectedUnit.getAttack(), 30, 40);
 			g.drawString("Move: " + selectedUnit.getMaxMovePoint(), 30, 50);
 			g.drawString("Shot range: " + selectedUnit.getRange(), 30, 60);
+		}
+		else if(selectedHex != null){
+			g.drawString("Terrain type: " + selectedHex.getTerrainType(), 30, 30);
+			g.drawString("Distance: " + selectedHex.getDistance(), 30, 40);
 		}
 	}
 
