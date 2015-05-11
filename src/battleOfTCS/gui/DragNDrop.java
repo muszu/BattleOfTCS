@@ -70,8 +70,11 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			for(HexMapElement hex : map.hexes){
 				if( hex.contains(x,y) && hex.isRed ){
 					if(lastHex!=null){
-						if(lastHexPosition!=hex)
-							game.turnList.remove(dragUnit);
+						if(lastHexPosition!=hex){
+							dragUnit.move(hex.getDistance());
+							if(dragUnit.getMovePoint()<=0)
+								game.turnList.remove(dragUnit);
+						}
 						lastHexPosition.shadow(false);
 						lastHexPosition.unit=null;
 						lastHexPosition.occupied=false;
@@ -165,7 +168,9 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					lastHexPosition=null;
 					hex.unit=clickUnit;
 					hex.occupied=true;
-					game.turnList.remove(hex.unit);
+					clickUnit.move(hex.getDistance());
+					if(clickUnit.getMovePoint()<=0)
+						game.turnList.remove(hex.unit);
 					clickUnit.setX(hex.getCenterX()-clickUnit.getWidth()/2);
 					clickUnit.setY(hex.getCenterY()-clickUnit.getHeight()/2);
 					clickUnit.setMyHex(hex);

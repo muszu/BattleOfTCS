@@ -140,4 +140,8 @@ public class Unit implements GameObject {
 	public void setMyHex(HexMapElement myHex) {
 		this.myHex = myHex;
 	}
+	
+	public void move(int x){
+		movePoint-=x;
+	}
 }
