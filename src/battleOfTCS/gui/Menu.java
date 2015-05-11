@@ -179,7 +179,20 @@ public class Menu {
 		units.add(new Unit(testImg,675,320,43,5,3,5,2));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,105,100,50,7,4,30,1));
+        units.add(new Unit(testImg,105,100,50,7,4,30,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat2.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,660,170,100,1,2,5,2));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/havycav2.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,130,400,100,4,3,5,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Lantern3.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,300,300,100,2,3,5,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,730,600,100,2,3,5,2));
+		
 		game = new Game( units, map );
 		for( Unit setUnit : units){
 			for(HexMapElement hex : map.hexes){
