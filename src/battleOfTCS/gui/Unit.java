@@ -18,13 +18,16 @@ public class Unit implements GameObject {
 	private int range;
 	private HexMapElement myHex;
 
-	public Unit(Image img, int x, int y, int maxHealth, int range) {
+	public Unit(Image img, int x, int y, int maxHealth, int range, int maxMovePoint, int attack, int owner) {
 		this.img = img;
 		this.x = x;
 		this.y = y;
 		this.maxHealth = maxHealth;
 		this.health = maxHealth;
 		this.range = range;
+		this.maxMovePoint = maxMovePoint;
+		this.attack = attack;
+		this.owner = owner;
 	}
 	
 	public Image getImage() {

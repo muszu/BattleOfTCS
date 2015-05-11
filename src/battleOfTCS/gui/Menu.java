@@ -171,33 +171,21 @@ public class Menu {
 		mode=3;
 		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
         Image testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,625,390,50,7));
-		units.get(0).setMaxMovePoint(6);
-		units.get(0).setOwner(2);
-		units.get(0).setAttack(25);;
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png"));
-        testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,105,220,999,6));
-		units.get(1).setMaxMovePoint(5);
-		units.get(1).setOwner(1);
-		units.get(1).setAttack(42);;
+		units.add(new Unit(testImg,625,390,50,7,6,25,2));
+        testImg = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png")).getImage();
+		units.add(new Unit(testImg,105,220,999,1,5,42,1));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,675,320,43,5));
-		units.get(2).setMaxMovePoint(3);
-		units.get(2).setOwner(2);
-		units.get(2).setAttack(5);;
+		units.add(new Unit(testImg,675,320,43,5,3,5,2));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,105,100,50,7));
-		units.get(3).setMaxMovePoint(4);
-		units.get(3).setOwner(1);
-		units.get(3).setAttack(30);
+		units.add(new Unit(testImg,105,100,50,7,4,30,1));
 		game = new Game( units, map );
 		for( Unit setUnit : units){
 			for(HexMapElement hex : map.hexes){
 				if( hex.contains( setUnit.getX()+setUnit.getWidth()/2, setUnit.getY()+setUnit.getHeight()/2) ){
 					hex.unit=setUnit;
+					setUnit.setMyHex(hex);
 					hex.occupied=true;
 					setUnit.setX(hex.getCenterX()-setUnit.getWidth()/2);
 					setUnit.setY(hex.getCenterY()-setUnit.getHeight()/2);
@@ -239,7 +227,7 @@ public class Menu {
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1024, 768);
 		frame.setResizable(false);
-		//frame.setBounds(0, 0, 1680, 1050);
+		//frame.setBounds(0, 0, 1366, 768);
 		//frame.setUndecorated(true);      //FULLSCREEN
 		
 		

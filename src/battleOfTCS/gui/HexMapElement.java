@@ -44,24 +44,12 @@ public class HexMapElement implements GameObject {
 	private int centerY;
 	public LinkedList<HexMapElement> Neighbours;
 	public boolean occupied;
-	public Integer distance;
+	private int distance;
 	
-	public HexMapElement(int x, int y) {
-		this.id = idCounter ++;
-		this.unit=null;
-		this.img = imgHex;
-		this.x = x;
-		this.y = y;
-		this.centerX = this.x + width/2;
-		this.centerY = this.y + side;
-		this.occupied = false;
-		this.distance = null;
-		isRed  = false;
-	    isGreen = false;
-	    isYellow = false;
-	    isShadow = false;
-	    inRangeOfShot=false;
-	}
+	final int GRASS = 1;
+	final int HILL = 2;
+	final int FOREST = 3;
+	private int terrainType;
 	
 	public HexMapElement(boolean center, int centerX, int centerY) {
 		this.id = idCounter ++;
@@ -69,26 +57,31 @@ public class HexMapElement implements GameObject {
 		switch (choosing) {
 		case 0:
 			this.img = imgHexGrass1;
+			terrainType = GRASS;
 			break;
 		case 1:
 			this.img = imgHexGrass2;
+			terrainType = GRASS;
 			break;
 		case 2:
 			this.img = imgHexHill;
+			terrainType = HILL;
 			break;
 		case 3:
 			this.img = imgHexForest;
+			terrainType = FOREST;
 			break;
 		default:
 			this.img = imgHex;
+			terrainType = GRASS;
 			break;
 		}
 		this.centerX = centerX;
 		this.centerY = centerY;
-		this.x = this.centerX - width/2;
-		this.y = this.centerY - side;
-		this.occupied = false;
-		this.distance = null;
+		x = centerX - width/2;
+		y = centerY - side;
+		occupied = false;
+		distance = 100;
 	    isRed  = false;
 	    isGreen = false;
 	    isYellow = false;
@@ -198,6 +191,22 @@ public class HexMapElement implements GameObject {
 			g.drawImage(HexMapElement.imgHexGreen, x,y, null);
 		if(isYellow)
 			g.drawImage(HexMapElement.imgHexYellow, x,y, null);
+	}
+
+	public int getDistance() {
+		return distance;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	public int getTerrainType() {
+		return terrainType;
+	}
+
+	public void setTerrainType(int terrainType) {
+		this.terrainType = terrainType;
 	}
 
 }
