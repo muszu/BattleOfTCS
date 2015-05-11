@@ -17,6 +17,11 @@ public class Unit implements GameObject {
 	private int movePoint;
 	private int range;
 	private HexMapElement myHex;
+	
+	
+	final int GRASS = 1;
+	final int HILL = 2;
+	final int FOREST = 3;
 
 	public Unit(Image img, int x, int y, int maxHealth, int range, int maxMovePoint, int attack, int owner) {
 		this.img = img;
@@ -129,9 +134,17 @@ public class Unit implements GameObject {
 		return String.valueOf(owner);
 	}
 	
-	public void attack(int hit){
-		health-=hit;
-	}
+	public void attack(Unit attacker){
+		int hit = (int) attacker.getAttack()/(attacker.getMaxMovePoint()/attacker.getMovePoint());
+		if(hit==0)
+			hit=1;
+		if(myHex.getTerrainType() == HILL)
+			health-=hit*0.8;
+		else if(myHex.getTerrainType() == FOREST)
+			health-=hit*0.6;
+		else
+			health-=hit;
+	}	
 
 	public HexMapElement getMyHex() {
 		return myHex;

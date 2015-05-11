@@ -49,6 +49,7 @@ public class HexMapElement implements GameObject {
 	final int GRASS = 1;
 	final int HILL = 2;
 	final int FOREST = 3;
+	
 	private int terrainType;
 	
 	public HexMapElement(boolean center, int centerX, int centerY) {

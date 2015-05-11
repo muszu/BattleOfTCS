@@ -207,12 +207,13 @@ public class Menu {
 				 "390[]",
 				 "600[]20[]20[]20[]")
 			);
-	    	JButton btnBack = new JButton("Back");
+	    	JButton btnBack = new JButton("End turn");
 	    	btnBack.setForeground(new Color(0f,0f,0f));
 			btnBack.setBackground(new Color(0.7f,0.7f,0.7f));
 	    	btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                modeMenu(panel);
+                game.endTurn();
+                panel.repaint();
             }
 	    	});
 			panel.add(btnBack,  "cell 0 2, width 150:250:300, height 30:50:80");

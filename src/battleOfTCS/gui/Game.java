@@ -85,6 +85,14 @@ public class Game {
 		
 	}
 	
+	public void endTurn(){
+		turnList.clear();
+		for(HexMapElement hexik : map.hexes){
+			hexik.clearColor();
+			hexik.shadow(false);
+		}
+		refresh();
+	}
 	
 	
 	
