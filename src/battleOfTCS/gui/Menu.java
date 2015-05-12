@@ -173,25 +173,25 @@ public class Menu {
         Image testImg = testImgIcon.getImage();
 		units.add(new Unit(testImg,625,390,50,7,6,25,2));
         testImg = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png")).getImage();
-		units.add(new Unit(testImg,105,220,999,1,5,42,1));
+		units.add(new Unit(testImg,105,220,999,1,5,82,1));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,675,320,43,5,3,5,2));
+		units.add(new Unit(testImg,675,320,43,5,3,20,2));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
         testImg = testImgIcon.getImage();
         units.add(new Unit(testImg,105,100,50,7,4,30,1));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat2.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,660,170,100,1,2,5,2));
+		units.add(new Unit(testImg,660,170,100,1,2,40,2));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/havycav2.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,130,400,100,4,3,5,1));
+		units.add(new Unit(testImg,130,400,100,4,3,60,1));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Lantern3.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,300,300,100,2,3,5,1));
+		units.add(new Unit(testImg,300,300,100,2,3,20,1));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,730,600,100,2,3,5,2));
+		units.add(new Unit(testImg,730,600,100,2,3,20,2));
 		
 		game = new Game( units, map );
 		for( Unit setUnit : units){
@@ -211,6 +211,7 @@ public class Menu {
 		panel.addMouseListener(listener);
 		panel.addMouseMotionListener(listener);
 		
+		game.refresh();
 		panel.removeAll();
 		panel.invalidate();
 	    panel.validate();
