@@ -1,5 +1,7 @@
 package battleOfTCS.gui;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -10,7 +12,12 @@ public class HexMap {
 	private static int amountInOddRow = 13;
 	private static int amountInEvenRow = 13;
 	private static int amountOfRows = 10;
-	private static int firstHexCenterX = 71; // position of the first hex in the first row
+	
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	static double width = screenSize.getWidth();
+	static double height = screenSize.getHeight();
+	
+	private static int firstHexCenterX = (int) (width -  HexMapElement.width*amountInEvenRow)/2; // position of the first hex in the first row
 	private static int firstHexCenterY = 154;
 	
 	

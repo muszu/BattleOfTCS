@@ -1,9 +1,11 @@
 package battleOfTCS.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -173,19 +175,19 @@ public class Menu {
         Image testImg = testImgIcon.getImage();
 		units.add(new Unit(testImg,625,390,50,7,6,25,2));
         testImg = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png")).getImage();
-		units.add(new Unit(testImg,105,220,999,1,5,82,1));
+		units.add(new Unit(testImg,305,220,999,1,5,82,1));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
         testImg = testImgIcon.getImage();
 		units.add(new Unit(testImg,675,320,43,5,3,20,2));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
         testImg = testImgIcon.getImage();
-        units.add(new Unit(testImg,105,100,50,7,4,30,1));
+        units.add(new Unit(testImg,300,100,50,7,4,30,1));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat2.png"));
         testImg = testImgIcon.getImage();
 		units.add(new Unit(testImg,660,170,100,1,2,40,2));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/havycav2.png"));
         testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,130,400,100,4,3,60,1));
+		units.add(new Unit(testImg,335,400,100,4,3,60,1));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Lantern3.png"));
         testImg = testImgIcon.getImage();
 		units.add(new Unit(testImg,300,300,100,2,3,20,1));
@@ -217,9 +219,10 @@ public class Menu {
 	    panel.validate();
 	    panel.repaint();
 	    panel.setLayout( new MigLayout(
-				 "", 
-				 "390[]",
-				 "600[]20[]20[]20[]")
+	    			"", 
+	    			new StringBuilder().append(frame.getWidth()/2-125).append("[]").toString(),
+	    			new StringBuilder().append(frame.getHeight()-80).append("[]20[]20[]20[]").toString()
+				 )
 			);
 	    	JButton btnBack = new JButton("End turn");
 	    	btnBack.setForeground(new Color(0f,0f,0f));
@@ -239,11 +242,16 @@ public class Menu {
 	
 	
 	private void initialize() {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double height = screenSize.getHeight();
 		frame = new JFrame();
-		frame.setBounds(0, 0, 1024, 768);
-		frame.setResizable(false);
+		frame.setBounds(0, 0, (int) width, (int) height);
+		//frame.setBounds(0, 0, 1024, 768);
 		//frame.setBounds(0, 0, 1366, 768);
-		//frame.setUndecorated(true);      //FULLSCREEN
+		//frame.setBounds(0, 0, 1920, 1080);
+		frame.setResizable(false);
+		frame.setUndecorated(true);      //FULLSCREEN
 		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

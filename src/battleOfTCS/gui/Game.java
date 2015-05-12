@@ -109,19 +109,18 @@ public class Game {
 	
 	
 	public void paint(Graphics g){
-		g.setColor(new Color(90, 90, 90));
-		g.drawImage(imgBoard250, 405, 0, null);
+		g.drawImage(imgBoard250, (int) (HexMap.width-imgBoard250.getWidth(null))/2, 0, null);
 		g.setColor(new Color(255, 255, 255));
 		if(win!=0){
 			g.setFont(mediumFont);
-			g.drawString( win == 1 ? playerA + "'s vicotry!" : playerB + "'s vicotry!", 440, 50);
+			g.drawString( win == 1 ? playerA + "'s vicotry!" : playerB + "'s vicotry!", (int) (HexMap.width)/2-6*(playerA.length()+playerB.length()), 50);
 		}
 		else{
 			g.setFont(bigFont);
 			if(turn == 1)
-				g.drawString( playerA , 502-(playerA.length()*6), 50);
+				g.drawString( playerA , (int) (HexMap.width)/2-(playerA.length()*12), 50);
 			else
-				g.drawString(  playerB, 502-(playerB.length()*6), 50);
+				g.drawString(  playerB, (int) (HexMap.width)/2 -(playerB.length()*12), 50);
 		}
 		g.setColor(new Color(90, 90, 90));
 		g.drawImage(imgBoard200, 5, 5,null);
