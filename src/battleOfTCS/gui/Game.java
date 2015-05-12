@@ -113,14 +113,17 @@ public class Game {
 		g.setColor(new Color(255, 255, 255));
 		if(win!=0){
 			g.setFont(mediumFont);
-			g.drawString( win == 1 ? playerA + "'s vicotry!" : playerB + "'s vicotry!", (int) (HexMap.width)/2-6*(playerA.length()+playerB.length()), 50);
+			if(win == 1)
+				g.drawString( playerA + "'s vicotry!", (int) (HexMap.width-g.getFontMetrics().stringWidth(playerA + "'s vicotry!"))/2, 50);
+			else
+				g.drawString( playerB + "'s vicotry!",(int) (HexMap.width-g.getFontMetrics().stringWidth(playerA + "'s vicotry!"))/2, 50);
 		}
 		else{
 			g.setFont(bigFont);
 			if(turn == 1)
-				g.drawString( playerA , (int) (HexMap.width)/2-(playerA.length()*12), 50);
+				g.drawString( playerA , (int) (HexMap.width-g.getFontMetrics().stringWidth(playerA))/2, 50);
 			else
-				g.drawString(  playerB, (int) (HexMap.width)/2 -(playerB.length()*12), 50);
+				g.drawString(  playerB, (int) (HexMap.width -g.getFontMetrics().stringWidth(playerB))/2, 50);
 		}
 		g.setColor(new Color(90, 90, 90));
 		g.drawImage(imgBoard200, 5, 5,null);
