@@ -4,9 +4,14 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import javax.swing.ImageIcon;
+
 public class Unit implements GameObject {
 	
+	private ImageIcon icon;
 	private Image img;
+	private Image img1;
+	private Image img2;
 	private int x;
 	private int y;
 	private int attack;
@@ -35,10 +40,36 @@ public class Unit implements GameObject {
 		this.owner = owner;
 	}
 	
+	public Unit(ImageIcon icon, int x, int y, int maxHealth, int range, int maxMovePoint, int attack, int owner) {
+		this.icon = icon;
+		this.img = icon.getImage();
+		this.x = x;
+		this.y = y;
+		this.maxHealth = maxHealth;
+		this.health = maxHealth;
+		this.range = range;
+		this.maxMovePoint = maxMovePoint;
+		this.attack = attack;
+		this.owner = owner;
+	}
+	
+	public ImageIcon getIcon(){
+		return icon;
+	}
+	
 	public Image getImage() {
 		return img;
 	}
 
+	public Image getImage1() {
+		return img1;
+	}
+	
+	public Image getImage2() {
+		return img2;
+	}
+
+	
 	public int getX() {
 		return x;
 	}

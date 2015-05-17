@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 import javax.swing.Action;
 import javax.swing.KeyStroke;
@@ -125,7 +126,7 @@ public class Menu {
 		btnLoadGame.setBackground(new Color(0.7f,0.7f,0.7f));
 		btnLoadGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	mode4(panel);            
+            	modeChooseUnits(panel);            
             }
         });	
 		
@@ -220,26 +221,123 @@ public class Menu {
 	    panel.repaint();
 	    panel.setLayout( new MigLayout(
 	    			"", 
-	    			new StringBuilder().append(frame.getWidth()/2-125).append("[]").toString(),
-	    			new StringBuilder().append(frame.getHeight()-80).append("[]20[]20[]20[]").toString()
+	    			new StringBuilder().append(frame.getWidth()/2-260).append("[]20[]").toString(),
+	    			new StringBuilder().append(frame.getHeight()-405).append("[]").toString()
 				 )
 			);
-	    	JButton btnBack = new JButton("End turn");
+   
+	    	JButton btnEndTurn = new JButton("End Turn");
+	    	btnEndTurn.setForeground(new Color(0f,0f,0f));
+			btnEndTurn.setBackground(new Color(0.7f,0.7f,0.7f));
+	    	btnEndTurn.addActionListener(new ActionListener() {
+		        public void actionPerformed(ActionEvent e) {
+		            game.endTurn();
+		            panel.repaint();
+		        }
+	    	});
+	    	
+		    JButton btnBack = new JButton("Back");
 	    	btnBack.setForeground(new Color(0f,0f,0f));
 			btnBack.setBackground(new Color(0.7f,0.7f,0.7f));
 	    	btnBack.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                game.endTurn();
-                panel.repaint();
-            }
+		        public void actionPerformed(ActionEvent e) {
+		            modeMenu(panel);
+		            panel.repaint();
+		        }
 	    	});
-			panel.add(btnBack,  "cell 0 2, width 150:250:300, height 30:50:80");
+	    	panel.add(btnEndTurn,  "cell 0 2, width 150:250:300, height 20:30:40");
+			panel.add(btnBack, "cell 1 2, width 150:250:300, height 20:30:40");
 			panel.invalidate();
 		    panel.validate();
 		    panel.repaint();
 	}
 	
-	
+
+	void modeChooseUnits(final JPanel panel){
+		final ArrayList<Unit> UnitsToChoose= new ArrayList<Unit>();
+		final ArrayList<Unit> ChosenUnits = new ArrayList<Unit>();
+		
+		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,625,390,50,7,6,25,2));
+        testImgIcon = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,305,220,999,1,5,82,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,675,320,43,5,3,20,2));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,300,100,50,7,4,30,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat2.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,660,170,100,1,2,40,2));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/havycav2.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,335,400,100,4,3,60,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Lantern3.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,300,300,100,2,3,20,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,730,600,100,2,3,20,2));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,730,600,100,2,3,20,2));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Mage1.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,730,600,100,2,3,20,2));
+		
+		mode = 2;
+		panel.removeAll();
+		panel.invalidate();
+	    panel.validate();
+	    panel.repaint();
+	    panel.setLayout( new MigLayout(
+    			"", 
+    			new StringBuilder().append(frame.getWidth()/2-325).append("[]100[]20[]60[]20[]").toString(),
+    			new StringBuilder().append(frame.getHeight()-625).append("[]20[]20[]20[]20[]100[]").toString()
+			)
+	    	);
+	    	JButton btnReady = new JButton("Ready!");
+	    	btnReady.setForeground(new Color(0f,0f,0f));
+			btnReady.setBackground(new Color(0.7f,0.7f,0.7f));
+	    	btnReady.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            modeGame(panel);
+	        }
+	    	});
+	    	JButton btnBack = new JButton("Back");
+	    	btnBack.setForeground(new Color(0f,0f,0f));
+			btnBack.setBackground(new Color(0.7f,0.7f,0.7f));
+	    	btnBack.addActionListener(new ActionListener() {
+	        public void actionPerformed(ActionEvent e) {
+	            modeMenu(panel);
+	        }
+	    	});
+	    	JButton [] btnChosenUnit = new JButton[5];
+	    	for(int i=0; i<5; i++){
+	    		btnChosenUnit[i] = new JButton("Empty");
+	    		btnChosenUnit[i].setForeground(new Color(0f,0f,0f));
+	    		btnChosenUnit[i].setBackground(new Color(0.7f,0.7f,0.7f));
+	    		btnChosenUnit[i].addActionListener(new ActionListener() {
+		        public void actionPerformed(ActionEvent e) {
+//		            ChosenUnits.remove(i);
+		        }
+		    	});
+	    	}
+	    	JButton [] btnUnit = new JButton[10];
+	    	for(int i=0; i<10; i++){
+	    		btnUnit[i] = new JButton();
+	    		btnUnit[i].setIcon(UnitsToChoose.get(i).getIcon());
+	    		btnUnit[i].addActionListener(new ActionListener() {
+	    			public void actionPerformed(ActionEvent e) {
+//	    				ChosenUnits.add(UnitsToChoose.get(i));
+	    			}   
+		        });
+	    	}
+
+	    	for(int i=0; i<5; i++)
+		    	panel.add(btnChosenUnit[i], "cell 0 "+i+", width 80:80:80, height 80:80:80");	    	
+	    	for(int i=0; i<10; i++)
+		    	panel.add(btnUnit[i], "cell "+((i/5)+3)+" "+i%5+", width 80:80:80, height 80:80:80");	    	
+	    	panel.add(btnReady,  "cell 1 5, width 100:150:200, height 20:30:40");
+	    	panel.add(btnBack,  "cell 2 5, width 100:150:200, height 20:30:40");
+			panel.invalidate();
+		    panel.validate();
+		    panel.repaint();
+	}	
+
 	
 	private void initialize() {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -282,7 +380,7 @@ public class Menu {
         	protected void paintComponent(Graphics g){
         		super.paintComponent(g);
         		if(backGround != null){
-        			if (mode==2)
+        			if(mode==2)
         				g.drawImage(backGroundGame, 0, 0, this.getWidth(), this.getHeight(), this);
         			if(mode==1)
         				g.drawImage(backGround, 0, 0, this.getWidth(), this.getHeight(), this);
