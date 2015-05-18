@@ -102,7 +102,15 @@ public class HexMap {
 		}
 		
 		/*
-		 * Highlighting cells in the range of shot
+		 * Highlighting cells in the range of shot after move
+		 */
+		
+		for(int i = 0; i < dist.size(); i++) 
+			if(dist.get(i) != -1 && dist.get(i) < moveRange)
+				markCellsInShotRangeAfterMove(hexes.get(i), cell, shotRange);
+		
+		/*
+		 * Highlighting cells in the range of shot without move
 		 */
 		
 		queue.clear();
@@ -123,7 +131,41 @@ public class HexMap {
 			
 			HexMapElement hex = hexes.get(id);
 			if(hex.unit != null && hex.unit.getOwner() != cell.unit.getOwner()){
+				if(hex.isGreen) hex.green(false);
 				hex.yellow(true);
+				hex.inRangeOfShot();
+			}
+			
+			for(HexMapElement neigh : hex.Neighbours) {
+				if(dist.get(neigh.id).equals(-1)) {
+					dist.set(neigh.id, dist.get(id) + 1);
+					queue.add(neigh.id);
+				}
+			}			
+		}
+	}
+	
+	private void markCellsInShotRangeAfterMove(HexMapElement cell, HexMapElement mainCell, int shotRange) {
+		
+		ArrayList<Integer> dist = new ArrayList<Integer>();
+		for(int i=0; i<hexes.size(); i++)
+			dist.add(-1);
+		dist.set(cell.id, 0);
+		LinkedList<Integer> queue = new LinkedList<Integer>();
+		queue.add(cell.id);
+		
+		while(true) {
+			Integer id;
+			if(queue.size() > 0)
+				id = queue.removeFirst();
+			else break;
+			
+			if(dist.get(id) > shotRange)
+				break;
+			
+			HexMapElement hex = hexes.get(id);
+			if(hex.unit != null && hex.unit.getOwner() != mainCell.unit.getOwner()){
+				if(!hex.isRed) hex.green(true);
 				hex.inRangeOfShot();
 			}
 			
