@@ -44,7 +44,6 @@ public class Menu {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				mode=1;
-				createUnitLists();
 				try {
 					Menu window = new Menu();
 					window.frame.setVisible(true);
@@ -235,7 +234,7 @@ public class Menu {
 	    panel.setLayout( new MigLayout(
 	    			"", 
 	    			new StringBuilder().append(frame.getWidth()/2-260).append("[]20[]").toString(),
-	    			new StringBuilder().append(frame.getHeight()-405).append("[]").toString()
+	    			new StringBuilder().append(frame.getHeight()-425).append("[]").toString()
 				 )
 			);
    
@@ -280,6 +279,7 @@ public class Menu {
     			new StringBuilder().append(40).append("[]20[]20[]20[]20[]80[]").toString()
 			)
 	    	);
+	    createUnitLists("black");
 	    	JButton btnReady = new JButton("Ready!");
 	    	btnReady.setForeground(new Color(0f,0f,0f));
 			btnReady.setBackground(new Color(0.7f,0.7f,0.7f));
@@ -310,6 +310,8 @@ public class Menu {
 		            if(Player1Ready) modeGame(panel);
 		            else {
 		            	Player1Ready = true;
+		            	UnitsToChoose.clear();
+		            	createUnitLists("red");
 		            	modeChooseUnits(panel);
 		            }
 	            }
@@ -443,28 +445,27 @@ public class Menu {
 	}
 
 
-	static void createUnitLists(){
-		
-		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/M - Griffin.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,50,7,6,25));
-        testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/M - Gnoll.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,999,1,5,82));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/hus1.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,43,5,3,20));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/Fighter - Scimitar2.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,50,7,4,30));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/Lantern2.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,100,1,2,40));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/M - Ogre.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,100,4,3,60));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/swordnshield1.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/Fighter - Bow.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/Mage1.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/black/M - Hydra.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
+	static void createUnitLists(String colorOfUnit){
+		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/M - Griffin.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,200,1,4,60));
+        testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/M - Gnoll.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,1,2,30));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/hus1.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,120,1,3,40));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/Fighter - Scimitar2.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,140,1,2,25));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/Lantern2.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,160,1,2,40));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/M - Ogre.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,180,1,2,50));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/swordnshield1.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,150,1,2,30));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/Fighter - Bow.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,7,2,20));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/Mage1.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,8,2,50));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/" + colorOfUnit + "/M - Hydra.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,200,2,2,50));
 	}
 	
 	void UnitToNewGame(){

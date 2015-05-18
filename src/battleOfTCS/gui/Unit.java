@@ -105,7 +105,7 @@ public class Unit implements GameObject {
 	}
 
 	public int getWidth() {
-		return img.getHeight(null);
+		return img.getWidth(null);
 	}
 
 	public int getHeight() {
@@ -114,16 +114,20 @@ public class Unit implements GameObject {
 	
 	public void drawIt(Graphics g, Boolean printHealth){
 		g.drawImage(img, x, y, null);
+		int przes=0;
+		if(img.getWidth(null)>100){
+			przes=40;
+		}
 		if(printHealth){
 			StringBuilder life = new StringBuilder().append(health).append("/").append(maxHealth);
 			g.setColor(new Color(0, 0, 0));
-			g.fillRect(x, y, 80, 12);
+			g.fillRect(x+przes, y, 80, 12);
 			g.setColor(new Color(100, 0, 0));
-			g.fillRect(x+1, y+1, 78, 10);
+			g.fillRect(x+1+przes, y+1, 78, 10);
 			g.setColor(new Color(0, 100, 0));
-			g.fillRect(x+1, y+1, (health*78)/maxHealth, 10);
+			g.fillRect(x+1+przes, y+1, (health*78)/maxHealth, 10);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString(life.toString(), (40-life.length()*3)+x, y+11);
+			g.drawString(life.toString(), (40-life.length()*3)+x+przes, y+11);
 		}
 	}
 	

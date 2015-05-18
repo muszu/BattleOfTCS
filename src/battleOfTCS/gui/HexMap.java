@@ -166,7 +166,7 @@ public class HexMap {
 			HexMapElement hex = hexes.get(id);
 			if(hex.unit != null && hex.unit.getOwner() != mainCell.unit.getOwner()){
 				if(!hex.isRed) hex.green(true);
-				hex.inRangeOfShot();
+				//hex.inRangeOfShot();
 			}
 			
 			for(HexMapElement neigh : hex.Neighbours) {
