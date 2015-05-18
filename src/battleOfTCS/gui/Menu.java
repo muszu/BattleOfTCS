@@ -34,6 +34,7 @@ public class Menu {
 	private HexMap map = new HexMap();
 	private JFrame frame;
 	private Game game;
+	private DragNDrop listener;
 
 	/**
 	 * Launch the Battle Of TCS.
@@ -121,8 +122,8 @@ public class Menu {
 		btnNewGame.setBackground(new Color(0.7f,0.7f,0.7f));
 		btnNewGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-	        	UnitToNewGame();
-            	modeGame(panel);
+            	Player1Ready = false;
+            	modeChooseUnits(panel);
             }
         });
 		
@@ -131,8 +132,8 @@ public class Menu {
 		btnLoadGame.setBackground(new Color(0.7f,0.7f,0.7f));
 		btnLoadGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	Player1Ready = false;
-            	modeChooseUnits(panel);            
+            	UnitToNewGame();
+            	modeGame(panel);           
             }
         });	
 		
@@ -214,7 +215,11 @@ public class Menu {
 				setUnit.setY(tempHex.getCenterY()-setUnit.getHeight()/2);
 			}
 		}
-		DragNDrop listener = new DragNDrop(units, panel, map, game);
+		if(listener!=null){
+			panel.removeMouseListener(listener);
+			panel.removeMouseMotionListener(listener);
+		}
+		listener = new DragNDrop(units, panel, map, game);
 		panel.addMouseListener(listener);
 		panel.addMouseMotionListener(listener);
 		
@@ -246,6 +251,7 @@ public class Menu {
 	    	btnBack.addActionListener(new ActionListener() {
 		        public void actionPerformed(ActionEvent e) {
 		            units.clear();
+		            map.clear();
 		        	modeMenu(panel);
 		            panel.repaint();
 		        }

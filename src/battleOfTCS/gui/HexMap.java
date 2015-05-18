@@ -134,4 +134,12 @@ public class HexMap {
 			}			
 		}
 	}
+
+	public void clear() {
+		for(HexMapElement hex : hexes) {
+        	hex.occupied=false;
+        	hex.unit=null;
+        	hex.clearColor();
+		}
+	}
 }
