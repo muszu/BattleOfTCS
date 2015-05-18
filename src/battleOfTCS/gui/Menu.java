@@ -277,7 +277,7 @@ public class Menu {
 	    panel.setLayout( new MigLayout(
     			"", 
     			new StringBuilder().append(frame.getWidth()/2-325).append("[]100[]20[]60[]20[]").toString(),
-    			new StringBuilder().append(frame.getHeight()-625).append("[]20[]20[]20[]20[]100[]").toString()
+    			new StringBuilder().append(40).append("[]20[]20[]20[]20[]80[]").toString()
 			)
 	    	);
 	    	JButton btnReady = new JButton("Ready!");
