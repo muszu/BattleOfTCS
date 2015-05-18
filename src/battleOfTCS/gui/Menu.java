@@ -176,19 +176,42 @@ public class Menu {
 	
 	
 	void modeGame(final JPanel panel){
+		LinkedList<HexMapElement> listOfHexA, listOfHexB;
+		listOfHexA = new LinkedList<>();
+		listOfHexB = new LinkedList<>();
+		HexMapElement tempHex;
 		mode=3;
 		game = new Game( units, map );
+		int i;
+		i=0;
+		for(HexMapElement hex : map.hexes){
+			i++;
+			if(i%13==1){ //1
+				listOfHexA.add(hex);
+			}
+			if(i%13==0){ //2
+				listOfHexB.add(hex);
+			}
+			
+		}
 		for( Unit setUnit : units){
-			for(HexMapElement hex : map.hexes){
-				if( hex.contains( setUnit.getX()+setUnit.getWidth()/2, setUnit.getY()+setUnit.getHeight()/2) ){
-					hex.unit=setUnit;
-					setUnit.setMyHex(hex);
-					hex.occupied=true;
-					setUnit.setX(hex.getCenterX()-setUnit.getWidth()/2);
-					setUnit.setY(hex.getCenterY()-setUnit.getHeight()/2);
-					break;
-				}
-				
+			if(setUnit.getOwner()==1){
+				tempHex=listOfHexA.getFirst();
+				listOfHexA.remove();
+				tempHex.unit=setUnit;
+				setUnit.setMyHex(tempHex);
+				tempHex.occupied=true;
+				setUnit.setX(tempHex.getCenterX()-setUnit.getWidth()/2);
+				setUnit.setY(tempHex.getCenterY()-setUnit.getHeight()/2);
+			}
+			else{
+				tempHex=listOfHexB.getFirst();
+				listOfHexB.remove();
+				tempHex.unit=setUnit;
+				setUnit.setMyHex(tempHex);
+				tempHex.occupied=true;
+				setUnit.setX(tempHex.getCenterX()-setUnit.getWidth()/2);
+				setUnit.setY(tempHex.getCenterY()-setUnit.getHeight()/2);
 			}
 		}
 		DragNDrop listener = new DragNDrop(units, panel, map, game);
