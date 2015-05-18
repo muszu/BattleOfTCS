@@ -28,6 +28,17 @@ public class Unit implements GameObject {
 	final int HILL = 2;
 	final int FOREST = 3;
 
+	public Unit(Unit unit){
+		this.icon = unit.icon;
+		this.img = unit.icon.getImage();
+		this.maxHealth = unit.maxHealth;
+		this.health = unit.maxHealth;
+		this.range = unit.range;
+		this.maxMovePoint = unit.maxMovePoint;
+		this.attack = unit.attack;
+		this.owner = unit.owner;
+	}
+	
 	public Unit(Image img, int x, int y, int maxHealth, int range, int maxMovePoint, int attack, int owner) {
 		this.img = img;
 		this.x = x;

@@ -30,6 +30,7 @@ public class Menu {
 	static LinkedList<Unit> units = new LinkedList<Unit>();
 	static final ArrayList<Unit> UnitsToChoose = new ArrayList<Unit>();
 	static final ArrayList<Unit> ChosenUnits = new ArrayList<Unit>();
+	private boolean Player1Ready;
 	private HexMap map = new HexMap();
 	private JFrame frame;
 	private Game game;
@@ -130,6 +131,7 @@ public class Menu {
 		btnLoadGame.setBackground(new Color(0.7f,0.7f,0.7f));
 		btnLoadGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+            	Player1Ready = false;
             	modeChooseUnits(panel);            
             }
         });	
@@ -250,13 +252,34 @@ public class Menu {
 			btnReady.setBackground(new Color(0.7f,0.7f,0.7f));
 	    	btnReady.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	        	for(int i=0; i<5; i++){
-	        		ChosenUnits.get(i).setOwner(1);
-	        		ChosenUnits.get(i).setX(190);
-	        		ChosenUnits.get(i).setY(100+i*125); //TO CORRECT
+	        	if(ChosenUnits.size()==0){
+	        		JOptionPane.showConfirmDialog(frame, 
+		                   "No units chosen", "Error", 
+		                   JOptionPane.DEFAULT_OPTION,
+		                   JOptionPane.INFORMATION_MESSAGE);
 	        	}
-	            units.addAll(ChosenUnits);
-	        	modeGame(panel);
+	        	
+	        	else{
+	        		for(int i=0; i<ChosenUnits.size(); i++){
+		        		if(Player1Ready) {
+			        		ChosenUnits.get(i).setOwner(2);
+			        		ChosenUnits.get(i).setX(1050);
+			        		ChosenUnits.get(i).setY(170+i*125); //TO CORRECT
+		        		}
+		        		else {
+			        		ChosenUnits.get(i).setOwner(1);
+			        		ChosenUnits.get(i).setX(190);
+			        		ChosenUnits.get(i).setY(100+i*125); //TO CORRECT
+		        		}
+		        	}
+	        		units.addAll(ChosenUnits);
+		            ChosenUnits.clear();
+		            if(Player1Ready) modeGame(panel);
+		            else {
+		            	Player1Ready = true;
+		            	modeChooseUnits(panel);
+		            }
+	            }
 	        }
 	    	});
 	    	JButton btnBack = new JButton("Back");
@@ -300,7 +323,7 @@ public class Menu {
 	    		btnUnit[i].addActionListener(new ActionListener() {
 	    			public void actionPerformed(ActionEvent e) {
 	    				if(ChosenUnits.size()<5){
-		    				ChosenUnits.add(UnitsToChoose.get(ii));
+		    				ChosenUnits.add(new Unit(UnitsToChoose.get(ii)));
 				            modeChooseUnits(panel);
 	    				}
     				}   
@@ -402,9 +425,9 @@ public class Menu {
         UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
 		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer.png"));
         UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat.png"));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/bow1test.png"));
         UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Mage1.png"));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/cav3.png"));
         UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
 	}
 	
