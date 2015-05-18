@@ -27,7 +27,9 @@ import net.miginfocom.swing.MigLayout;
 public class Menu {
 	public static int mode;
 		
-	static LinkedList<Unit> units;
+	static LinkedList<Unit> units = new LinkedList<Unit>();
+	static final ArrayList<Unit> UnitsToChoose = new ArrayList<Unit>();
+	static final ArrayList<Unit> ChosenUnits = new ArrayList<Unit>();
 	private HexMap map = new HexMap();
 	private JFrame frame;
 	private Game game;
@@ -39,6 +41,7 @@ public class Menu {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				mode=1;
+				createUnitLists();
 				try {
 					Menu window = new Menu();
 					window.frame.setVisible(true);
@@ -117,6 +120,7 @@ public class Menu {
 		btnNewGame.setBackground(new Color(0.7f,0.7f,0.7f));
 		btnNewGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+	        	UnitToNewGame();
             	modeGame(panel);
             }
         });
@@ -170,32 +174,7 @@ public class Menu {
 	
 	
 	void modeGame(final JPanel panel){
-		units = new LinkedList<>();
 		mode=3;
-		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
-        Image testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,625,390,50,7,6,25,2));
-        testImg = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png")).getImage();
-		units.add(new Unit(testImg,305,220,999,1,5,82,1));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
-        testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,675,320,43,5,3,20,2));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
-        testImg = testImgIcon.getImage();
-        units.add(new Unit(testImg,300,100,50,7,4,30,1));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat2.png"));
-        testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,660,170,100,1,2,40,2));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/havycav2.png"));
-        testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,335,400,100,4,3,60,1));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Lantern3.png"));
-        testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,300,300,100,2,3,20,1));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer.png"));
-        testImg = testImgIcon.getImage();
-		units.add(new Unit(testImg,730,600,100,2,3,20,2));
-		
 		game = new Game( units, map );
 		for( Unit setUnit : units){
 			for(HexMapElement hex : map.hexes){
@@ -241,7 +220,8 @@ public class Menu {
 			btnBack.setBackground(new Color(0.7f,0.7f,0.7f));
 	    	btnBack.addActionListener(new ActionListener() {
 		        public void actionPerformed(ActionEvent e) {
-		            modeMenu(panel);
+		            units.clear();
+		        	modeMenu(panel);
 		            panel.repaint();
 		        }
 	    	});
@@ -252,32 +232,8 @@ public class Menu {
 		    panel.repaint();
 	}
 	
-
+	
 	void modeChooseUnits(final JPanel panel){
-		final ArrayList<Unit> UnitsToChoose= new ArrayList<Unit>();
-		final ArrayList<Unit> ChosenUnits = new ArrayList<Unit>();
-		
-		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,625,390,50,7,6,25,2));
-        testImgIcon = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,305,220,999,1,5,82,1));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,675,320,43,5,3,20,2));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,300,100,50,7,4,30,1));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat2.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,660,170,100,1,2,40,2));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/havycav2.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,335,400,100,4,3,60,1));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Lantern3.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,300,300,100,2,3,20,1));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,730,600,100,2,3,20,2));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,730,600,100,2,3,20,2));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Mage1.png"));
-        UnitsToChoose.add(new Unit(testImgIcon,730,600,100,2,3,20,2));
-		
 		mode = 2;
 		panel.removeAll();
 		panel.invalidate();
@@ -294,7 +250,13 @@ public class Menu {
 			btnReady.setBackground(new Color(0.7f,0.7f,0.7f));
 	    	btnReady.addActionListener(new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
-	            modeGame(panel);
+	        	for(int i=0; i<5; i++){
+	        		ChosenUnits.get(i).setOwner(1);
+	        		ChosenUnits.get(i).setX(190);
+	        		ChosenUnits.get(i).setY(100+i*125); //TO CORRECT
+	        	}
+	            units.addAll(ChosenUnits);
+	        	modeGame(panel);
 	        }
 	    	});
 	    	JButton btnBack = new JButton("Back");
@@ -307,23 +269,41 @@ public class Menu {
 	    	});
 	    	JButton [] btnChosenUnit = new JButton[5];
 	    	for(int i=0; i<5; i++){
-	    		btnChosenUnit[i] = new JButton("Empty");
+	    		btnChosenUnit[i] = new JButton();
 	    		btnChosenUnit[i].setForeground(new Color(0f,0f,0f));
 	    		btnChosenUnit[i].setBackground(new Color(0.7f,0.7f,0.7f));
+	    		
+	    		if (ChosenUnits.size()<=i){
+	    			btnChosenUnit[i].setIcon(null);
+	    			btnChosenUnit[i].setText("Empty");
+	    		}
+	    		else{
+	    			btnChosenUnit[i].setText("");
+	    			btnChosenUnit[i].setIcon(ChosenUnits.get(i).getIcon());
+	    		}
+	    		final int ii = i;
 	    		btnChosenUnit[i].addActionListener(new ActionListener() {
 		        public void actionPerformed(ActionEvent e) {
-//		            ChosenUnits.remove(i);
+		            if (ChosenUnits.size()>ii){
+			        	ChosenUnits.remove(ii);
+			            modeChooseUnits(panel);
+		            }
 		        }
 		    	});
 	    	}
 	    	JButton [] btnUnit = new JButton[10];
 	    	for(int i=0; i<10; i++){
 	    		btnUnit[i] = new JButton();
+	    		btnUnit[i].setBackground(new Color(0.7f,0.7f,0.7f));
 	    		btnUnit[i].setIcon(UnitsToChoose.get(i).getIcon());
+	    		final int ii = i;
 	    		btnUnit[i].addActionListener(new ActionListener() {
 	    			public void actionPerformed(ActionEvent e) {
-//	    				ChosenUnits.add(UnitsToChoose.get(i));
-	    			}   
+	    				if(ChosenUnits.size()<5){
+		    				ChosenUnits.add(UnitsToChoose.get(ii));
+				            modeChooseUnits(panel);
+	    				}
+    				}   
 		        });
 	    	}
 
@@ -401,5 +381,58 @@ public class Menu {
         final JPanel panel = new JPanelBackground();
 		frame.add(panel);
 		modeMenu(panel);
+	}
+
+
+	static void createUnitLists(){
+		
+		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,50,7,6,25));
+        testImgIcon = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,999,1,5,82));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,43,5,3,20));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,50,7,4,30));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat2.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,1,2,40));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/havycav2.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,4,3,60));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Lantern3.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Mage1.png"));
+        UnitsToChoose.add(new Unit(testImgIcon,100,2,3,20));
+	}
+	
+	void UnitToNewGame(){
+		units.clear();
+		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/hus1test.png"));
+        Image testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,625,390,50,7,6,25,2));
+        testImg = new ImageIcon(Menu.class.getResource("images/units/MrKozikMaster.png")).getImage();
+		units.add(new Unit(testImg,305,220,999,1,5,82,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer1test.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,675,320,43,5,3,20,2));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Szczypka.png"));
+        testImg = testImgIcon.getImage();
+        units.add(new Unit(testImg,300,100,50,7,4,30,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/goat2.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,660,170,100,1,2,40,2));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/havycav2.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,335,400,100,4,3,60,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/Lantern3.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,300,300,100,2,3,20,1));
+		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/deer.png"));
+        testImg = testImgIcon.getImage();
+		units.add(new Unit(testImg,730,600,100,2,3,20,2));
+		
 	}
 }
