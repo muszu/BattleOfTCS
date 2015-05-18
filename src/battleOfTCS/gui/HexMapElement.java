@@ -209,5 +209,31 @@ public class HexMapElement implements GameObject {
 	public void setTerrainType(int terrainType) {
 		this.terrainType = terrainType;
 	}
+	
+	public void setRandomTerrainType(){
+		int choosing = generator.nextInt(4);
+		switch (choosing) {
+		case 0:
+			this.img = imgHexGrass1;
+			terrainType = GRASS;
+			break;
+		case 1:
+			this.img = imgHexGrass2;
+			terrainType = GRASS;
+			break;
+		case 2:
+			this.img = imgHexHill;
+			terrainType = HILL;
+			break;
+		case 3:
+			this.img = imgHexForest;
+			terrainType = FOREST;
+			break;
+		default:
+			this.img = imgHex;
+			terrainType = GRASS;
+			break;
+		}
+	}
 
 }

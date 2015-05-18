@@ -1,5 +1,6 @@
 package battleOfTCS.gui;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -31,7 +32,7 @@ public class Menu {
 	static final ArrayList<Unit> UnitsToChoose = new ArrayList<Unit>();
 	static final ArrayList<Unit> ChosenUnits = new ArrayList<Unit>();
 	private boolean Player1Ready;
-	private HexMap map  = new HexMap();;
+	private HexMap map;
 	private JFrame frame;
 	private Game game;
 	private DragNDrop listener;
@@ -181,6 +182,9 @@ public class Menu {
 		listOfHexA = new LinkedList<>();
 		listOfHexB = new LinkedList<>();
 		HexMapElement tempHex;
+		for(HexMapElement tmp : map.hexes){
+			tmp.setRandomTerrainType();
+		}
 		mode=3;
 		game = new Game( units, map );
 		int i;
@@ -372,18 +376,21 @@ public class Menu {
 
 	
 	private void initialize() {
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		double width = screenSize.getWidth();
-		double height = screenSize.getHeight();
+		//Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		//double width = screenSize.getWidth();
+		//double height = screenSize.getHeight();
 		frame = new JFrame();
-		frame.setBounds(0, 0, (int) width, (int) height);
-		//frame.setBounds(0, 0, 1024, 768);
+		//frame.setBounds(0, 0, (int) width, (int) height);
+		frame.setBounds(0, 0, 1024, 768);
 		//frame.setBounds(0, 0, 1366, 768);
 		//frame.setBounds(0, 0, 1920, 1080);
 		frame.setResizable(false);
-		frame.setUndecorated(true);      //FULLSCREEN
+		//frame.setUndecorated(true);      //FULLSCREEN
 		
-		
+		HexMap.width = frame.getWidth();
+		HexMap.height = frame.getHeight();
+		HexMap.firstHexCenterX =  (int) (HexMap.width -  HexMapElement.width*HexMap.getAmountInOddRow())/2;
+		map = new HexMap();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
