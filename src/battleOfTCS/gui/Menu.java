@@ -31,7 +31,7 @@ public class Menu {
 	static final ArrayList<Unit> UnitsToChoose = new ArrayList<Unit>();
 	static final ArrayList<Unit> ChosenUnits = new ArrayList<Unit>();
 	private boolean Player1Ready;
-	private HexMap map;
+	private HexMap map  = new HexMap();;
 	private JFrame frame;
 	private Game game;
 	private DragNDrop listener;
@@ -122,7 +122,6 @@ public class Menu {
 		btnNewGame.setBackground(new Color(0.7f,0.7f,0.7f));
 		btnNewGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	map = new HexMap();
             	Player1Ready = false;
             	modeChooseUnits(panel);
             }
@@ -133,7 +132,6 @@ public class Menu {
 		btnLoadGame.setBackground(new Color(0.7f,0.7f,0.7f));
 		btnLoadGame.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	map = new HexMap();
             	UnitToNewGame();
             	modeGame(panel);           
             }
