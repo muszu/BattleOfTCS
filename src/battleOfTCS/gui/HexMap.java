@@ -90,7 +90,7 @@ public class HexMap {
 			HexMapElement hex = hexes.get(id);
 			
 			if(dist.get(id) <= moveRange)
-				hex.red(true);
+				hex.shadowLight(true);
 			
 			for(HexMapElement neigh : hex.Neighbours) {
 				if(dist.get(neigh.id).equals(-1) && neigh.occupied == false) {
@@ -132,7 +132,7 @@ public class HexMap {
 			HexMapElement hex = hexes.get(id);
 			if(hex.unit != null && hex.unit.getOwner() != cell.unit.getOwner()){
 				if(hex.isGreen) hex.green(false);
-				hex.yellow(true);
+				hex.red(true);
 				hex.inRangeOfShot();
 			}
 			
@@ -165,8 +165,7 @@ public class HexMap {
 			
 			HexMapElement hex = hexes.get(id);
 			if(hex.unit != null && hex.unit.getOwner() != mainCell.unit.getOwner()){
-				if(!hex.isRed) hex.green(true);
-				//hex.inRangeOfShot();
+				if(!hex.isShadowLight) hex.yellow(true);
 			}
 			
 			for(HexMapElement neigh : hex.Neighbours) {

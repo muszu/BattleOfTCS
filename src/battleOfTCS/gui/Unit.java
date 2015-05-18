@@ -7,7 +7,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 
 public class Unit implements GameObject {
-	
+
 	private ImageIcon icon;
 	private Image img;
 	private Image img1;
@@ -22,13 +22,12 @@ public class Unit implements GameObject {
 	private int movePoint;
 	private int range;
 	private HexMapElement myHex;
-	
-	
+
 	final int GRASS = 1;
 	final int HILL = 2;
 	final int FOREST = 3;
 
-	public Unit(Unit unit){
+	public Unit(Unit unit) {
 		this.icon = unit.icon;
 		this.img = unit.icon.getImage();
 		this.maxHealth = unit.maxHealth;
@@ -38,8 +37,9 @@ public class Unit implements GameObject {
 		this.attack = unit.attack;
 		this.owner = unit.owner;
 	}
-	
-	public Unit(Image img, int x, int y, int maxHealth, int range, int maxMovePoint, int attack, int owner) {
+
+	public Unit(Image img, int x, int y, int maxHealth, int range,
+			int maxMovePoint, int attack, int owner) {
 		this.img = img;
 		this.x = x;
 		this.y = y;
@@ -50,8 +50,9 @@ public class Unit implements GameObject {
 		this.attack = attack;
 		this.owner = owner;
 	}
-	
-	public Unit(ImageIcon icon, int maxHealth, int range, int maxMovePoint, int attack) {
+
+	public Unit(ImageIcon icon, int maxHealth, int range, int maxMovePoint,
+			int attack) {
 		this.icon = icon;
 		this.img = icon.getImage();
 		this.maxHealth = maxHealth;
@@ -60,11 +61,11 @@ public class Unit implements GameObject {
 		this.maxMovePoint = maxMovePoint;
 		this.attack = attack;
 	}
-	
-	public ImageIcon getIcon(){
+
+	public ImageIcon getIcon() {
 		return icon;
 	}
-	
+
 	public Image getImage() {
 		return img;
 	}
@@ -72,12 +73,11 @@ public class Unit implements GameObject {
 	public Image getImage1() {
 		return img1;
 	}
-	
+
 	public Image getImage2() {
 		return img2;
 	}
 
-	
 	public int getX() {
 		return x;
 	}
@@ -93,15 +93,17 @@ public class Unit implements GameObject {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
+
 	public int getMaxHealth() {
 		return maxHealth;
 	}
+
 	public int getHealth() {
 		return health;
 	}
-	public void setHealth( int health ){
-		this.health=health;
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 
 	public int getWidth() {
@@ -111,26 +113,27 @@ public class Unit implements GameObject {
 	public int getHeight() {
 		return img.getHeight(null);
 	}
-	
-	public void drawIt(Graphics g, Boolean printHealth){
+
+	public void drawIt(Graphics g, Boolean printHealth) {
 		g.drawImage(img, x, y, null);
-		int przes=0;
-		if(img.getWidth(null)>100){
-			przes=40;
+		int przes = 0;
+		if (img.getWidth(null) > 100) {
+			przes = 40;
 		}
-		if(printHealth){
-			StringBuilder life = new StringBuilder().append(health).append("/").append(maxHealth);
+		if (printHealth) {
+			StringBuilder life = new StringBuilder().append(health).append("/")
+					.append(maxHealth);
 			g.setColor(new Color(0, 0, 0));
-			g.fillRect(x+przes, y, 80, 12);
+			g.fillRect(x + przes, y, 80, 12);
 			g.setColor(new Color(100, 0, 0));
-			g.fillRect(x+1+przes, y+1, 78, 10);
+			g.fillRect(x + 1 + przes, y + 1, 78, 10);
 			g.setColor(new Color(0, 100, 0));
-			g.fillRect(x+1+przes, y+1, (health*78)/maxHealth, 10);
+			g.fillRect(x + 1 + przes, y + 1, (health * 78) / maxHealth, 10);
 			g.setColor(new Color(255, 255, 255));
-			g.drawString(life.toString(), (40-life.length()*3)+x+przes, y+11);
+			g.drawString(life.toString(), (40 - life.length() * 3) + x + przes,
+					y + 11);
 		}
 	}
-	
 
 	public int getOwner() {
 		return owner;
@@ -148,17 +151,17 @@ public class Unit implements GameObject {
 		this.maxMovePoint = maxMovePoint;
 		this.movePoint = maxMovePoint;
 	}
-	
+
 	public int getMovePoint() {
 		return movePoint;
 	}
-	
+
 	public int getRange() {
 		return range;
 	}
-	
+
 	void substractMovePoint(int substracter) {
-		movePoint=movePoint--;
+		movePoint = movePoint--;
 	}
 
 	public int getAttack() {
@@ -168,37 +171,37 @@ public class Unit implements GameObject {
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
-	public void rest(){
-		movePoint=maxMovePoint;
+
+	public void rest() {
+		movePoint = maxMovePoint;
 	}
-	
-	
-	public String toString(){
+
+	public String toString() {
 		return String.valueOf(owner);
 	}
-	
-	public void attack(Unit attacker){
-		int hit = (int) attacker.getAttack()/(attacker.getMaxMovePoint()/attacker.getMovePoint());
+
+	public void attack(Unit attacker) {
+		int hit = (int) attacker.getAttack()
+				/ (attacker.getMaxMovePoint() / attacker.getMovePoint());
 		// if unit's range is not greater than 1 that means its a meele unit
-		if(hit==0)
-			hit=1;
-		if(attacker.range>1){
-			if(myHex.getTerrainType() == FOREST)
-				health-=hit*0.5;
+		if (hit == 0)
+			hit = 1;
+		if (attacker.range > 1) {
+			if (myHex.getTerrainType() == FOREST)
+				health -= hit * 0.5;
 			else
-				health-=hit;	
-		}
-		else{
-			if(hit==0)
-				hit=1;
-			if(myHex.getTerrainType() == HILL)
-				health-=hit*0.6;
-			else if(myHex.getTerrainType() == FOREST)
-				health-=hit*0.8;
+				health -= hit;
+		} else {
+			if (hit == 0)
+				hit = 1;
+			if (myHex.getTerrainType() == HILL)
+				health -= hit * 0.6;
+			else if (myHex.getTerrainType() == FOREST)
+				health -= hit * 0.8;
 			else
-				health-=hit;
+				health -= hit;
 		}
-	}	
+	}
 
 	public HexMapElement getMyHex() {
 		return myHex;
@@ -207,8 +210,8 @@ public class Unit implements GameObject {
 	public void setMyHex(HexMapElement myHex) {
 		this.myHex = myHex;
 	}
-	
-	public void move(int x){
-		movePoint-=x;
+
+	public void move(int x) {
+		movePoint -= x;
 	}
 }
