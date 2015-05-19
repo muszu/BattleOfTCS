@@ -19,7 +19,7 @@ public class HexMap {
 	static double height;
 	
 	public static int firstHexCenterX; // position of the first hex in the first row
-	private static int firstHexCenterY = 154;
+	private static int firstHexCenterY = 124;
 	
 	
 	public HexMap() {

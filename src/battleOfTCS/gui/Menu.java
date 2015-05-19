@@ -215,10 +215,8 @@ public class Menu {
 		panel.validate();
 		panel.repaint();
 		panel.setLayout(new MigLayout("",
-				new StringBuilder().append(frame.getWidth() / 2 - 260)
-						.append("[]20[]").toString(), new StringBuilder()
-						.append(frame.getHeight() - 425).append("[]")
-						.toString()));
+				new StringBuilder().append(frame.getWidth() / 2 - 260).append("[]20[]").toString(), 
+				new StringBuilder().append( frame.getHeight()-50).append("[]2[]").toString()));
 
 		JButton btnEndTurn = new JButton("End Turn");
 		btnEndTurn.setForeground(new Color(0f, 0f, 0f));
@@ -241,8 +239,8 @@ public class Menu {
 				panel.repaint();
 			}
 		});
-		panel.add(btnEndTurn, "cell 0 2, width 150:250:300, height 20:30:40");
-		panel.add(btnBack, "cell 1 2, width 150:250:300, height 20:30:40");
+		panel.add(btnEndTurn, "cell 0 0, width 150:250:300, height 20:30:40");
+		panel.add(btnBack, "cell 1 0, width 150:250:300, height 20:30:40");
 		panel.invalidate();
 		panel.validate();
 		panel.repaint();
@@ -254,10 +252,11 @@ public class Menu {
 		panel.invalidate();
 		panel.validate();
 		panel.repaint();
-		panel.setLayout(new MigLayout("", new StringBuilder()
-				.append(frame.getWidth() / 2 - 325)
-				.append("[]100[]20[]60[]20[]").toString(), new StringBuilder()
-				.append(40).append("[]20[]20[]20[]20[]80[]").toString()));
+		panel.setLayout(new MigLayout(
+				"", 
+				(frame.getWidth() / 2 - 325) + "[]100[]20[]60[]20[]", 
+				40+"[]20[]20[]20[]20[]80[]"
+			));
 		createUnitLists("black");
 		JButton btnReady = new JButton("Ready!");
 		btnReady.setForeground(new Color(0f, 0f, 0f));
@@ -358,16 +357,16 @@ public class Menu {
 	}
 
 	private void initialize() {
-		// Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		// double width = screenSize.getWidth();
-		// double height = screenSize.getHeight();
+		 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		 double width = screenSize.getWidth();
+		 double height = screenSize.getHeight();
 		frame = new JFrame();
-		// frame.setBounds(0, 0, (int) width, (int) height);
-		frame.setBounds(0, 0, 1024, 768);
+		frame.setBounds(0, 0, (int) width, (int) height);
+		//frame.setBounds(0, 0, 1024, 768);
 		// frame.setBounds(0, 0, 1366, 768);
 		// frame.setBounds(0, 0, 1920, 1080);
 		frame.setResizable(false);
-		// frame.setUndecorated(true); //FULLSCREEN
+		frame.setUndecorated(true); //FULLSCREEN
 
 		HexMap.width = frame.getWidth();
 		HexMap.height = frame.getHeight();
@@ -399,7 +398,7 @@ public class Menu {
 				Menu.class.getResource("images/backbroundmenuv3.jpg"))
 				.getImage();
 		final Image backGroundGame = new ImageIcon(
-				Menu.class.getResource("images/backbroundmenu.png")).getImage();
+				Menu.class.getResource("images/backbroundmenuv2.jpg")).getImage();
 		final Image backGroundPrim = new ImageIcon(
 				Menu.class.getResource("images/backbroundmenuprim.png"))
 				.getImage();
