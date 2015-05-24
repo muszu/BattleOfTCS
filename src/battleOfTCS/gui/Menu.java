@@ -421,8 +421,10 @@ public class Menu {
 	}
 	
 	private void changeResolution(int resolutionMode) {
+		frame.dispose();
+		frame.setUndecorated(false);
 		switch(resolutionMode) {
-			case 1: {
+			case 1: {		
 				frame.setBounds(0, 0, 1024, 768);
 				HexMap.firstHexCenterY = 124;
 				break;
@@ -438,6 +440,7 @@ public class Menu {
 				break;
 			}
 			case 4: {
+				 frame.setUndecorated(true);
 				 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 				 double width = screenSize.getWidth();
 				 double height = screenSize.getHeight();
@@ -446,6 +449,7 @@ public class Menu {
 				 break;
 			}
 		}
+		frame.setVisible(true);
 		HexMap.width = frame.getWidth();
 		HexMap.height = frame.getHeight();
 		HexMap.firstHexCenterX = (int) (HexMap.width - HexMapElement.width
