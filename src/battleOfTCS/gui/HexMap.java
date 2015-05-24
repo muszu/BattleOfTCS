@@ -19,7 +19,7 @@ public class HexMap {
 	static double height;
 	
 	public static int firstHexCenterX; // position of the first hex in the first row
-	private static int firstHexCenterY = 124;
+	public static int firstHexCenterY = 124;
 	
 	
 	public HexMap() {
@@ -45,6 +45,12 @@ public class HexMap {
         for(HexMapElement hex : hexes) {
         	getNeighbours(hex);
         }
+	}
+	
+	public static HexMap getNewMap() {
+		
+		HexMapElement.resetIdCounter();
+		return new HexMap();
 	}
 	
 	public void getNeighbours(HexMapElement hex) {

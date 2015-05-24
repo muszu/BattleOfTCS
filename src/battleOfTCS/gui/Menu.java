@@ -28,8 +28,8 @@ public class Menu {
 	public static int mode;
 
 	static LinkedList<Unit> units = new LinkedList<Unit>();
-	static final ArrayList<Unit> UnitsToChoose = new ArrayList<Unit>();
-	static final ArrayList<Unit> ChosenUnits = new ArrayList<Unit>();
+	static ArrayList<Unit> UnitsToChoose = new ArrayList<Unit>();
+	static ArrayList<Unit> ChosenUnits = new ArrayList<Unit>();
 	private boolean Player1Ready;
 	private HexMap map;
 	private JFrame frame;
@@ -56,6 +56,21 @@ public class Menu {
 	public Menu() {
 		initialize();
 	}
+	
+	public void repaintOptions(final JPanel panel, JButton a, JButton b, JButton c, JButton d, JButton e) {
+		panel.setLayout(new MigLayout("", new StringBuilder()
+		.append(frame.getWidth() / 2 - 125).append("[]").toString(),
+		new StringBuilder().append(frame.getHeight() - 400)
+				.append("[]20[]20[]20[]").toString()));
+		panel.add(a, "cell 0 0, width 150:250:300, height 30:50:80");
+		panel.add(b, "cell 0 1, width 150:250:300, height 30:50:80");
+		panel.add(c, "cell 0 2, width 150:250:300, height 30:50:80");
+		panel.add(d, "cell 0 3, width 150:250:300, height 30:50:80");
+		panel.add(e, "cell 0 4, width 150:250:300, height 30:50:80");
+		panel.invalidate();
+		panel.validate();
+		panel.repaint();
+	}
 
 	void mode2(final JPanel panel) {
 		mode = 2;
@@ -63,8 +78,13 @@ public class Menu {
 		panel.invalidate();
 		panel.validate();
 		panel.repaint();
-		panel.setLayout(new MigLayout("", "390[]", "600[]20[]20[]20[]"));
-		JButton btnBack = new JButton("Back");
+		
+		final JButton btnBack = new JButton("Back");
+		final JButton btnReso1 = new JButton("1024 : 768");
+		final JButton btnReso2 = new JButton("1366 : 768");
+		final JButton btnReso3 = new JButton("1920 : 1080");
+		final JButton btnReso4 = new JButton("Full screen");
+		
 		btnBack.setForeground(new Color(0f, 0f, 0f));
 		btnBack.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnBack.addActionListener(new ActionListener() {
@@ -72,7 +92,51 @@ public class Menu {
 				modeMenu(panel);
 			}
 		});
-		panel.add(btnBack, "cell 0 2, width 150:250:300, height 30:50:80");
+		
+		btnReso1.setForeground(new Color(0f, 0f, 0f));
+		btnReso1.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnReso1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changeResolution(1);
+				repaintOptions(panel, btnBack, btnReso1, btnReso2, btnReso3, btnReso4);
+			}
+		});
+		
+		btnReso2.setForeground(new Color(0f, 0f, 0f));
+		btnReso2.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnReso2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changeResolution(2);
+				repaintOptions(panel, btnBack, btnReso1, btnReso2, btnReso3, btnReso4);
+			}
+		});
+		
+		btnReso3.setForeground(new Color(0f, 0f, 0f));
+		btnReso3.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnReso3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changeResolution(3);
+				repaintOptions(panel, btnBack, btnReso1, btnReso2, btnReso3, btnReso4);
+			}
+		});
+		
+		btnReso4.setForeground(new Color(0f, 0f, 0f));
+		btnReso4.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnReso4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				changeResolution(4);
+				repaintOptions(panel, btnBack, btnReso1, btnReso2, btnReso3, btnReso4);
+			}
+		});
+		panel.setLayout(new MigLayout("", new StringBuilder()
+		.append(frame.getWidth() / 2 - 125).append("[]").toString(),
+		new StringBuilder().append(frame.getHeight() - 400)
+				.append("[]20[]20[]20[]").toString()));
+		panel.add(btnBack, "cell 0 0, width 150:250:300, height 30:50:80");
+		panel.add(btnReso1, "cell 0 1, width 150:250:300, height 30:50:80");
+		panel.add(btnReso2, "cell 0 2, width 150:250:300, height 30:50:80");
+		panel.add(btnReso3, "cell 0 3, width 150:250:300, height 30:50:80");
+		panel.add(btnReso4, "cell 0 4, width 150:250:300, height 30:50:80");
 		panel.invalidate();
 		panel.validate();
 		panel.repaint();
@@ -355,18 +419,50 @@ public class Menu {
 		panel.validate();
 		panel.repaint();
 	}
+	
+	private void changeResolution(int resolutionMode) {
+		switch(resolutionMode) {
+			case 1: {
+				frame.setBounds(0, 0, 1024, 768);
+				HexMap.firstHexCenterY = 124;
+				break;
+			}
+			case 2: {
+				frame.setBounds(0, 0, 1366, 768);
+				HexMap.firstHexCenterY = 124;
+				break;
+			}
+			case 3: {
+				frame.setBounds(0, 0, 1920, 1080);
+				HexMap.firstHexCenterY = 240; 
+				break;
+			}
+			case 4: {
+				 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+				 double width = screenSize.getWidth();
+				 double height = screenSize.getHeight();
+				 frame.setBounds(0, 0, (int) width, (int) height);
+				 HexMap.firstHexCenterY = 240;
+				 break;
+			}
+		}
+		HexMap.width = frame.getWidth();
+		HexMap.height = frame.getHeight();
+		HexMap.firstHexCenterX = (int) (HexMap.width - HexMapElement.width
+				* HexMap.getAmountInOddRow()) / 2;
+		map = HexMap.getNewMap();
+		Player1Ready = false;
+		UnitsToChoose = new ArrayList<Unit>();
+		ChosenUnits = new ArrayList<Unit>();
+		
+	}
 
 	private void initialize() {
-		 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		 double width = screenSize.getWidth();
-		 double height = screenSize.getHeight();
+		
 		frame = new JFrame();
-		frame.setBounds(0, 0, (int) width, (int) height);
-		//frame.setBounds(0, 0, 1024, 768);
-		// frame.setBounds(0, 0, 1366, 768);
-		// frame.setBounds(0, 0, 1920, 1080);
+		frame.setBounds(0, 0, 1024, 768);
 		frame.setResizable(false);
-		frame.setUndecorated(true); //FULLSCREEN
+		frame.setUndecorated(false);
 
 		HexMap.width = frame.getWidth();
 		HexMap.height = frame.getHeight();

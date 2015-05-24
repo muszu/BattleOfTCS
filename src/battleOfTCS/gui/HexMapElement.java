@@ -265,5 +265,9 @@ public class HexMapElement implements GameObject {
 			break;
 		}
 	}
+	
+	public static void resetIdCounter() {
+		idCounter = 0;
+	}
 
 }
