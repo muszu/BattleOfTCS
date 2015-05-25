@@ -217,6 +217,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					if (game.turnList.contains(hex.unit)) {
 						lastHexPosition = hex;
 						clickUnit = hex.unit;
+						if(hex.getTerrainType()==2)
 						map.markAvailableBFS(hex, clickUnit.getMovePoint(),
 								clickUnit.getRange());
 						break;

@@ -115,7 +115,6 @@ public class Unit implements GameObject {
 	}
 
 	public void drawIt(Graphics g, Boolean printHealth) {
-		g.drawImage(img, x, y, null);
 		int przes = 0;
 		if (img.getWidth(null) > 100) {
 			przes = 40;
@@ -133,7 +132,12 @@ public class Unit implements GameObject {
 			g.drawString(life.toString(), (40 - life.length() * 3) + x + przes,
 					y + 11);
 		}
+		else{
+			g.drawImage(img, x, y, null);
+		}
+		
 	}
+	
 
 	public int getOwner() {
 		return owner;

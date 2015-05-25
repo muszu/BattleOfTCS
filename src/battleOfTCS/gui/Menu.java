@@ -403,6 +403,8 @@ public class Menu {
 						for (HexMapElement hex : map.hexes)
 							hex.drawIt(g);
 						for (Unit unit : units)
+							unit.drawIt(g, false);
+						for (Unit unit : units)
 							unit.drawIt(g, true);
 						game.paint(g);
 					}
