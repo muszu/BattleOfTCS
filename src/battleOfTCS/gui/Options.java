@@ -101,7 +101,7 @@ public class Options {
 				 double width = screenSize.getWidth();
 				 double height = screenSize.getHeight();
 				 frame.setBounds(0, 0, (int) width, (int) height);
-				 HexMap.firstHexCenterY = 240;
+				 HexMap.firstHexCenterY = (int) width/10;
 				 break;
 			}
 		}

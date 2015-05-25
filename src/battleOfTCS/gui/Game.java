@@ -167,6 +167,9 @@ public class Game {
 					(int) HexMap.width * 4 / 5, 30);
 			g.drawString("Distance: " + selectedHex.getDistance(),
 					(int) HexMap.width * 4 / 5, 40);
+			if(selectedHex.isFlag)
+				g.drawString("Flag",
+						(int) HexMap.width * 4 / 5, 50);
 		}
 	}
 

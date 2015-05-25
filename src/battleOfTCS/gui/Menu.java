@@ -146,7 +146,7 @@ public class Menu {
 		panel.repaint();
 	}
 
-	void modeGame(final JPanel panel, boolean modeOfGame) {
+	void modeGame(final JPanel panel, boolean flagMode) {  // true == capture flag
 		LinkedList<HexMapElement> listOfHexA, listOfHexB;
 		listOfHexA = new LinkedList<>();
 		listOfHexB = new LinkedList<>();
@@ -156,9 +156,9 @@ public class Menu {
 			tmp.isFlag = false;
 		}
 		mode = 3;
-		game = new Game(units, map); // true == capture flag
-		Game.modeOfGame = modeOfGame;
-		if(modeOfGame){
+		game = new Game(units, map); 
+		Game.modeOfGame = flagMode;
+		if(flagMode){
 			Game.flagHex = map.hexes.get( 6+(new Random().nextInt(9))*13);
 			Game.flagHex.isFlag = true;
 		}
