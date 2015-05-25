@@ -16,6 +16,7 @@ public class HexMapElement implements GameObject {
 	public boolean isGreen;
 	public boolean isYellow;
 	public boolean inRangeOfShot;
+	public boolean isFlag;
 
 	public final static Image imgHex = new ImageIcon(
 			Menu.class.getResource("images/hex.png")).getImage();
@@ -43,6 +44,8 @@ public class HexMapElement implements GameObject {
 			Menu.class.getResource("images/hex_grass6.png")).getImage();
 	public final static Image imgHexGrass2 = new ImageIcon(
 			Menu.class.getResource("images/hex_grass6.png")).getImage();
+	public final static Image imgHexFlag = new ImageIcon(
+			Menu.class.getResource("images/flag_90red.png")).getImage();
 
 	private static int idCounter = 0;
 	public static int width = imgHex.getWidth(null);
@@ -68,6 +71,7 @@ public class HexMapElement implements GameObject {
 	private int terrainType;
 
 	public HexMapElement(boolean center, int centerX, int centerY) {
+		isFlag = false;
 		this.id = idCounter++;
 		int choosing = generator.nextInt(4);
 		switch (choosing) {
@@ -221,6 +225,9 @@ public class HexMapElement implements GameObject {
 		} else {
 			if (isShadowLight)
 				g.drawImage(HexMapElement.imgHexShadowLight, x, y, null);
+		}
+		if(isFlag){
+			g.drawImage(imgHexFlag, x+4, y, null);
 		}
 	}
 

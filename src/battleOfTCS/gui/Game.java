@@ -13,7 +13,9 @@ public class Game {
 	private String playerA;
 	private String playerB;
 	public static Unit selectedUnit;
+	public static HexMapElement flagHex;
 	public static HexMapElement selectedHex;
+	public static boolean modeOfGame;
 	private int win;
 	private LinkedList<Unit> units;
 	public LinkedList<Unit> turnList;

@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.Action;
 import javax.swing.KeyStroke;
@@ -104,7 +105,7 @@ public class Menu {
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UnitToNewGame();
-				modeGame(panel);
+				modeGame(panel, true);
 			}
 		});
 
@@ -145,16 +146,22 @@ public class Menu {
 		panel.repaint();
 	}
 
-	void modeGame(final JPanel panel) {
+	void modeGame(final JPanel panel, boolean modeOfGame) {
 		LinkedList<HexMapElement> listOfHexA, listOfHexB;
 		listOfHexA = new LinkedList<>();
 		listOfHexB = new LinkedList<>();
 		HexMapElement tempHex;
 		for (HexMapElement tmp : map.hexes) {
 			tmp.setRandomTerrainType();
+			tmp.isFlag = false;
 		}
 		mode = 3;
-		game = new Game(units, map);
+		game = new Game(units, map); // true == capture flag
+		Game.modeOfGame = modeOfGame;
+		if(modeOfGame){
+			Game.flagHex = map.hexes.get( 6+(new Random().nextInt(9))*13);
+			Game.flagHex.isFlag = true;
+		}
 		int i;
 		i = 0;
 		for (HexMapElement hex : map.hexes) {
@@ -258,20 +265,14 @@ public class Menu {
 					for (int i = 0; i < ChosenUnits.size(); i++) {
 						if (Player1Ready) {
 							ChosenUnits.get(i).setOwner(2);
-							ChosenUnits.get(i).setX(1050);
-							ChosenUnits.get(i).setY(170 + i * 125); // TO
-																	// CORRECT
 						} else {
 							ChosenUnits.get(i).setOwner(1);
-							ChosenUnits.get(i).setX(190);
-							ChosenUnits.get(i).setY(100 + i * 125); // TO
-																	// CORRECT
 						}
 					}
 					units.addAll(ChosenUnits);
 					ChosenUnits.clear();
 					if (Player1Ready)
-						modeGame(panel);
+						modeGame(panel,true); // true == capture flag mode
 					else {
 						Player1Ready = true;
 						UnitsToChoose.clear();
