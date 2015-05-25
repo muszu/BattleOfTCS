@@ -216,6 +216,7 @@ public class Unit implements GameObject {
 	}
 
 	public void move(int x) {
-		movePoint -= x;
+		if(Game.tacticSet==0)
+			movePoint -= x;
 	}
 }

@@ -78,107 +78,124 @@ public class HexMap {
 	}
 	
 	public void markAvailableBFS(HexMapElement cell, int moveRange, int shotRange) {
-		/*
-		 *  Highlighting cells in the range of move
-		 */
-		ArrayList<Integer> dist = new ArrayList<Integer>();
-		for(int i=0; i<hexes.size(); i++)
-			dist.add(-1);
-		
-		dist.set(cell.id, 0);
-		cell.setDistance(0);
-		LinkedList<Integer> queue = new LinkedList<Integer>();
-		queue.add(cell.id);
-		
-		while(!queue.isEmpty()) {
-			Integer id = queue.removeFirst();
-			HexMapElement hex = hexes.get(id);
+		if(Game.tacticSet==0){
+			/*
+			 *  Highlighting cells in the range of move
+			 */
+			ArrayList<Integer> dist = new ArrayList<Integer>();
+			for(int i=0; i<hexes.size(); i++)
+				dist.add(-1);
 			
-			if(dist.get(id) <= moveRange)
-				hex.shadowLight(true);
+			dist.set(cell.id, 0);
+			cell.setDistance(0);
+			LinkedList<Integer> queue = new LinkedList<Integer>();
+			queue.add(cell.id);
 			
-			for(HexMapElement neigh : hex.Neighbours) {
-				if(dist.get(neigh.id).equals(-1) && neigh.occupied == false) {
-					dist.set(neigh.id, dist.get(id) + 1);
-					neigh.setDistance(dist.get(neigh.id));
-					queue.add(neigh.id);
-				}
-			}			
-		}
-		
-		/*
-		 * Highlighting cells in the range of shot after move
-		 */
-		
-		for(int i = 0; i < dist.size(); i++) 
-			if(dist.get(i) != -1 && dist.get(i) < moveRange)
-				markCellsInShotRangeAfterMove(hexes.get(i), cell, shotRange);
-		
-		/*
-		 * Highlighting cells in the range of shot without move
-		 */
-		
-		queue.clear();
-		dist.clear();
-		for(int i=0; i<hexes.size(); i++)
-			dist.add(-1);
-		dist.set(cell.id, 0);
-		queue.add(cell.id);
-		
-		while(true) {
-			Integer id;
-			if(queue.size() > 0)
-				id = queue.removeFirst();
-			else break;
-			
-			if(dist.get(id) > shotRange)
-				break;
-			
-			HexMapElement hex = hexes.get(id);
-			if(hex.unit != null && hex.unit.getOwner() != cell.unit.getOwner()){
-				if(hex.isGreen) hex.green(false);
-				hex.red(true);
-				hex.inRangeOfShot();
+			while(!queue.isEmpty()) {
+				Integer id = queue.removeFirst();
+				HexMapElement hex = hexes.get(id);
+				
+				if(dist.get(id) <= moveRange)
+					hex.shadowLight(true);
+				
+				for(HexMapElement neigh : hex.Neighbours) {
+					if(dist.get(neigh.id).equals(-1) && neigh.occupied == false) {
+						dist.set(neigh.id, dist.get(id) + 1);
+						neigh.setDistance(dist.get(neigh.id));
+						queue.add(neigh.id);
+					}
+				}			
 			}
 			
-			for(HexMapElement neigh : hex.Neighbours) {
-				if(dist.get(neigh.id).equals(-1)) {
-					dist.set(neigh.id, dist.get(id) + 1);
-					queue.add(neigh.id);
+			/*
+			 * Highlighting cells in the range of shot after move
+			 */
+			
+			for(int i = 0; i < dist.size(); i++) 
+				if(dist.get(i) != -1 && dist.get(i) < moveRange)
+					markCellsInShotRangeAfterMove(hexes.get(i), cell, shotRange);
+			
+			/*
+			 * Highlighting cells in the range of shot without move
+			 */
+			
+			queue.clear();
+			dist.clear();
+			for(int i=0; i<hexes.size(); i++)
+				dist.add(-1);
+			dist.set(cell.id, 0);
+			queue.add(cell.id);
+			
+			while(true) {
+				Integer id;
+				if(queue.size() > 0)
+					id = queue.removeFirst();
+				else break;
+				
+				if(dist.get(id) > shotRange)
+					break;
+				
+				HexMapElement hex = hexes.get(id);
+				if(hex.unit != null && hex.unit.getOwner() != cell.unit.getOwner()){
+					if(hex.isGreen) hex.green(false);
+					hex.red(true);
+					hex.inRangeOfShot();
 				}
-			}			
+				
+				for(HexMapElement neigh : hex.Neighbours) {
+					if(dist.get(neigh.id).equals(-1)) {
+						dist.set(neigh.id, dist.get(id) + 1);
+						queue.add(neigh.id);
+					}
+				}			
+			}
+		}
+		else if(Game.tacticSet == 2 ){ // player 1
+			for(HexMapElement hex : hexes) {
+				if(hex.tacticSet==1 && hex.unit==null){
+					hex.shadowLight(true);
+				}
+			}
+		}
+		else{ // Game.tacticSet == 1    player 2
+			for(HexMapElement hex : hexes) {
+				if(hex.tacticSet==2 && hex.unit==null){
+					hex.shadowLight(true);
+				}
+			}
 		}
 	}
 	
 	private void markCellsInShotRangeAfterMove(HexMapElement cell, HexMapElement mainCell, int shotRange) {
-		
-		ArrayList<Integer> dist = new ArrayList<Integer>();
-		for(int i=0; i<hexes.size(); i++)
-			dist.add(-1);
-		dist.set(cell.id, 0);
-		LinkedList<Integer> queue = new LinkedList<Integer>();
-		queue.add(cell.id);
-		
-		while(true) {
-			Integer id;
-			if(queue.size() > 0)
-				id = queue.removeFirst();
-			else break;
+		if(Game.tacticSet==0){
+			ArrayList<Integer> dist = new ArrayList<Integer>();
+			for(int i=0; i<hexes.size(); i++)
+				dist.add(-1);
+			dist.set(cell.id, 0);
+			LinkedList<Integer> queue = new LinkedList<Integer>();
+			queue.add(cell.id);
 			
-			if(dist.get(id) > shotRange)
-				break;
-			
-			HexMapElement hex = hexes.get(id);
-			if(hex.unit != null && hex.unit.getOwner() != mainCell.unit.getOwner()){
-				if(!hex.isShadowLight) hex.yellow(true);
-			}
-			
-			for(HexMapElement neigh : hex.Neighbours) {
-				if(dist.get(neigh.id).equals(-1)) {
-					dist.set(neigh.id, dist.get(id) + 1);
-					queue.add(neigh.id);
+			while(true) {
+				Integer id;
+				if(queue.size() > 0)
+					id = queue.removeFirst();
+				else break;
+				
+				if(dist.get(id) > shotRange)
+					break;
+				
+				HexMapElement hex = hexes.get(id);
+				if(hex.unit != null && hex.unit.getOwner() != mainCell.unit.getOwner()){
+					if(!hex.isShadowLight) hex.yellow(true);
 				}
-			}			
+				
+				for(HexMapElement neigh : hex.Neighbours) {
+					if(dist.get(neigh.id).equals(-1)) {
+						dist.set(neigh.id, dist.get(id) + 1);
+						queue.add(neigh.id);
+					}
+				}			
+			}
 		}
 	}
 

@@ -158,6 +158,7 @@ public class Menu {
 		mode = 3;
 		game = new Game(units, map); 
 		Game.modeOfGame = flagMode;
+		Game.tacticSet=2;
 		if(flagMode){
 			Game.flagHex = map.hexes.get( 6+(new Random().nextInt(9))*13);
 			Game.flagHex.isFlag = true;
@@ -166,11 +167,14 @@ public class Menu {
 		i = 0;
 		for (HexMapElement hex : map.hexes) {
 			i++;
-			if (i % 13 == 1) { // 1
+			hex.tacticSet=0;
+			if (i % 13 == 1 || i % 13 == 2|| i % 13 == 3) { // 1
 				listOfHexA.add(hex);
+				hex.tacticSet=1;
 			}
-			if (i % 13 == 0) { // 2
+			if (i % 13 == 0 || i % 13 == 12|| i % 13 == 11) { // 2
 				listOfHexB.add(hex);
+				hex.tacticSet=2;
 			}
 
 		}
@@ -208,13 +212,16 @@ public class Menu {
 		panel.repaint();
 		panel.setLayout(new MigLayout("",
 				new StringBuilder().append(frame.getWidth() / 2 - 260).append("[]20[]").toString(), 
-				new StringBuilder().append( frame.getHeight()-50).append("[]2[]").toString()));
+				new StringBuilder().append( frame.getHeight()-80).append("[]2[]").toString()));
 
 		JButton btnEndTurn = new JButton("End Turn");
 		btnEndTurn.setForeground(new Color(0f, 0f, 0f));
 		btnEndTurn.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnEndTurn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(Game.tacticSet!=0){
+					Game.tacticSet--;
+				}
 				game.endTurn();
 				panel.repaint();
 			}

@@ -17,6 +17,8 @@ public class HexMapElement implements GameObject {
 	public boolean isYellow;
 	public boolean inRangeOfShot;
 	public boolean isFlag;
+	
+	public int tacticSet;
 
 	public final static Image imgHex = new ImageIcon(
 			Menu.class.getResource("images/hex.png")).getImage();

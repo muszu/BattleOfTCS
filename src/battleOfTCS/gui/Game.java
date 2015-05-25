@@ -13,6 +13,7 @@ public class Game {
 	private String playerA;
 	private String playerB;
 	public static Unit selectedUnit;
+	public static int tacticSet;
 	public static int turnToWin;
 	public static int ownerOfFlag,lastOwnerOfFlag;
 	public static HexMapElement flagHex;
@@ -199,6 +200,10 @@ public class Game {
 			if(selectedHex.isFlag)
 				g.drawString("Flag",
 						(int) HexMap.width * 4 / 5, 50);
+			
+			g.drawString("TacticSet" + selectedHex.tacticSet,
+					(int) HexMap.width * 4 / 5, 60);
+			
 		}
 	}
 
