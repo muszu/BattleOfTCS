@@ -40,7 +40,6 @@ public class Menu {
 	private String colorB = "red";
 	private String playerA = "TCS";
 	private String playerB = "Free Folk";
-	private boolean CaptureFlag = true;
 
 	/**
 	 * Launch the Battle Of TCS.
@@ -358,7 +357,7 @@ public class Menu {
 					units.addAll(ChosenUnits);
 					ChosenUnits.clear();
 					if (Player1Ready)
-						modeGame(panel,true); // true == capture flag mode
+						modeGame(panel,false); // true == capture flag mode
 					else {
 						Player1Ready = true;
 						UnitsToChoose.clear();

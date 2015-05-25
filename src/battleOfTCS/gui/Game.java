@@ -85,22 +85,26 @@ public class Game {
 				if (turnList.isEmpty())
 					win = 2;
 			}
-			if(flagHex.unit!=null){
-				ownerOfFlag = flagHex.unit.getOwner();
-				if(lastOwnerOfFlag!=ownerOfFlag){
-					turnToWin=10;
-					lastOwnerOfFlag=ownerOfFlag;
+			if(flagHex!=null){
+				if(flagHex.unit!=null){
+					ownerOfFlag = flagHex.unit.getOwner();
+					if(lastOwnerOfFlag!=ownerOfFlag){
+						turnToWin=10;
+						lastOwnerOfFlag=ownerOfFlag;
+					}
+					else{
+						--turnToWin;
+					}
 				}
 				else{
-					--turnToWin;
+					turnToWin=42;
+				}
+				if(turnToWin==0){
+					win = ownerOfFlag;
+				
 				}
 			}
-			else{
-				turnToWin=42;
-			}
-			if(turnToWin==0){
-				win = ownerOfFlag;
-			}
+			
 		}
 		int winA, winB;
 		winA = 1;
