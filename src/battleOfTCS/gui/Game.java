@@ -35,7 +35,9 @@ public class Game {
 	private static Font mediumFont = new Font("Arial", Font.BOLD, 25);
 	private static Font bigFont = new Font("Arial", Font.BOLD, 40);
 
-	public Game(LinkedList<Unit> unitsList, HexMap map) {
+	public Game(LinkedList<Unit> unitsList, HexMap map, String A, String B) {
+		playerA = A;
+		playerB = B;
 		win = 0;
 		turnToWin=42;
 		ownerOfFlag=42;
