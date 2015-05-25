@@ -40,6 +40,7 @@ public class Menu {
 	private String colorB = "red";
 	private String playerA = "TCS";
 	private String playerB = "Free Folk";
+	JTextField nameA, nameB;
 
 	/**
 	 * Launch the Battle Of TCS.
@@ -162,7 +163,7 @@ public class Menu {
 			tmp.isFlag = false;
 		}
 		mode = 3;
-		game = new Game(units, map, playerA, playerB); 
+		game = new Game(units, map); 
 		Game.modeOfGame = flagMode;
 		Game.tacticSet=2;
 		if(flagMode){
@@ -287,11 +288,11 @@ public class Menu {
 			}
 		});
 
-		JTextField nameA = new JTextField("Player's A name", 1);
+		nameA = new JTextField("Player's A name", 1);
 		nameA.setForeground(new Color(0f, 0f, 0f));
 		nameA.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		
-		JTextField nameB = new JTextField("Player's B name", 1);
+		nameB = new JTextField("Player's B name", 1);
 		nameB.setForeground(new Color(0f, 0f, 0f));
 		nameB.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		
@@ -308,6 +309,7 @@ public class Menu {
 		btnChooseUnits.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnChooseUnits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				setName();
 				modeChooseUnits(panel);
 			}
 		});
@@ -323,6 +325,11 @@ public class Menu {
 		panel.repaint();
 	}
 	
+	protected void setName() {
+		Game.playerA = nameA.getText();
+		Game.playerB = nameB.getText();
+	}
+
 	void modeChooseUnits(final JPanel panel) {
 		mode = 2;
 		panel.removeAll();

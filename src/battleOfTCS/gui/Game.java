@@ -10,8 +10,8 @@ import javax.swing.ImageIcon;
 
 public class Game {
 	private static int turn;
-	private String playerA;
-	private String playerB;
+	public static String playerA;
+	public static String playerB;
 	public static Unit selectedUnit;
 	public static int tacticSet;
 	public static int turnToWin;
@@ -35,9 +35,7 @@ public class Game {
 	private static Font mediumFont = new Font("Arial", Font.BOLD, 25);
 	private static Font bigFont = new Font("Arial", Font.BOLD, 40);
 
-	public Game(LinkedList<Unit> unitsList, HexMap map, String A, String B) {
-		playerA = A;
-		playerB = B;
+	public Game(LinkedList<Unit> unitsList, HexMap map) {
 		win = 0;
 		turnToWin=42;
 		ownerOfFlag=42;
@@ -48,8 +46,6 @@ public class Game {
 		for (Unit unit : units) {
 			unit.rest();
 		}
-		playerA = "TCS";
-		playerB = "Free Folk";
 		turn = 1;
 		for (Unit unit : units) {
 			if (unit.getOwner() == 1)
