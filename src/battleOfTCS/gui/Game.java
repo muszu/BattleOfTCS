@@ -159,10 +159,10 @@ public class Game {
 			if(turnToWin<=10){
 				g.setFont(smallFont);
 				if(ownerOfFlag==1)
-					g.drawString("Left " + turnToWin + "turn to " + playerA + " win", (int) (HexMap.width - g.getFontMetrics()
+					g.drawString("Left " + turnToWin + " turn to " + playerA + " win", (int) (HexMap.width - g.getFontMetrics()
 						.stringWidth("Left " + turnToWin + " turn to " + playerA + " win")) / 2, 70);
 				else
-					g.drawString("Left " + turnToWin + "turn to " + playerB + " win", (int) (HexMap.width - g.getFontMetrics()
+					g.drawString("Left " + turnToWin + " turn to " + playerB + " win", (int) (HexMap.width - g.getFontMetrics()
 							.stringWidth("Left " + turnToWin + " turn to " + playerB + " win")) / 2, 70);
 			}
 		}

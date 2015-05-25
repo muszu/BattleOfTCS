@@ -40,6 +40,7 @@ public class Menu {
 	private String colorB = "red";
 	private String playerA = "TCS";
 	private String playerB = "Free Folk";
+	private Boolean flagOrNot;
 	JTextField nameA, nameB;
 
 	/**
@@ -112,7 +113,7 @@ public class Menu {
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UnitToNewGame();
-				modeGame(panel, true);
+				modeGame(panel, flagOrNot);
 			}
 		});
 
@@ -255,6 +256,9 @@ public class Menu {
 
 	void modePrepareGame(final JPanel panel){
 		mode = 2;
+		flagOrNot = false;
+		colorA = "black";
+		colorB = "red";
 		panel.removeAll();
 		panel.invalidate();
 		panel.validate();
@@ -262,11 +266,12 @@ public class Menu {
 		panel.setLayout(new MigLayout(
 				"", 
 				(frame.getWidth()/ 2 - 320)+"[]20[]20[]20[]", 
-				(frame.getHeight()/2 - 100)+"[]50[]100[]"
+				(frame.getHeight()/2 - 100)+"[]30[]50[]100[]"
 			));
 		
 		
 		String [] colors = {"black", "red", "green", "blue", "white", "yellow"};
+		String [] gameModes = {"annihilation", "capture flag"};
 		JComboBox<String> colorListA = new JComboBox<String>(colors);
 		colorListA.setForeground(new Color(0f, 0f, 0f));
 		colorListA.setBackground(new Color(0.7f, 0.7f, 0.7f));
@@ -287,7 +292,19 @@ public class Menu {
 				colorB = (String) cb.getSelectedItem();
 			}
 		});
-
+		JComboBox<String> gameModeList = new JComboBox<String>(gameModes);
+		colorListB.setForeground(new Color(0f, 0f, 0f));
+		colorListB.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		colorListB.setSelectedIndex(1);
+		colorListB.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+		        JComboBox<String> cb = (JComboBox<String>)e.getSource();
+		        if(cb.equals(cb.getComponent(0)))
+		        	flagOrNot = false;
+				else
+					flagOrNot = true;
+			}
+		});
 		nameA = new JTextField("Player's A name", 1);
 		nameA.setForeground(new Color(0f, 0f, 0f));
 		nameA.setBackground(new Color(0.7f, 0.7f, 0.7f));
@@ -314,12 +331,13 @@ public class Menu {
 			}
 		});
 		
-		panel.add(nameA, "cell 0 0, width 120:150:170, height 20:30:40");
-		panel.add(nameB, "cell 3 0, width 120:150:170, height 20:30:40");
-		panel.add(colorListA, "cell 0 1, width 120:150:170, height 20:30:40");
-		panel.add(colorListB, "cell 3 1, width 120:150:170, height 20:30:40");
-		panel.add(btnBack, "cell 2 2, width 100:120:140, height 20:30:40");
-		panel.add(btnChooseUnits, "cell 1 2, width 100:120:140, height 20:30:40");
+		panel.add(gameModeList, "cell 1 0, width 120:150:170, height 20:30:40");
+		panel.add(nameA, "cell 0 1, width 120:150:170, height 20:30:40");
+		panel.add(nameB, "cell 3 1, width 120:150:170, height 20:30:40");
+		panel.add(colorListA, "cell 0 2, width 120:150:170, height 20:30:40");
+		panel.add(colorListB, "cell 3 2, width 120:150:170, height 20:30:40");
+		panel.add(btnBack, "cell 2 3, width 100:120:140, height 20:30:40");
+		panel.add(btnChooseUnits, "cell 1 3, width 100:120:140, height 20:30:40");
 		panel.invalidate();
 		panel.validate();
 		panel.repaint();
@@ -341,6 +359,7 @@ public class Menu {
 				(frame.getWidth() / 2 - 325) + "[]100[]20[]60[]20[]", 
 				40+"[]20[]20[]20[]20[]80[]"
 			));
+		UnitsToChoose.clear();
 		createUnitLists(colorA);
 		JButton btnReady = new JButton("Ready!");
 		btnReady.setForeground(new Color(0f, 0f, 0f));
@@ -364,7 +383,7 @@ public class Menu {
 					units.addAll(ChosenUnits);
 					ChosenUnits.clear();
 					if (Player1Ready)
-						modeGame(panel,false); // true == capture flag mode
+						modeGame(panel,flagOrNot); // true == capture flag mode
 					else {
 						Player1Ready = true;
 						UnitsToChoose.clear();
