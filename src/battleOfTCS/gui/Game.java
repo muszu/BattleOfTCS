@@ -13,6 +13,8 @@ public class Game {
 	private String playerA;
 	private String playerB;
 	public static Unit selectedUnit;
+	public static int turnToWin;
+	public static int ownerOfFlag,lastOwnerOfFlag;
 	public static HexMapElement flagHex;
 	public static HexMapElement selectedHex;
 	public static boolean modeOfGame;
@@ -34,6 +36,9 @@ public class Game {
 
 	public Game(LinkedList<Unit> unitsList, HexMap map) {
 		win = 0;
+		turnToWin=42;
+		ownerOfFlag=42;
+		lastOwnerOfFlag=41;
 		turnList = new LinkedList<Unit>();
 		this.units = unitsList;
 		this.map = map;
@@ -77,6 +82,22 @@ public class Game {
 				if (turnList.isEmpty())
 					win = 2;
 			}
+			if(flagHex.unit!=null){
+				ownerOfFlag = flagHex.unit.getOwner();
+				if(lastOwnerOfFlag!=ownerOfFlag){
+					turnToWin=10;
+					lastOwnerOfFlag=ownerOfFlag;
+				}
+				else{
+					--turnToWin;
+				}
+			}
+			else{
+				turnToWin=42;
+			}
+			if(turnToWin==0){
+				win = ownerOfFlag;
+			}
 		}
 		int winA, winB;
 		winA = 1;
@@ -97,7 +118,6 @@ public class Game {
 				if (hex.unit != null && hex.unit.equals(unit))
 					hex.green(true);
 		}
-
 	}
 
 	public void endTurn() {
@@ -133,6 +153,15 @@ public class Game {
 			else
 				g.drawString(playerB, (int) (HexMap.width - g.getFontMetrics()
 						.stringWidth(playerB)) / 2, 50);
+			if(turnToWin<=10){
+				g.setFont(smallFont);
+				if(ownerOfFlag==1)
+					g.drawString("Left " + turnToWin + "turn to " + playerA + " win", (int) (HexMap.width - g.getFontMetrics()
+						.stringWidth("Left " + turnToWin + " turn to " + playerA + " win")) / 2, 70);
+				else
+					g.drawString("Left " + turnToWin + "turn to " + playerB + " win", (int) (HexMap.width - g.getFontMetrics()
+							.stringWidth("Left " + turnToWin + " turn to " + playerB + " win")) / 2, 70);
+			}
 		}
 		g.setColor(new Color(90, 90, 90));
 		g.drawImage(imgBoard200, 5, 5, null);
