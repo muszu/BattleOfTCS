@@ -36,10 +36,8 @@ public class Menu {
 	private JFrame frame;
 	private Game game;
 	private DragNDrop listener;
-	private String colorA = "black";
-	private String colorB = "red";
-	private String playerA = "TCS";
-	private String playerB = "Free Folk";
+	private String colorA;
+	private String colorB;
 	private Boolean flagOrNot;
 	JTextField nameA, nameB;
 
@@ -257,6 +255,7 @@ public class Menu {
 	void modePrepareGame(final JPanel panel){
 		mode = 2;
 		flagOrNot = false;
+		Game.modeOfGame = false;
 		colorA = "black";
 		colorB = "red";
 		panel.removeAll();
@@ -327,6 +326,8 @@ public class Menu {
 		btnChooseUnits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setName();
+				UnitsToChoose.clear();
+				createUnitLists(colorA);
 				modeChooseUnits(panel);
 			}
 		});
@@ -359,8 +360,6 @@ public class Menu {
 				(frame.getWidth() / 2 - 325) + "[]100[]20[]60[]20[]", 
 				40+"[]20[]20[]20[]20[]80[]"
 			));
-		UnitsToChoose.clear();
-		createUnitLists(colorA);
 		JButton btnReady = new JButton("Ready!");
 		btnReady.setForeground(new Color(0f, 0f, 0f));
 		btnReady.setBackground(new Color(0.7f, 0.7f, 0.7f));

@@ -200,11 +200,7 @@ public class Game {
 			g.drawString("Distance: " + selectedHex.getDistance(),
 					(int) HexMap.width * 4 / 5, 40);
 			if(selectedHex.isFlag)
-				g.drawString("Flag",
-						(int) HexMap.width * 4 / 5, 50);
-			
-			g.drawString("TacticSet" + selectedHex.tacticSet,
-					(int) HexMap.width * 4 / 5, 60);
+				g.drawString("Flag",(int) HexMap.width * 4 / 5, 50);
 			
 		}
 	}
