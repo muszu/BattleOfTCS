@@ -38,7 +38,7 @@ public class Menu {
 	private DragNDrop listener;
 	private String colorA;
 	private String colorB;
-	private Boolean flagOrNot;
+	private static Boolean flagOrNot;
 	JTextField nameA, nameB;
 
 	/**
@@ -48,6 +48,7 @@ public class Menu {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				mode = 1;
+				flagOrNot = false;
 				try {
 					Menu window = new Menu();
 					window.frame.setVisible(true);
@@ -254,8 +255,8 @@ public class Menu {
 
 	void modePrepareGame(final JPanel panel){
 		mode = 2;
-		flagOrNot = false;
-		Game.modeOfGame = false;
+		//flagOrNot = true;
+		//Game.modeOfGame = true;
 		colorA = "black";
 		colorB = "red";
 		panel.removeAll();
@@ -291,17 +292,20 @@ public class Menu {
 				colorB = (String) cb.getSelectedItem();
 			}
 		});
-		JComboBox<String> gameModeList = new JComboBox<String>(gameModes);
+		final JComboBox<String> gameModeList = new JComboBox<String>(gameModes);
 		colorListB.setForeground(new Color(0f, 0f, 0f));
 		colorListB.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		colorListB.setSelectedIndex(1);
 		colorListB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-		        JComboBox<String> cb = (JComboBox<String>)e.getSource();
-		        if(cb.equals(cb.getComponent(0)))
+		        if(gameModeList.getSelectedItem().equals(gameModeList.getItemAt(0))){
 		        	flagOrNot = false;
-				else
+		        	Game.modeOfGame = false;
+		        }
+				else{
 					flagOrNot = true;
+		        	Game.modeOfGame = true;
+				}
 			}
 		});
 		nameA = new JTextField("Player's A name", 1);
@@ -325,6 +329,14 @@ public class Menu {
 		btnChooseUnits.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnChooseUnits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(gameModeList.getSelectedItem().equals(gameModeList.getItemAt(0))){
+		        	flagOrNot = false;
+		        	Game.modeOfGame = false;
+		        }
+				else{
+					flagOrNot = true;
+		        	Game.modeOfGame = true;
+				}
 				setName();
 				UnitsToChoose.clear();
 				createUnitLists(colorA);
