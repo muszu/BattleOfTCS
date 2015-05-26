@@ -255,8 +255,6 @@ public class Menu {
 
 	void modePrepareGame(final JPanel panel){
 		mode = 2;
-		//flagOrNot = true;
-		//Game.modeOfGame = true;
 		colorA = "black";
 		colorB = "red";
 		panel.removeAll();
@@ -272,24 +270,22 @@ public class Menu {
 		
 		String [] colors = {"black", "red", "green", "blue", "white", "yellow"};
 		String [] gameModes = {"annihilation", "capture flag"};
-		JComboBox<String> colorListA = new JComboBox<String>(colors);
+		final JComboBox<String> colorListA = new JComboBox<String>(colors);
 		colorListA.setForeground(new Color(0f, 0f, 0f));
 		colorListA.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		colorListA.setSelectedIndex(0);
 		colorListA.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-		        JComboBox<String> cb = (JComboBox<String>)e.getSource();
-				colorA = (String) cb.getSelectedItem();
+				colorA = (String) colorListA.getSelectedItem(); 
 			}
 		});
-		JComboBox<String> colorListB = new JComboBox<String>(colors);
+		final JComboBox<String> colorListB = new JComboBox<String>(colors);
 		colorListB.setForeground(new Color(0f, 0f, 0f));
 		colorListB.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		colorListB.setSelectedIndex(1);
 		colorListB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-		        JComboBox<String> cb = (JComboBox<String>)e.getSource();
-				colorB = (String) cb.getSelectedItem();
+				colorB = (String) colorListB.getSelectedItem();
 			}
 		});
 		final JComboBox<String> gameModeList = new JComboBox<String>(gameModes);
@@ -300,11 +296,10 @@ public class Menu {
 			public void actionPerformed(ActionEvent e){
 		        if(gameModeList.getSelectedItem().equals(gameModeList.getItemAt(0))){
 		        	flagOrNot = false;
-		        	Game.modeOfGame = false;
+		        	
 		        }
 				else{
 					flagOrNot = true;
-		        	Game.modeOfGame = true;
 				}
 			}
 		});
@@ -331,11 +326,9 @@ public class Menu {
 			public void actionPerformed(ActionEvent e) {
 				if(gameModeList.getSelectedItem().equals(gameModeList.getItemAt(0))){
 		        	flagOrNot = false;
-		        	Game.modeOfGame = false;
 		        }
 				else{
 					flagOrNot = true;
-		        	Game.modeOfGame = true;
 				}
 				setName();
 				UnitsToChoose.clear();
