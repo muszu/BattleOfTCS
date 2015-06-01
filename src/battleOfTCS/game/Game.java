@@ -5,24 +5,27 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 
 public class Game {
 	private static int turn;
-	public static String playerA;
-	public static String playerB;
-	public static Unit selectedUnit;
+	public String playerA;
+	public String playerB;
+	public String colorA;
+	public String colorB;
+	public Unit selectedUnit;
 	public static int tacticSet;
 	public static int turnToWin;
-	public static int ownerOfFlag,lastOwnerOfFlag;
-	public static HexMapElement flagHex;
-	public static HexMapElement selectedHex;
-	public static boolean modeOfGame;
+	public int ownerOfFlag,lastOwnerOfFlag;
+	public HexMapElement flagHex;
+	public HexMapElement selectedHex;
+	public boolean modeOfGame;
 	private int win;
-	private LinkedList<Unit> units;
+	public List<Unit> units = new LinkedList<>();
 	public LinkedList<Unit> turnList;
-	private HexMap map;
+	public HexMap map;
 
 	public final static Image imgBoard150 = new ImageIcon(
 			Menu.class.getResource("images/board150.png")).getImage();
@@ -34,6 +37,10 @@ public class Game {
 	private static Font smallFont = new Font("Arial", Font.BOLD, 15);
 	private static Font mediumFont = new Font("Arial", Font.BOLD, 25);
 	private static Font bigFont = new Font("Arial", Font.BOLD, 40);
+	
+	public Game() {
+		
+	}
 
 	public Game(LinkedList<Unit> unitsList, HexMap map) {
 		win = 0;

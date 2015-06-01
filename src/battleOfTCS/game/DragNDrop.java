@@ -128,8 +128,8 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			if (hex.contains(x, y)) {
 				if (lastHex != hex) {
 					if (lastHex != null) {
-						Game.selectedUnit = hex.unit;
-						Game.selectedHex = hex;
+						game.selectedUnit = hex.unit;
+						game.selectedHex = hex;
 						hex.shadow(true);
 						lastHex.shadow(false);
 						lastHex = hex;
@@ -249,8 +249,8 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 		for (HexMapElement hex : map.hexes) {
 			if (hex.contains(x, y)) {
 				if (lastHex != hex) {
-					Game.selectedUnit = hex.unit;
-					Game.selectedHex = hex;
+					game.selectedUnit = hex.unit;
+					game.selectedHex = hex;
 					if (lastHex != null) {
 						hex.shadow(true);
 						lastHex.shadow(false);
