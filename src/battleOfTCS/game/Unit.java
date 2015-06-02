@@ -207,7 +207,7 @@ public class Unit implements GameObject {
 	}
 
 	public void move(int x) {
-		if(Game.tacticSet==0)
+		if(myHex.tacticSet==0)
 			movePoint -= x;
 	}
 	

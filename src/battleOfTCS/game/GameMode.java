@@ -15,7 +15,7 @@ import net.miginfocom.swing.MigLayout;
 
 public class GameMode {
 	
-	private HexMap map = new HexMap();
+	private HexMap map;
 	private DragNDrop listener;
 	
 	private LinkedList<HexMapElement> listOfHexA = new LinkedList<>();
@@ -40,6 +40,7 @@ public class GameMode {
 	}
 
 	private void createMap() {
+		map = new HexMap(game);
 		for (HexMapElement hex : map.hexes) {
 			hex.setRandomTerrainType();
 			hex.setFlag(false);
@@ -58,7 +59,7 @@ public class GameMode {
 		createMap();
 		game.prepareTurnList();
 		
-		Game.tacticSet = 2;
+		game.tacticSet = 2;
 		
 		int i = 0;
 		
@@ -112,8 +113,8 @@ public class GameMode {
 		btnEndTurn.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnEndTurn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(Game.tacticSet != 0){
-					Game.tacticSet --;
+				if(game.tacticSet != 0){
+					game.tacticSet --;
 				}
 				game.endTurn();
 				panel.repaint();

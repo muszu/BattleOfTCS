@@ -10,14 +10,14 @@ import java.util.List;
 import javax.swing.ImageIcon;
 
 public class Game {
-	private static int turn;
+	private int turn;
 	public String playerA;
 	public String playerB;
 	public String colorA;
 	public String colorB;
 	public Unit selectedUnit;
-	public static int tacticSet;
-	public static int turnToWin;
+	public int tacticSet;
+	public int turnToWin;
 	public int ownerOfFlag,lastOwnerOfFlag;
 	public HexMapElement flagHex;
 	public HexMapElement selectedHex;
@@ -25,7 +25,7 @@ public class Game {
 	private int win;
 	public List<Unit> units = new LinkedList<>();
 	public LinkedList<Unit> turnList;
-	public HexMap map = new HexMap();
+	public HexMap map = new HexMap(this);
 
 	public final static Image imgBoard150 = new ImageIcon(
 			Controller.class.getResource("images/board150.png")).getImage();
@@ -89,15 +89,15 @@ public class Game {
 			for (Unit unit : units) {
 				unit.rest();
 			}
-			if (Game.turn == 1) {
-				Game.turn = 2;
+			if (turn == 1) {
+				turn = 2;
 				for (Unit addme : units)
 					if (addme.getOwner() == 2)
 						turnList.add(addme);
 				if (turnList.isEmpty())
 					win = 1;
 			} else {
-				Game.turn = 1;
+				turn = 1;
 				for (Unit addme : units)
 					if (addme.getOwner() == 1)
 						turnList.add(addme);
@@ -232,7 +232,7 @@ public class Game {
 	}
 
 	public void setTurn(int turnset) {
-		Game.turn = turnset;
+		turn = turnset;
 	}
 
 }

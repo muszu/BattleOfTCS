@@ -17,12 +17,13 @@ public class HexMap {
 	
 	static double width;
 	static double height;
+	private Game game;
 	
 	public static int firstHexCenterX; // position of the first hex in the first row
 	public static int firstHexCenterY = 124;
 	
-	public HexMap() {
-		
+	public HexMap(Game game) {
+		this.game=game;
 		HexMapElement.resetIdCounter();
 		hexes = new LinkedList<HexMapElement>();
         
@@ -47,10 +48,10 @@ public class HexMap {
         }
 	}
 	
-	public static HexMap getNewMap() {
+	public static HexMap getNewMap(Game game) {
 		
 		HexMapElement.resetIdCounter();
-		return new HexMap();
+		return new HexMap(game);
 	}
 	
 	public void getNeighbours(HexMapElement hex) {
@@ -79,7 +80,7 @@ public class HexMap {
 	}
 	
 	public void markAvailableBFS(HexMapElement cell, int moveRange, int shotRange) {
-		if(Game.tacticSet==0){
+		if(game.tacticSet==0){
 			/*
 			 *  Highlighting cells in the range of move
 			 */
@@ -151,7 +152,7 @@ public class HexMap {
 				}			
 			}
 		}
-		else if(Game.tacticSet == 2 ){ // player 1
+		else if(game.tacticSet == 2 ){ // player 1
 			for(HexMapElement hex : hexes) {
 				if(hex.tacticSet==1 && hex.unit==null){
 					hex.shadowLight(true);
@@ -168,7 +169,7 @@ public class HexMap {
 	}
 	
 	private void markCellsInShotRangeAfterMove(HexMapElement cell, HexMapElement mainCell, int shotRange) {
-		if(Game.tacticSet==0){
+		if(game.tacticSet==0){
 			ArrayList<Integer> dist = new ArrayList<Integer>();
 			for(int i=0; i<hexes.size(); i++)
 				dist.add(-1);
