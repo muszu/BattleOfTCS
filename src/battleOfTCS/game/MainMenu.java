@@ -9,43 +9,54 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import net.miginfocom.swing.MigLayout;
+
 public class MainMenu {
+
 	
-	private JFrame frame;
-	private Modes modes;
-	private JPanel panel;
+	private JButton btnNewGame = new JButton("New game");
+	private JButton btnLoadGame = new JButton("Load game");
+	private JButton btnOptions = new JButton("Options");
+	private JButton btnExit = new JButton("Exit");
 	
-	JButton btnNewGame = new JButton("New game");
-	JButton btnLoadGame = new JButton("Load game");
-	JButton btnOptions = new JButton("Options");
-	JButton btnExit = new JButton("Exit");
+	JFrame frame;
+	Controller controller;
+	JPanel panel;
 	
-	public MainMenu(JFrame frame, Modes modes, JPanel panel) {
+	
+	public MainMenu(JFrame frame, Controller controller, JPanel panel) {
 		this.frame = frame;
-		this.modes = modes;
+		this.controller = controller;
 		this.panel = panel;
 		
 		this.setButtons();
 	}
 	
 	
-	public void repaintMainMenu() {
+	public void paintMainMenu() {
+		panel.removeAll();
+		panel.setLayout(new MigLayout("", new StringBuilder()
+				.append(frame.getWidth() / 2 - 125).append("[]").toString(),
+				new StringBuilder().append(frame.getHeight() - 400)
+						.append("[]20[]20[]20[]").toString()));
+		
 		panel.add(btnNewGame, "cell 0 0, width 150:250:300, height 30:50:80");
 		panel.add(btnLoadGame, "cell 0 1, width 150:250:300, height 30:50:80");
 		panel.add(btnOptions, "cell 0 2, width 150:250:300, height 30:50:80");
 		panel.add(btnExit, "cell 0 3, width 150:250:300, height 30:50:80");
+		
 		panel.invalidate();
 		panel.validate();
 		panel.repaint();
 	}
 	
 	
-	public void setButtons() {
+	private void setButtons() {
 		btnNewGame.setForeground(new Color(0f, 0f, 0f));
 		btnNewGame.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnNewGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modes.setChooseColorAndNameMode();
+				controller.setChooseColorAndNameMode();
 			}
 		});
 
@@ -53,7 +64,7 @@ public class MainMenu {
 		btnLoadGame.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnLoadGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modes.setLoadGameMode();
+				controller.setLoadGameMode();
 			}
 		});
 
@@ -61,7 +72,7 @@ public class MainMenu {
 		btnOptions.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnOptions.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modes.setOptionsMode();
+				controller.setOptionsMode();
 			}
 		});
 

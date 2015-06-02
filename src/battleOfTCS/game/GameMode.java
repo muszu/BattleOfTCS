@@ -5,63 +5,44 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.Random;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import net.miginfocom.swing.MigLayout;
+
 
 public class GameMode {
+	
+	private HexMap map = new HexMap();
+	private DragNDrop listener;
+	
+	private LinkedList<HexMapElement> listOfHexA = new LinkedList<>();
+	private LinkedList<HexMapElement> listOfHexB = new LinkedList<>();
+	
+	private JButton btnEndTurn = new JButton("End Turn");
+	private JButton btnBack = new JButton("Back");
 	
 	JFrame frame;
 	JPanel panel;
 	Game game;
-	Modes modes;
+	Controller controller;
 	
-	HexMap map = new HexMap();
-	DragNDrop listener;
-	
-	JButton btnEndTurn = new JButton("End Turn");
-	JButton btnBack = new JButton("Back");
-	
-	LinkedList<HexMapElement> listOfHexA = new LinkedList<>(), listOfHexB = new LinkedList<>();
-	
-	public GameMode(JFrame frame, JPanel panel, Game game, Modes modes) {
+	public GameMode(JFrame frame, JPanel panel, Game game, Controller controller) {
 		this.frame = frame;
 		this.panel = panel;
 		this.game = game;
-		this.modes = modes;
+		this.controller = controller;
 		
-		listener = new DragNDrop(game.units, panel, map, game);
-		this.setButtons();
-	}
-	
-	
-	public void setButtons() {
-		btnEndTurn.setForeground(new Color(0f, 0f, 0f));
-		btnEndTurn.setBackground(new Color(0.7f, 0.7f, 0.7f));
-		btnEndTurn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(Game.tacticSet != 0){
-					Game.tacticSet --;
-				}
-				game.endTurn();
-				panel.repaint();
-			}
-		});
-		
-		btnBack.setForeground(new Color(0f, 0f, 0f));
-		btnBack.setBackground(new Color(0.7f, 0.7f, 0.7f));
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				modes.setMainMenuMode();
-			}
-		});
+		setButtons();
+		prepareGame();
 	}
 
-	public void createMap() {
-		for (HexMapElement tmp : map.hexes) {
-			tmp.setRandomTerrainType();
-			tmp.setFlag(false);
+	private void createMap() {
+		for (HexMapElement hex : map.hexes) {
+			hex.setRandomTerrainType();
+			hex.setFlag(false);
 		}
 		
 		game.map = map;
@@ -72,7 +53,10 @@ public class GameMode {
 		}
 	}
 	
-	public void sth() {
+	private void prepareGame() {
+		
+		createMap();
+		game.prepareTurnList();
 		
 		Game.tacticSet = 2;
 		
@@ -122,12 +106,39 @@ public class GameMode {
 
 		game.refresh();
 	}
-
+	
+	private void setButtons() {
+		btnEndTurn.setForeground(new Color(0f, 0f, 0f));
+		btnEndTurn.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnEndTurn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(Game.tacticSet != 0){
+					Game.tacticSet --;
+				}
+				game.endTurn();
+				panel.repaint();
+			}
+		});
+		
+		btnBack.setForeground(new Color(0f, 0f, 0f));
+		btnBack.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.setMainMenuMode();
+			}
+		});
+	}
 	
 
-	public void repaintGameMode() {
+	public void paintGameMode() {
+		panel.removeAll();
+		panel.setLayout(new MigLayout("",
+				new StringBuilder().append(frame.getWidth() / 2 - 260).append("[]20[]").toString(), 
+				new StringBuilder().append( frame.getHeight()-80).append("[]2[]").toString()));
+		
 		panel.add(btnEndTurn, "cell 0 0, width 150:250:300, height 20:30:40");
 		panel.add(btnBack, "cell 1 0, width 150:250:300, height 20:30:40");
+		
 		panel.invalidate();
 		panel.validate();
 		panel.repaint();

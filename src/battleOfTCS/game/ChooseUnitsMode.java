@@ -10,37 +10,31 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import net.miginfocom.swing.MigLayout;
 
 public class ChooseUnitsMode {
 	
-	List<Unit> unitsToChoose;
-	List<Unit> chosenUnits = new ArrayList<Unit>();
-	public boolean player1Ready;
-
+	private List<Unit> unitsToChoose;
+	private List<Unit> chosenUnits = new ArrayList<Unit>();
+	private boolean player1Ready;
 	
-	JTextField nameA, nameB;
+	private JButton btnReady = new JButton("Ready!");
+	private JButton btnBack = new JButton("Back");
+	private JButton[] btnChosenUnit = new JButton[5];
+	private JButton[] btnUnit = new JButton[10];
 	
 	JFrame frame;
 	JPanel panel;
-	Modes modes;
+	Controller controller;
 	Game game;
 	
 	
-	JButton btnReady = new JButton("Ready!");
-	JButton btnBack = new JButton("Back");
-	JButton[] btnChosenUnit = new JButton[5];
-	JButton[] btnUnit = new JButton[10];
-	
-	
-	
-	public ChooseUnitsMode(JFrame frame, JPanel panel, Game game, Modes modes) {
+	public ChooseUnitsMode(JFrame frame, JPanel panel, Game game, Controller controller) {
 		this.frame = frame;
 		this.panel = panel;
 		this.game = game;
-		this.modes = modes;
+		this.controller = controller;
 		
 		unitsToChoose = Unit.createUnitLists(game.colorA);	
 		
@@ -50,31 +44,7 @@ public class ChooseUnitsMode {
 		this.setBtnUnit();
 	}
 	
-	public void repaintChooseUnitsMode() {
-	
-		this.setBtnChosenUnit();
-		this.setBtnUnit();
-		
-		panel.removeAll();
-		panel.setLayout(new MigLayout("", (frame.getWidth() / 2 - 325) + "[]100[]20[]60[]20[]", 
-			40+"[]20[]20[]20[]20[]80[]"
-			));
-		
-		for (int i = 0; i < 5; i++)
-			panel.add(btnChosenUnit[i], "cell 0 " + i
-					+ ", width 80:80:80, height 80:80:80");
-		for (int i = 0; i < 10; i++)
-			panel.add(btnUnit[i], "cell " + ((i / 5) + 3) + " " + i % 5
-					+ ", width 80:80:80, height 80:80:80");
-		panel.add(btnReady, "cell 1 5, width 100:150:200, height 20:30:40");
-		panel.add(btnBack, "cell 2 5, width 100:150:200, height 20:30:40");
-		panel.invalidate();
-		panel.validate();
-		panel.repaint();
-	}
-	
-	
-	public void setBtnReady() {
+	private void setBtnReady() {
 		btnReady.setForeground(new Color(0f, 0f, 0f));
 		btnReady.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnReady.addActionListener(new ActionListener() {
@@ -96,19 +66,18 @@ public class ChooseUnitsMode {
 					game.units.addAll(chosenUnits);
 					chosenUnits.clear();
 					if (player1Ready) 
-						modes.setGameMode(); // true == capture flag mode
+						controller.setGameMode(); // true == capture flag mode
 					else {
 						player1Ready = true;
 						unitsToChoose = Unit.createUnitLists(game.colorB);
-						repaintChooseUnitsMode();
+						paintChooseUnitsMode();
 					}
 				}
 			}
 		});
 	}
 	
-	
-	public void setBtnUnit() {
+	private void setBtnUnit() {
 		for (int i = 0; i < 10; i++) {
 			btnUnit[i] = new JButton();
 			btnUnit[i].setBackground(new Color(0.7f, 0.7f, 0.7f));
@@ -118,15 +87,14 @@ public class ChooseUnitsMode {
 				public void actionPerformed(ActionEvent e) {
 					if (chosenUnits.size() < 5) {
 						chosenUnits.add(new Unit(unitsToChoose.get(ii)));
-						repaintChooseUnitsMode();
+						paintChooseUnitsMode();
 					}
 				}
 			});
 		}
 	}
 	
-	
-	public void setBtnChosenUnit() {
+	private void setBtnChosenUnit() {
 		for (int i = 0; i < 5; i++) {
 			btnChosenUnit[i] = new JButton();
 			btnChosenUnit[i].setForeground(new Color(0f, 0f, 0f));
@@ -145,23 +113,42 @@ public class ChooseUnitsMode {
 				public void actionPerformed(ActionEvent e) {
 					if (chosenUnits.size() > ii) {
 						chosenUnits.remove(ii);
-						modes.setChooseUnitsMode();
+						controller.setChooseUnitsMode();
 					}
 				}
 			});
 		}
 	}
 	
-	
-	
-	public void setBtnBack() {
+	private void setBtnBack() {
 		btnBack.setForeground(new Color(0f, 0f, 0f));
 		btnBack.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modes.setMainMenuMode();
+				controller.setChooseColorAndNameMode();
 			}
 		});
 	}
-
+	
+	public void paintChooseUnitsMode() {
+		
+		this.setBtnChosenUnit();
+		this.setBtnUnit();
+		
+		panel.removeAll();
+		panel.setLayout(new MigLayout("", (frame.getWidth() / 2 - 325) + "[]100[]20[]60[]20[]", 
+			40+"[]20[]20[]20[]20[]80[]"
+			));
+		
+		for (int i = 0; i < 5; i++)
+			panel.add(btnChosenUnit[i], "cell 0 " + i + ", width 80:80:80, height 80:80:80");
+		for (int i = 0; i < 10; i++)
+			panel.add(btnUnit[i], "cell " + ((i / 5) + 3) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
+		panel.add(btnReady, "cell 1 5, width 100:150:200, height 20:30:40");
+		panel.add(btnBack, "cell 2 5, width 100:150:200, height 20:30:40");
+		
+		panel.invalidate();
+		panel.validate();
+		panel.repaint();
+	}
 }

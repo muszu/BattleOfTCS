@@ -10,18 +10,17 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
-import net.miginfocom.swing.MigLayout;
 
-public class Modes {
-	
+public class Controller {
 	
 	public JPanelBackground panel = new JPanelBackground();
 	public JFrame frame = new JFrame();
 	public Game game = new Game();
 	
 	
-	
-	public Modes() {
+	public Controller() {
+		panel.controller = this;
+		
 		frame.add(panel);
 		
 		frame.setBounds(0, 0, 1024, 768);
@@ -56,75 +55,43 @@ public class Modes {
 	
 	public void setMainMenuMode() {
 		panel.mode = 1;
-		panel.removeAll();
-		panel.invalidate();
-		panel.validate();
-		panel.repaint();
-		panel.setLayout(new MigLayout("", new StringBuilder()
-				.append(frame.getWidth() / 2 - 125).append("[]").toString(),
-				new StringBuilder().append(frame.getHeight() - 400)
-						.append("[]20[]20[]20[]").toString()));
 		
 		MainMenu menu = new MainMenu(frame, this, panel);
-		menu.repaintMainMenu();
+		menu.paintMainMenu();
 	}
 	
 	
 	public void setOptionsMode() {
-		panel.removeAll();
-		panel.invalidate();
-		panel.validate();
-		panel.repaint(2);
-		panel.setLayout(new MigLayout("", new StringBuilder()
-			.append(frame.getWidth() / 2 - 125).append("[]").toString(),
-			new StringBuilder().append(frame.getHeight() - 500)
-				.append("[]20[]20[]20[]20[]").toString()));
+		panel.mode = 2;
 		
 		Options options = new Options(panel, frame, this);
-		options.repaintOptions();
-		
+		options.paintOptions();
 	}
 	
 	
 	public void setGameMode() {
-		panel.removeAll();
-		panel.invalidate();
-		panel.validate();
-		panel.repaint();
-		panel.setLayout(new MigLayout("",
-				new StringBuilder().append(frame.getWidth() / 2 - 260).append("[]20[]").toString(), 
-				new StringBuilder().append( frame.getHeight()-80).append("[]2[]").toString()));
+		panel.mode = 3;
 		
 		GameMode gameMode = new GameMode(frame, panel, game, this);
-		gameMode.repaintGameMode();
-		
+		gameMode.paintGameMode();
 	}
 	
 	
 	public void setChooseColorAndNameMode() {
-		panel.removeAll();
-		panel.invalidate();
-		panel.validate();
-		panel.repaint();
-		panel.setLayout(new MigLayout(
-				"", 
-				(frame.getWidth()/ 2 - 320)+"[]20[]20[]20[]", 
-				(frame.getHeight()/2 - 100)+"[]30[]50[]100[]"
-			));
+		game = new Game();
+		
+		panel.mode = 2;
 		
 		ChooseColorAndNameMode chooseColor = new ChooseColorAndNameMode(frame, this, panel, game);
-		chooseColor.repaintChooseColorAndNameMode();
+		chooseColor.paintChooseColorAndNameMode();
 	}
 	
 	
 	public void setChooseUnitsMode() {
-		panel.removeAll();
-		panel.setLayout(new MigLayout("", (frame.getWidth() / 2 - 325) + "[]100[]20[]60[]20[]", 
-			40+"[]20[]20[]20[]20[]80[]"
-			));
+		panel.mode = 2;
 		
 		ChooseUnitsMode choose = new ChooseUnitsMode(frame, panel, game, this);
-		choose.repaintChooseUnitsMode();
+		choose.paintChooseUnitsMode();
 	}
 	
 	

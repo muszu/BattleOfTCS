@@ -23,6 +23,7 @@ public class HexMap {
 	
 	public HexMap() {
 		
+		HexMapElement.resetIdCounter();
 		hexes = new LinkedList<HexMapElement>();
         
         boolean oddRow = true;

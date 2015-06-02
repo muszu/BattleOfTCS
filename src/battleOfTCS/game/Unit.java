@@ -214,35 +214,35 @@ public class Unit implements GameObject {
 	public static List<Unit> createUnitLists(String colorOfUnit) {
 		List<Unit> unitsToChoose = new LinkedList<>();
 		
-		ImageIcon testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/" 
+		ImageIcon testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/" 
 				+ colorOfUnit + "/M - Griffin.png"));
 		
 		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 4, 60));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/M - Gnoll.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 100, 1, 2, 30));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/hus1.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 120, 1, 3, 40));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/Fighter - Scimitar2.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 140, 1, 2, 25));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/Lantern2.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 160, 1, 2, 40));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/M - Ogre.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 180, 1, 2, 50));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/swordnshield1.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 150, 1, 2, 30));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/Fighter - Bow.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 100, 7, 2, 20));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/Mage1.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 100, 8, 2, 50));
-		testImgIcon = new ImageIcon(Menu.class.getResource("images/units/small/"
+		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
 				+ colorOfUnit + "/M - Hydra.png"));
 		unitsToChoose.add(new Unit(testImgIcon, 200, 2, 2, 50));
 		

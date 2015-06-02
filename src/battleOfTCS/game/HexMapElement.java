@@ -21,27 +21,27 @@ public class HexMapElement implements GameObject {
 	public int tacticSet;
 
 	public final static Image imgHex = new ImageIcon(
-			Menu.class.getResource("images/hex.png")).getImage();
+			Controller.class.getResource("images/hex.png")).getImage();
 	public final static Image imgHexShadow = new ImageIcon(
-			Menu.class.getResource("images/hexshadow.png")).getImage();
+			Controller.class.getResource("images/hexshadow.png")).getImage();
 	public final static Image imgHexShadowLight = new ImageIcon(
-			Menu.class.getResource("images/hexshadowlight.png")).getImage();
+			Controller.class.getResource("images/hexshadowlight.png")).getImage();
 	public final static Image imgHexRed = new ImageIcon(
-			Menu.class.getResource("images/hexred.png")).getImage();
+			Controller.class.getResource("images/hexred.png")).getImage();
 	public final static Image imgHexYellow = new ImageIcon(
-			Menu.class.getResource("images/hexyellow.png")).getImage();
+			Controller.class.getResource("images/hexyellow.png")).getImage();
 	public final static Image imgHexGreen = new ImageIcon(
-			Menu.class.getResource("images/hexgreen.png")).getImage();
+			Controller.class.getResource("images/hexgreen.png")).getImage();
 	public final static Image imgHexForest = new ImageIcon(
-			Menu.class.getResource("images/hex_forest1.png")).getImage();
+			Controller.class.getResource("images/hex_forest1.png")).getImage();
 	public final static Image imgHexHill = new ImageIcon(
-			Menu.class.getResource("images/hex_hill.png")).getImage();
+			Controller.class.getResource("images/hex_hill.png")).getImage();
 	public final static Image imgHexGrass1 = new ImageIcon(
-			Menu.class.getResource("images/hex_grass6.png")).getImage();
+			Controller.class.getResource("images/hex_grass6.png")).getImage();
 	public final static Image imgHexGrass2 = new ImageIcon(
-			Menu.class.getResource("images/hex_grass6.png")).getImage();
+			Controller.class.getResource("images/hex_grass6.png")).getImage();
 	public final static Image imgHexFlag = new ImageIcon(
-			Menu.class.getResource("images/flag_90red.png")).getImage();
+			Controller.class.getResource("images/flag_90red.png")).getImage();
 
 	private static int idCounter = 0;
 	public static int width = imgHex.getWidth(null);

@@ -25,23 +25,27 @@ public class Game {
 	private int win;
 	public List<Unit> units = new LinkedList<>();
 	public LinkedList<Unit> turnList;
-	public HexMap map;
+	public HexMap map = new HexMap();
 
 	public final static Image imgBoard150 = new ImageIcon(
-			Menu.class.getResource("images/board150.png")).getImage();
+			Controller.class.getResource("images/board150.png")).getImage();
 	public final static Image imgBoard200 = new ImageIcon(
-			Menu.class.getResource("images/board200.png")).getImage();
+			Controller.class.getResource("images/board200.png")).getImage();
 	public final static Image imgBoard250 = new ImageIcon(
-			Menu.class.getResource("images/board250.png")).getImage();
+			Controller.class.getResource("images/board250.png")).getImage();
 
 	private static Font smallFont = new Font("Arial", Font.BOLD, 15);
 	private static Font mediumFont = new Font("Arial", Font.BOLD, 25);
 	private static Font bigFont = new Font("Arial", Font.BOLD, 40);
 	
 	public Game() {
-		
+		win = 0;
+		turnToWin = 42;
+		ownerOfFlag = 42;
+		lastOwnerOfFlag = 41;
+		turnList = new LinkedList<Unit>();
 	}
-
+	
 	public Game(LinkedList<Unit> unitsList, HexMap map) {
 		win = 0;
 		turnToWin=42;
@@ -50,6 +54,18 @@ public class Game {
 		turnList = new LinkedList<Unit>();
 		this.units = unitsList;
 		this.map = map;
+		for (Unit unit : units) {
+			unit.rest();
+		}
+		turn = 1;
+		for (Unit unit : units) {
+			if (unit.getOwner() == 1)
+				turnList.add(unit);
+		}
+	}
+	
+	public void prepareTurnList() {
+		turnList = new LinkedList<Unit>();
 		for (Unit unit : units) {
 			unit.rest();
 		}
