@@ -9,7 +9,11 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-public class Game {
+public class Game implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1034765971413943883L;
 	private int turn;
 	public String playerA;
 	public String playerB;

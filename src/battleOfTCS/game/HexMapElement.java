@@ -6,7 +6,12 @@ import java.util.LinkedList;
 import java.util.Random;
 import javax.swing.ImageIcon;
 
-public class HexMapElement implements GameObject {
+public class HexMapElement implements GameObject,java.io.Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2087863756052824635L;
 
 	Random generator = new Random();
 
@@ -20,38 +25,37 @@ public class HexMapElement implements GameObject {
 	
 	public int tacticSet;
 
-	public final static Image imgHex = new ImageIcon(
-			Controller.class.getResource("images/hex.png")).getImage();
-	public final static Image imgHexShadow = new ImageIcon(
-			Controller.class.getResource("images/hexshadow.png")).getImage();
-	public final static Image imgHexShadowLight = new ImageIcon(
-			Controller.class.getResource("images/hexshadowlight.png")).getImage();
-	public final static Image imgHexRed = new ImageIcon(
-			Controller.class.getResource("images/hexred.png")).getImage();
-	public final static Image imgHexYellow = new ImageIcon(
-			Controller.class.getResource("images/hexyellow.png")).getImage();
-	public final static Image imgHexGreen = new ImageIcon(
-			Controller.class.getResource("images/hexgreen.png")).getImage();
-	public final static Image imgHexForest = new ImageIcon(
-			Controller.class.getResource("images/hex_forest1.png")).getImage();
-	public final static Image imgHexHill = new ImageIcon(
-			Controller.class.getResource("images/hex_hill.png")).getImage();
-	public final static Image imgHexGrass1 = new ImageIcon(
-			Controller.class.getResource("images/hex_grass6.png")).getImage();
-	public final static Image imgHexGrass2 = new ImageIcon(
-			Controller.class.getResource("images/hex_grass6.png")).getImage();
-	public final static Image imgHexFlag = new ImageIcon(
-			Controller.class.getResource("images/flag_90red.png")).getImage();
+	public final static ImageIcon imgHex = new ImageIcon(
+			Controller.class.getResource("images/hex.png"));
+	public final static ImageIcon imgHexShadow = new ImageIcon(
+			Controller.class.getResource("images/hexshadow.png"));
+	public final static ImageIcon imgHexShadowLight = new ImageIcon(
+			Controller.class.getResource("images/hexshadowlight.png"));
+	public final static ImageIcon imgHexRed = new ImageIcon(
+			Controller.class.getResource("images/hexred.png"));
+	public final static ImageIcon imgHexYellow = new ImageIcon(
+			Controller.class.getResource("images/hexyellow.png"));
+	public final static ImageIcon imgHexGreen = new ImageIcon(
+			Controller.class.getResource("images/hexgreen.png"));
+	public final static ImageIcon imgHexForest = new ImageIcon(
+			Controller.class.getResource("images/hex_forest1.png"));
+	public final static ImageIcon imgHexHill = new ImageIcon(
+			Controller.class.getResource("images/hex_hill.png"));
+	public final static ImageIcon imgHexGrass1 = new ImageIcon(
+			Controller.class.getResource("images/hex_grass6.png"));
+	public final static ImageIcon imgHexGrass2 = new ImageIcon(
+			Controller.class.getResource("images/hex_grass6.png"));
+	public final static ImageIcon imgHexFlag = new ImageIcon(
+			Controller.class.getResource("images/flag_90red.png"));
 
 	private static int idCounter = 0;
-	public static int width = imgHex.getWidth(null);
-	public static int height = imgHex.getHeight(null);
+	public static int width = imgHex.getIconWidth();
+	public static int height = imgHex.getIconHeight();
 	public static int side = height / 2;
 
 	public Unit unit;
 	public int id;
-
-	private Image img;
+	private ImageIcon img;
 	private int x;
 	private int y;
 	private int centerX;
@@ -161,7 +165,7 @@ public class HexMapElement implements GameObject {
 	}
 
 	public Image getImage() {
-		return img;
+		return img.getImage();
 	}
 
 	public int getX() {
@@ -188,7 +192,7 @@ public class HexMapElement implements GameObject {
 		this.y = y;
 	}
 
-	public void setImage(Image img) {
+	public void setImage(ImageIcon img) {
 		this.img = img;
 	}
 
@@ -197,29 +201,29 @@ public class HexMapElement implements GameObject {
 	}
 
 	public int getWidth() {
-		return img.getWidth(null);
+		return img.getImage().getWidth(null);
 	}
 
 	public int getHeight() {
-		return img.getHeight(null);
+		return img.getImage().getHeight(null);
 	}
 
 	public void drawIt(Graphics g) {
-		g.drawImage(img, x, y, null);
+		g.drawImage(img.getImage(), x, y, null);
 		if (isShadow)
-			g.drawImage(HexMapElement.imgHexShadow, x, y, null);
+			g.drawImage(HexMapElement.imgHexShadow.getImage(), x, y, null);
 		if (isRed) {
-			g.drawImage(HexMapElement.imgHexRed, x, y, null);
+			g.drawImage(HexMapElement.imgHexRed.getImage(), x, y, null);
 		} else if (isGreen) {
-			g.drawImage(HexMapElement.imgHexGreen, x, y, null);
+			g.drawImage(HexMapElement.imgHexGreen.getImage(), x, y, null);
 		} else if (isYellow) {
-			g.drawImage(HexMapElement.imgHexYellow, x, y, null);
+			g.drawImage(HexMapElement.imgHexYellow.getImage(), x, y, null);
 		} else {
 			if (isShadowLight)
-				g.drawImage(HexMapElement.imgHexShadowLight, x, y, null);
+				g.drawImage(HexMapElement.imgHexShadowLight.getImage(), x, y, null);
 		}
 		if(isFlag){
-			g.drawImage(imgHexFlag, x+4, y, null);
+			g.drawImage(imgHexFlag.getImage(), x+4, y, null);
 		}
 	}
 

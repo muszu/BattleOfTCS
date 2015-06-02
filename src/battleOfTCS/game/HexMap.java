@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 
-public class HexMap {
+public class HexMap implements java.io.Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7551702619270922929L;
 	public LinkedList<HexMapElement> hexes;
 	private static int amountInOddRow = 13;
 	private static int amountInEvenRow = 13;

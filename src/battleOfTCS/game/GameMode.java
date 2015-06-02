@@ -3,12 +3,23 @@ package battleOfTCS.game;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Random;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -29,14 +40,88 @@ public class GameMode {
 	Game game;
 	Controller controller;
 	
-	public GameMode(JFrame frame, JPanel panel, Game game, Controller controller) {
+	public GameMode(final JFrame frame, JPanel panel, Game game, Controller controller) {
 		this.frame = frame;
 		this.panel = panel;
 		this.game = game;
 		this.controller = controller;
 		
+		KeyStroke saveKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, false);
+		@SuppressWarnings("serial")
+		Action saveAction = new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(frame,
+								"Are you sure to save your game?", "Save",
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					saveGame();
+				}
+			}
+		};
+		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(saveKeyStroke, "S");
+		frame.getRootPane().getActionMap().put("S", saveAction);
+		
+		KeyStroke loadKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, false);
+		@SuppressWarnings("serial")
+		Action loadAction = new AbstractAction() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(frame,
+								"Are you sure to load your game?", "Load",
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+					 loadGame();
+				}
+			}
+		};
+		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(loadKeyStroke, "L");
+		frame.getRootPane().getActionMap().put("L", loadAction);
+		
+		
 		setButtons();
 		prepareGame();
+	}
+
+	
+	
+	protected void loadGame() {
+		try
+	      {
+			 FileInputStream loadGame = new  FileInputStream("saveGame.ser");
+	         ObjectInputStream in = new ObjectInputStream(loadGame);
+	         game = null;
+	         game = (Game) in.readObject();
+	         map = game.map;
+	         controller.game = game;
+	         in.close();
+	         loadGame.close();
+	         panel.removeMouseListener(listener);
+	         panel.removeMouseMotionListener(listener);
+	         listener = new DragNDrop(game.units, panel, map, game);
+	 			panel.addMouseListener(listener);
+	 			panel.addMouseMotionListener(listener);
+	 			game.refresh();
+	         System.out.println("Game loaded");
+	      }catch(IOException i)
+	      {
+	          i.printStackTrace();
+	      } catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	protected void saveGame() {
+		 try
+	      {
+	         FileOutputStream saveGame = new FileOutputStream("saveGame.ser");
+	         ObjectOutputStream out = new ObjectOutputStream(saveGame);
+	         out.writeObject(game);
+	         out.close();
+	         saveGame.close();
+	         System.out.println("Game saved");
+	      }catch(IOException i)
+	      {
+	          i.printStackTrace();
+	      }
 	}
 
 	private void createMap() {

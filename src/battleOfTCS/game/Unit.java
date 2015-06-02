@@ -8,10 +8,13 @@ import java.util.List;
 
 import javax.swing.ImageIcon;
 
-public class Unit implements GameObject {
-
+public class Unit implements GameObject, java.io.Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5689501156384474474L;
 	private ImageIcon icon;
-	private Image img;
+	private ImageIcon img;
 	private int x;
 	private int y;
 	private int attack;
@@ -29,7 +32,7 @@ public class Unit implements GameObject {
 
 	public Unit(Unit unit) {
 		this.icon = unit.icon;
-		this.img = unit.icon.getImage();
+		this.img = unit.icon;
 		this.maxHealth = unit.maxHealth;
 		this.health = unit.maxHealth;
 		this.range = unit.range;
@@ -38,7 +41,7 @@ public class Unit implements GameObject {
 		this.owner = unit.owner;
 	}
 
-	public Unit(Image img, int x, int y, int maxHealth, int range,
+	public Unit(ImageIcon img, int x, int y, int maxHealth, int range,
 			int maxMovePoint, int attack, int owner) {
 		this.img = img;
 		this.x = x;
@@ -54,7 +57,7 @@ public class Unit implements GameObject {
 	public Unit(ImageIcon icon, int maxHealth, int range, int maxMovePoint,
 			int attack) {
 		this.icon = icon;
-		this.img = icon.getImage();
+		this.img = icon;
 		this.maxHealth = maxHealth;
 		this.health = maxHealth;
 		this.range = range;
@@ -67,7 +70,7 @@ public class Unit implements GameObject {
 	}
 
 	public Image getImage() {
-		return img;
+		return img.getImage();
 	}
 
 	public int getX() {
@@ -99,16 +102,16 @@ public class Unit implements GameObject {
 	}
 
 	public int getWidth() {
-		return img.getWidth(null);
+		return img.getIconWidth();
 	}
 
 	public int getHeight() {
-		return img.getHeight(null);
+		return img.getIconHeight();
 	}
 
 	public void drawIt(Graphics g, Boolean printHealth) {
 		int przes = 0;
-		if (img.getWidth(null) > 100) {
+		if (img.getIconWidth() > 100) {
 			przes = 40;
 		}
 		if (printHealth) {
@@ -125,7 +128,7 @@ public class Unit implements GameObject {
 					y + 11);
 		}
 		else{
-			g.drawImage(img, x, y, null);
+			g.drawImage(img.getImage(), x, y, null);
 		}
 		
 	}
