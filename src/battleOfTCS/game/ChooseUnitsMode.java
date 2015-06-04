@@ -1,6 +1,7 @@
 package battleOfTCS.game;
 
 import java.awt.Color;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -8,8 +9,10 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -23,6 +26,8 @@ public class ChooseUnitsMode {
 	private JButton btnBack = new JButton("Back");
 	private JButton[] btnChosenUnit = new JButton[5];
 	private JButton[] btnUnit = new JButton[10];
+	private JButton[] btnParameters = new JButton[10];
+	
 	
 	JFrame frame;
 	JPanel panel;
@@ -36,12 +41,13 @@ public class ChooseUnitsMode {
 		this.game = game;
 		this.controller = controller;
 		
-		unitsToChoose = Unit.createUnitLists(game.colorA);	
+		unitsToChoose = Unit.createUnitLists(game.colorA);
 		
 		this.setBtnBack();
 		this.setBtnChosenUnit();
 		this.setBtnReady();
 		this.setBtnUnit();
+		this.setBtnParameters();
 	}
 	
 	private void setBtnReady() {
@@ -120,6 +126,22 @@ public class ChooseUnitsMode {
 		}
 	}
 	
+	private void setBtnParameters() {
+		for (int i = 0; i < 10; i++) {
+			btnParameters[i] = new JButton();
+			btnParameters[i].setBackground(new Color(0.7f, 0.7f, 0.7f));
+			btnParameters[i].setHorizontalAlignment(SwingConstants.LEFT);
+			btnParameters[i].setMargin(new Insets(0,0,0,0));
+			
+			String param = "Health " + unitsToChoose.get(i).getHealth() + "\n" +
+							"Attack " + unitsToChoose.get(i).getAttack() + "\n" + 
+							"Move " + unitsToChoose.get(i).getMaxMovePoint() + "\n" +
+							"ShotRange " + unitsToChoose.get(i).getRange();
+			
+			btnParameters[i].setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
+		}
+	}
+	
 	private void setBtnBack() {
 		btnBack.setForeground(new Color(0f, 0f, 0f));
 		btnBack.setBackground(new Color(0.7f, 0.7f, 0.7f));
@@ -142,8 +164,14 @@ public class ChooseUnitsMode {
 		
 		for (int i = 0; i < 5; i++)
 			panel.add(btnChosenUnit[i], "cell 0 " + i + ", width 80:80:80, height 80:80:80");
-		for (int i = 0; i < 10; i++)
+		for (int i = 0; i < 5; i++)
+			panel.add(btnUnit[i], "cell " + ((i / 5) + 2) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
+		for (int i = 5; i < 10; i++)
 			panel.add(btnUnit[i], "cell " + ((i / 5) + 3) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
+		for (int i = 0; i < 5; i++)
+			panel.add(btnParameters[i], "cell " + ((i / 5) + 2) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
+		for (int i = 5; i < 10; i++)
+			panel.add(btnParameters[i], "cell " + ((i / 5) + 3) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
 		panel.add(btnReady, "cell 1 5, width 100:150:200, height 20:30:40");
 		panel.add(btnBack, "cell 2 5, width 100:150:200, height 20:30:40");
 		
