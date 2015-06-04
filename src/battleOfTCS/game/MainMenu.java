@@ -17,6 +17,7 @@ public class MainMenu {
 	private JButton btnNewGame = new JButton("New game");
 	private JButton btnLoadGame = new JButton("Load game");
 	private JButton btnOptions = new JButton("Options");
+	private JButton btnCredits = new JButton("Credits");
 	private JButton btnExit = new JButton("Exit");
 	
 	JFrame frame;
@@ -38,12 +39,13 @@ public class MainMenu {
 		panel.setLayout(new MigLayout("", new StringBuilder()
 				.append(frame.getWidth() / 2 - 125).append("[]").toString(),
 				new StringBuilder().append(frame.getHeight() - 400)
-						.append("[]20[]20[]20[]").toString()));
+						.append("[]10[]10[]10[]10[]10[]10[]").toString()));
 		
-		panel.add(btnNewGame, "cell 0 0, width 150:250:300, height 30:50:80");
-		panel.add(btnLoadGame, "cell 0 1, width 150:250:300, height 30:50:80");
-		panel.add(btnOptions, "cell 0 2, width 150:250:300, height 30:50:80");
-		panel.add(btnExit, "cell 0 3, width 150:250:300, height 30:50:80");
+		panel.add(btnNewGame, "cell 0 0, width 150:250:300, height 30:40:60");
+		panel.add(btnLoadGame, "cell 0 1, width 150:250:300, height 30:40:60");
+		panel.add(btnOptions, "cell 0 2, width 150:250:300, height 30:40:60");
+		panel.add(btnCredits, "cell 0 3, width 150:250:300, height 30:40:60");
+		panel.add(btnExit, "cell 0 4, width 150:250:300, height 30:40:60");
 		
 		panel.invalidate();
 		panel.validate();
@@ -75,7 +77,15 @@ public class MainMenu {
 				controller.setOptionsMode();
 			}
 		});
-
+		
+		btnCredits.setForeground(new Color(0f, 0f, 0f));
+		btnCredits.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnCredits.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.setCreditsMode();
+			}
+		});
+		
 		btnExit.setForeground(new Color(0f, 0f, 0f));
 		btnExit.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnExit.addActionListener(new ActionListener() {

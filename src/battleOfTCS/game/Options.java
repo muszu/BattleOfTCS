@@ -68,14 +68,14 @@ public class Options {
 		panel.setLayout(new MigLayout("", new StringBuilder()
 			.append(frame.getWidth() / 2 - 125).append("[]").toString(),
 			new StringBuilder().append(frame.getHeight() - 500)
-				.append("[]20[]20[]20[]20[]").toString()));
+				.append("[]50[]10[]10[]10[]").toString()));
 		
-		panel.add(btnBack, "cell 0 0, width 150:250:300, height 30:40:80");
-		panel.add(btnReso1, "cell 0 1, width 150:250:300, height 30:40:80");
-		panel.add(btnReso2, "cell 0 2, width 150:250:300, height 30:40:80");
-		panel.add(btnReso3, "cell 0 3, width 150:250:300, height 30:40:80");
-		panel.add(btnReso4, "cell 0 4, width 150:250:300, height 30:40:80");
-		panel.add(btnReso5, "cell 0 5, width 150:250:300, height 30:40:80");
+		panel.add(btnBack, "cell 0 0, width 150:250:300, height 30:40:60");
+		panel.add(btnReso1, "cell 0 1, width 150:250:300, height 30:40:60");
+		panel.add(btnReso2, "cell 0 2, width 150:250:300, height 30:40:60");
+		panel.add(btnReso3, "cell 0 3, width 150:250:300, height 30:40:60");
+		panel.add(btnReso4, "cell 0 4, width 150:250:300, height 30:40:60");
+		panel.add(btnReso5, "cell 0 5, width 150:250:300, height 30:40:60");
 		
 		panel.invalidate();
 		panel.validate();
