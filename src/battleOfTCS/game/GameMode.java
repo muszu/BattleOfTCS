@@ -200,6 +200,14 @@ public class GameMode {
 			public void actionPerformed(ActionEvent e) {
 				if(game.tacticSet != 0){
 					game.tacticSet --;
+					if(game.tacticSet==0){
+						for(HexMapElement hex : map.hexes) {
+							if(hex.unit!=null){
+								hex.unit.getMyHex().tacticSet = 0;
+							}
+							hex.tacticSet = 0;
+						}
+					}
 				}
 				game.endTurn();
 				panel.repaint();
