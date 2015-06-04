@@ -328,4 +328,15 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 	public void setFlag(boolean isFlag) {
 		this.isFlag = isFlag;
 	}
+
+	public void recenter(int centerX2, int centerY2) {
+		centerX = centerX2;
+		centerY = centerY2;
+		x = centerX - width / 2;
+		y = centerY - side;
+		if(unit!=null){
+			unit.setX(centerX - unit.getWidth() / 2);
+			unit.setY(centerY - unit.getHeight() / 2);
+		}	
+	}
 }

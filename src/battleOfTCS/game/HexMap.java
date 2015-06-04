@@ -213,4 +213,28 @@ public class HexMap implements java.io.Serializable{
         	hex.clearColor();
 		}
 	}
+
+	public void recenter(int width2, int height2) {
+		HexMapElement tempHex;
+		width = width2;
+		height = height2;
+		HexMap.firstHexCenterX = (int) (HexMap.width - HexMapElement.width * HexMap.getAmountInOddRow()) / 2;
+    		int k = 0;
+    		boolean oddRow = true;
+            for(int i=1; i <= amountOfRows; i++) {
+            	
+            	/* position of a center of the first hex in this row */
+            	int centerX = oddRow ? firstHexCenterX : firstHexCenterX + HexMapElement.width / 2;
+            	int centerY = firstHexCenterY + 3*(i-1)* HexMapElement.side / 2;
+            	int amountOfHexes = oddRow ? amountInOddRow : amountInEvenRow;
+            	
+            	for(int j=1; j <= amountOfHexes; j++) {
+            		tempHex=hexes.get(k);
+            		tempHex.recenter(centerX,centerY);
+            		centerX += HexMapElement.width;
+            		++k;
+            	}
+            	oddRow = !oddRow;
+            }
+	}
 }

@@ -207,6 +207,8 @@ public class Unit implements GameObject, java.io.Serializable {
 
 	public void setMyHex(HexMapElement myHex) {
 		this.myHex = myHex;
+		x=( myHex.getCenterX() - img.getIconWidth() / 2);
+		y=( myHex.getCenterY() - img.getIconHeight() / 2);
 	}
 
 	public void move(int x) {

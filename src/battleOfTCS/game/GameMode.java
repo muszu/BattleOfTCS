@@ -106,7 +106,8 @@ public class GameMode {
 	          i.printStackTrace();
 	      } catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
-		}
+	      }
+			map.recenter(frame.getWidth(),frame.getHeight() );
 	}
 
 	protected void saveGame() {
@@ -170,16 +171,12 @@ public class GameMode {
 				tempHex.unit = setUnit;
 				setUnit.setMyHex(tempHex);
 				tempHex.occupied = true;
-				setUnit.setX(tempHex.getCenterX() - setUnit.getWidth() / 2);
-				setUnit.setY(tempHex.getCenterY() - setUnit.getHeight() / 2);
 			} else {
 				tempHex = listOfHexB.getFirst();
 				listOfHexB.remove();
 				tempHex.unit = setUnit;
 				setUnit.setMyHex(tempHex);
 				tempHex.occupied = true;
-				setUnit.setX(tempHex.getCenterX() - setUnit.getWidth() / 2);
-				setUnit.setY(tempHex.getCenterY() - setUnit.getHeight() / 2);
 			}
 		}
 		if (listener != null) {

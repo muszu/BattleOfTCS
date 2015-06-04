@@ -90,7 +90,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			if (dragUnit != null) {
 				for (HexMapElement hex : map.hexes) {
 					if (hex.contains(x, y) && hex.unit != null) {
-						if (hex.isInRangeOfShot()
+						if (hex.isInRangeOfShot() && hex.isRed()
 								&& hex.unit.getOwner() != dragUnit.getOwner()) {
 							hex.unit.attack(dragUnit);
 							hex.unit.setMyHex(hex);
@@ -186,7 +186,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			if (clickUnit != null) {
 				for (HexMapElement hex : map.hexes) {
 					if (hex.contains(x, y) && hex.unit != null) {
-						if (hex.isInRangeOfShot()
+						if (hex.isInRangeOfShot() && hex.isRed()
 								&& hex.unit.getOwner() != clickUnit.getOwner()) {
 							hex.unit.attack(clickUnit);
 							hex.unit.setMyHex(hex);
