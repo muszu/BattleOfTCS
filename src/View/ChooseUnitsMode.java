@@ -26,7 +26,7 @@ public class ChooseUnitsMode {
 	
 	private JButton btnReady = new JButton("Ready!");
 	private JButton btnBack = new JButton("Back");
-	private JButton[] btnChosenUnit = new JButton[5];
+	private JButton[] btnChosenUnit = new JButton[10];
 	private JButton[] btnUnit = new JButton[10];
 	private JLabel[] labParameters = new JLabel[10];
 	
@@ -93,7 +93,7 @@ public class ChooseUnitsMode {
 			final int ii = i;
 			btnUnit[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					if (chosenUnits.size() < 5) {
+					if (chosenUnits.size() < 10) {
 						chosenUnits.add(new Unit(unitsToChoose.get(ii)));
 						paintChooseUnitsMode();
 					}
@@ -103,7 +103,7 @@ public class ChooseUnitsMode {
 	}
 	
 	private void setBtnChosenUnit() {
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10; i++) {
 			btnChosenUnit[i] = new JButton();
 			btnChosenUnit[i].setForeground(new Color(0f, 0f, 0f));
 			btnChosenUnit[i].setBackground(new Color(0.7f, 0.7f, 0.7f));
@@ -121,7 +121,7 @@ public class ChooseUnitsMode {
 				public void actionPerformed(ActionEvent e) {
 					if (chosenUnits.size() > ii) {
 						chosenUnits.remove(ii);
-						controller.setChooseUnitsMode();
+						paintChooseUnitsMode();
 					}
 				}
 			});
@@ -161,22 +161,22 @@ public class ChooseUnitsMode {
 		this.setBtnUnit();
 		
 		panel.removeAll();
-		panel.setLayout(new MigLayout("", (frame.getWidth() / 2 - 325) + "[]100[]20[]60[]20[]", 
-			40+"[]20[]20[]20[]20[]80[]"
+		panel.setLayout(new MigLayout(
+				"", 
+				(frame.getWidth() / 2 - 810/2) 
+				+ "[]5[][]10[][]5[]60[]5[]", 
+				(frame.getHeight() / 2 - 530/2) 
+				+"[]5[]5[]5[]5[]80[]"
 			));
 		
-		for (int i = 0; i < 5; i++)
-			panel.add(btnChosenUnit[i], "cell 0 " + i + ", width 80:80:80, height 80:80:80");
-		for (int i = 0; i < 5; i++)
-			panel.add(btnUnit[i], "cell " + ((i / 5) + 2) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
-		for (int i = 5; i < 10; i++)
-			panel.add(btnUnit[i], "cell " + ((i / 5) + 3) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
-		for (int i = 0; i < 5; i++)
-			panel.add(labParameters[i], "cell " + ((i / 5) + 2) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
-		for (int i = 5; i < 10; i++)
-			panel.add(labParameters[i], "cell " + ((i / 5) + 3) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
-		panel.add(btnReady, "cell 1 5, width 100:150:200, height 20:30:40");
-		panel.add(btnBack, "cell 2 5, width 100:150:200, height 20:30:40");
+		for (int i = 0; i < 10; i++)
+			panel.add(btnChosenUnit[i], "cell " + ( i / 5) + " " + i%5 + ", width 80:80:80, height 80:80:80");
+		for (int i = 0; i < 10; i++)
+			panel.add(btnUnit[i], "cell " + (( i / 5)*2 + 4) + " " + i%5 +  ", width 80:80:80, height 80:80:80");
+		for (int i = 0; i < 10; i++)
+			panel.add(labParameters[i], "cell " + ((i / 5)*2 + 5) + " " + i%5 + ", width 80:80:80, height 80:80:80");
+		panel.add(btnReady, "cell 2 5, width 80:120:150, height 20:30:40");
+		panel.add(btnBack, "cell 3 5, width 80:120:150, height 20:30:40");
 		
 		panel.invalidate();
 		panel.validate();
