@@ -19,7 +19,7 @@ public class ChooseColorAndNameMode {
 	
 	private final String [] colors = {"black", "red", "green", "blue", "white", "yellow"};
 	private final String [] gameModes = {"annihilation", "capture flag"};
-	private final String [] gamePoints = {"500", "1000", "1500","2000"};
+	private final String [] gamePoints = {"500 $", "1000 $", "1500 $","2000 $"};
 	
 	private final JComboBox<String> colorListA = new JComboBox<String>(colors);
 	private final JComboBox<String> colorListB = new JComboBox<String>(colors);
@@ -36,6 +36,7 @@ public class ChooseColorAndNameMode {
 	private String colorB = "red";
 	private String playerAname = "Player's A Name";
 	private String playerBname = "Player's B Name";
+	private Integer points = 500;
 	private boolean flagOrNot = true;
 	
 	JPanel panel;
@@ -95,19 +96,20 @@ public class ChooseColorAndNameMode {
 		        int pointNum =  gamePointsList.getSelectedIndex();
 		        switch (pointNum) {
 				case 0:
-					System.out.println(500);
+					points=500;
 					break;
 				case 1:
-					System.out.println(1000);			
+					points=1000;			
 					break;
 				case 2:
-					System.out.println(1500);
+					points=1500;
 					break;
 
 				default:
-					System.out.println(2000);
+					points=2000;
 					break;
 				}
+		        System.out.println(points);
 			}
 		});
 	}
@@ -132,6 +134,7 @@ public class ChooseColorAndNameMode {
 				game.modeOfGame = flagOrNot;
 				game.colorA = colorA;
 				game.colorB = colorB;
+				game.points = points;
 				controller.setChooseUnitsMode();
 			}
 		});

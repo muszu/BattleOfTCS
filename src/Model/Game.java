@@ -31,10 +31,12 @@ public class Game implements java.io.Serializable{
 	public List<Unit> units = new LinkedList<>();
 	public LinkedList<Unit> turnList;
 	public HexMap map = new HexMap(this);
+	public Integer points;
 
 	public final static Image imgBoard150 = new ImageIcon("images/board150.png").getImage();
 	public final static Image imgBoard200 = new ImageIcon("images/board200.png").getImage();
 	public final static Image imgBoard250 = new ImageIcon("images/board250.png").getImage();
+	public final static Image imgBoard360 = new ImageIcon("images/board360.png").getImage();
 
 	private static Font smallFont = new Font("Arial", Font.BOLD, 15);
 	private static Font mediumFont = new Font("Arial", Font.BOLD, 25);
@@ -159,8 +161,8 @@ public class Game implements java.io.Serializable{
 	}
 
 	public void paint(Graphics g) {
-		g.drawImage(imgBoard250,
-				(int) (HexMap.width - imgBoard250.getWidth(null)) / 2, 0, null);
+		g.drawImage(imgBoard360,
+				(int) (HexMap.width - imgBoard360.getWidth(null)) / 2, 0, null);
 		g.setColor(new Color(255, 255, 255));
 		if (win != 0) {
 			g.setFont(mediumFont);
