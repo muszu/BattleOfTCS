@@ -220,7 +220,9 @@ public class GameMode {
 		btnBack.setForeground(new Color(0f, 0f, 0f));
 		btnBack.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e){ 
+				frame.getRootPane().getActionMap().remove("S");
+				frame.getRootPane().getActionMap().remove("L");;
 				controller.setMainMenuMode();
 			}
 		});
