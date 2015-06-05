@@ -19,10 +19,12 @@ public class ChooseColorAndNameMode {
 	
 	private final String [] colors = {"black", "red", "green", "blue", "white", "yellow"};
 	private final String [] gameModes = {"annihilation", "capture flag"};
+	private final String [] gamePoints = {"500", "1000", "1500","2000"};
 	
 	private final JComboBox<String> colorListA = new JComboBox<String>(colors);
 	private final JComboBox<String> colorListB = new JComboBox<String>(colors);
 	private final JComboBox<String> gameModeList = new JComboBox<String>(gameModes);
+	private final JComboBox<String> gamePointsList = new JComboBox<String>(gamePoints);
 	
 	private JButton btnChooseUnits = new JButton("Choose Units");
 	private JButton btnBack = new JButton("Back");
@@ -75,13 +77,37 @@ public class ChooseColorAndNameMode {
 		
 		gameModeList.setForeground(new Color(0f, 0f, 0f));
 		gameModeList.setBackground(new Color(0.7f, 0.7f, 0.7f));
-		gameModeList.setSelectedIndex(1);
+		gameModeList.setSelectedIndex(0);
 		gameModeList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 		        if(gameModeList.getSelectedItem().equals(gameModeList.getItemAt(0)))
 		        	flagOrNot = false;
 				else
 					flagOrNot = true;
+			}
+		});
+		
+		gamePointsList.setForeground(new Color(0f, 0f, 0f));
+		gamePointsList.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		gamePointsList.setSelectedIndex(0);
+		gamePointsList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        int pointNum =  gamePointsList.getSelectedIndex();
+		        switch (pointNum) {
+				case 0:
+					System.out.println(500);
+					break;
+				case 1:
+					System.out.println(1000);			
+					break;
+				case 2:
+					System.out.println(1500);
+					break;
+
+				default:
+					System.out.println(2000);
+					break;
+				}
 			}
 		});
 	}
@@ -129,16 +155,17 @@ public class ChooseColorAndNameMode {
 	
 	public void paintChooseColorAndNameMode() {
 		panel.removeAll();
-		panel.setLayout(new MigLayout("", (frame.getWidth()/ 2 - 320)+"[]20[]20[]20[]", 
-			(frame.getHeight()/2 - 100)+"[]30[]50[]100[]"));
+		panel.setLayout(new MigLayout("", (frame.getWidth()/ 2 - 580/2)+"[][]20[][]", 
+			(frame.getHeight()/2 - 340/2)+"[]30[]50[]100[]"));
 		
-		panel.add(gameModeList, "cell 1 0, width 120:150:170, height 20:30:40");
-		panel.add(nameA, "cell 0 1, width 120:150:170, height 20:30:40");
-		panel.add(nameB, "cell 3 1, width 120:150:170, height 20:30:40");
-		panel.add(colorListA, "cell 0 2, width 120:150:170, height 20:30:40");
-		panel.add(colorListB, "cell 3 2, width 120:150:170, height 20:30:40");
-		panel.add(btnBack, "cell 2 3, width 100:120:140, height 20:30:40");
-		panel.add(btnChooseUnits, "cell 1 3, width 100:120:140, height 20:30:40");
+		panel.add(gameModeList, "cell 1 0, width 100:140:150, height 20:40:40");
+		panel.add(gamePointsList, "cell 2 0, width 100:140:150, height 20:40:40");
+		panel.add(nameA, "cell 0 1, width 100:140:150, height 20:40:40");
+		panel.add(nameB, "cell 3 1, width 100:140:150, height 20:40:40");
+		panel.add(colorListA, "cell 0 2, width 100:140:150, height 20:40:40");
+		panel.add(colorListB, "cell 3 2, width 100:140:150, height 20:40:40");
+		panel.add(btnBack, "cell 2 3, width 100:140:150, height 20:40:40");
+		panel.add(btnChooseUnits, "cell 1 3, width 100:140:150, height 20:40:40");
 		
 		panel.invalidate();
 		panel.validate();
