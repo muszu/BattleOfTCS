@@ -68,10 +68,9 @@ public class Options {
 	
 	public void paintOptions() {
 		panel.removeAll();
-		panel.setLayout(new MigLayout("", new StringBuilder()
-			.append(frame.getWidth() / 2 - 125).append("[]").toString(),
-			new StringBuilder().append(frame.getHeight() - 500)
-				.append("[]50[]10[]10[]10[]").toString()));
+		panel.setLayout(new MigLayout("", 
+				(frame.getWidth() / 2 - 125) + "[]",
+			frame.getHeight() - 500 + "[]50[]10[]10[]10[]"));
 		
 		panel.add(btnBack, "cell 0 0, width 150:250:300, height 30:40:60");
 		panel.add(btnReso1, "cell 0 1, width 150:250:300, height 30:40:60");

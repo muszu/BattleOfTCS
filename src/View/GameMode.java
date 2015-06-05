@@ -232,8 +232,8 @@ public class GameMode {
 	public void paintGameMode() {
 		panel.removeAll();
 		panel.setLayout(new MigLayout("",
-				new StringBuilder().append(frame.getWidth() / 2 - 260).append("[]20[]").toString(), 
-				new StringBuilder().append( frame.getHeight()-80).append("[]2[]").toString()));
+				frame.getWidth() / 2 - 260 + "[]20[]", 
+				frame.getHeight()-80  + "[]2[]"));
 		
 		panel.add(btnEndTurn, "cell 0 0, width 150:250:300, height 20:30:40");
 		panel.add(btnBack, "cell 1 0, width 150:250:300, height 20:30:40");

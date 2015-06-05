@@ -22,6 +22,7 @@ public class JPanelBackground extends JPanel {
 	static Image newBackGround = new ImageIcon("images/newbackground.png").getImage();
 	static Image newBackGround2 = new ImageIcon("images/newbackground2.png").getImage();
 	static Image battle = new ImageIcon("images/battle.png").getImage();
+	static Image credits = new ImageIcon("images/credits.png").getImage();
 
 	
 	protected void paintComponent(Graphics g) {
@@ -43,6 +44,10 @@ public class JPanelBackground extends JPanel {
 				for (Unit unit : controller.game.units)
 					unit.drawIt(g, true);
 				controller.game.paint(g);
+			}
+			if(mode == 4){
+				g.drawImage(newBackGround, 0, 0, this);
+				g.drawImage(credits, (int) (getWidth()-credits.getWidth(null))/2 , (int) (getHeight()-credits.getHeight(null))/2, this);
 			}
 		}
 	}

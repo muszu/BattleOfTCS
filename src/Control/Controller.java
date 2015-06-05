@@ -16,6 +16,7 @@ import Model.HexMap;
 import Model.HexMapElement;
 import View.ChooseColorAndNameMode;
 import View.ChooseUnitsMode;
+import View.Credits;
 import View.GameMode;
 import View.JPanelBackground;
 import View.MainMenu;
@@ -79,6 +80,8 @@ public class Controller {
 		options.paintOptions();
 	}
 	
+
+	
 	
 	public void setGameMode() {
 		panel.mode = 3;
@@ -113,7 +116,10 @@ public class Controller {
 		gameMode.paintGameMode();
 	}
 	
-public void setCreditsMode() {
+	public void setCreditsMode() {
+		panel.mode = 4;
 		
+		Credits credits = new Credits(panel, frame, this);
+		credits.paintCredits();
 	}
 }
