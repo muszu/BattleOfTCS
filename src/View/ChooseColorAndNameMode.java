@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package View;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -10,6 +10,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Control.Controller;
+import Model.Game;
 import net.miginfocom.swing.MigLayout;
 
 

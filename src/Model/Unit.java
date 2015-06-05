@@ -1,12 +1,12 @@
-package battleOfTCS.game;
+package Model;
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.swing.ImageIcon;
+
 
 public class Unit implements GameObject, java.io.Serializable {
 	/**
@@ -17,10 +17,10 @@ public class Unit implements GameObject, java.io.Serializable {
 	private ImageIcon img;
 	private int x;
 	private int y;
-	private int attack;
+	public int attack;
 	private int maxHealth;
-	private int health;
-	private int owner;
+	public int health;
+	public int owner;
 	private int maxMovePoint;
 	private int movePoint;
 	private int range;
@@ -93,14 +93,6 @@ public class Unit implements GameObject, java.io.Serializable {
 		return maxHealth;
 	}
 
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
 	public int getWidth() {
 		return img.getIconWidth();
 	}
@@ -134,14 +126,6 @@ public class Unit implements GameObject, java.io.Serializable {
 	}
 	
 
-	public int getOwner() {
-		return owner;
-	}
-
-	public void setOwner(int owner) {
-		this.owner = owner;
-	}
-
 	public int getMaxMovePoint() {
 		return maxMovePoint;
 	}
@@ -163,14 +147,6 @@ public class Unit implements GameObject, java.io.Serializable {
 		movePoint = movePoint--;
 	}
 
-	public int getAttack() {
-		return attack;
-	}
-
-	public void setAttack(int attack) {
-		this.attack = attack;
-	}
-
 	public void rest() {
 		movePoint = maxMovePoint;
 	}
@@ -180,21 +156,21 @@ public class Unit implements GameObject, java.io.Serializable {
 	}
 
 	public void attack(Unit attacker) {
-		int hit = (int) attacker.getAttack() - ( attacker.getMaxMovePoint() / attacker.getMovePoint() ) / 2 ;
+		int hit = (int) attacker.attack - ( attacker.getMaxMovePoint() / attacker.getMovePoint() ) / 2 ;
 		// if unit's range is not greater than 1 that means its a meele unit
 		if (hit == 0)
 			hit = 1;
 		if (attacker.range > 1) {
-			if (myHex.getTerrainType() == FOREST)
+			if (myHex.terrainType == FOREST)
 				health -= hit * 0.5;
 			else
 				health -= hit;
 		} else {
 			if (hit == 0)
 				hit = 1;
-			if (myHex.getTerrainType() == HILL)
+			if (myHex.terrainType == HILL)
 				health -= hit * 0.6;
-			else if (myHex.getTerrainType() == FOREST)
+			else if (myHex.terrainType == FOREST)
 				health -= hit * 0.8;
 			else
 				health -= hit;
@@ -219,36 +195,26 @@ public class Unit implements GameObject, java.io.Serializable {
 	public static List<Unit> createUnitLists(String colorOfUnit) {
 		List<Unit> unitsToChoose = new LinkedList<>();
 		
-		ImageIcon testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/" 
-				+ colorOfUnit + "/M - Griffin.png"));
+		ImageIcon testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Griffin.png");
 		
 		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 4, 60));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/M - Gnoll.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Gnoll.png");
 		unitsToChoose.add(new Unit(testImgIcon, 100, 1, 2, 30));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/hus1.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/hus1.png");
 		unitsToChoose.add(new Unit(testImgIcon, 120, 1, 3, 40));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/Fighter - Scimitar2.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Scimitar2.png");
 		unitsToChoose.add(new Unit(testImgIcon, 140, 1, 2, 25));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/Lantern2.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Lantern2.png");
 		unitsToChoose.add(new Unit(testImgIcon, 160, 1, 2, 40));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/M - Ogre.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Ogre.png");
 		unitsToChoose.add(new Unit(testImgIcon, 180, 1, 2, 50));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/swordnshield1.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/swordnshield1.png");
 		unitsToChoose.add(new Unit(testImgIcon, 150, 1, 2, 30));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/Fighter - Bow.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Bow.png");
 		unitsToChoose.add(new Unit(testImgIcon, 100, 7, 2, 20));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/Mage1.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Mage1.png");
 		unitsToChoose.add(new Unit(testImgIcon, 100, 8, 2, 50));
-		testImgIcon = new ImageIcon(Controller.class.getResource("images/units/small/"
-				+ colorOfUnit + "/M - Hydra.png"));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Hydra.png");
 		unitsToChoose.add(new Unit(testImgIcon, 200, 2, 2, 50));
 		
 		return unitsToChoose;

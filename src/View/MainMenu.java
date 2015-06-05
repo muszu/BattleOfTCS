@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package View;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Control.Controller;
 import net.miginfocom.swing.MigLayout;
 
 public class MainMenu {

@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package View;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -6,18 +6,22 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import Control.Controller;
+import Model.HexMapElement;
+import Model.Unit;
+
 @SuppressWarnings("serial")
 public class JPanelBackground extends JPanel {
 	
 	public int mode = 1;
-	Controller controller;
+	public Controller controller;
 	
-	static Image backGround = new ImageIcon(Controller.class.getResource("images/backbroundmenuv3.jpg")).getImage();
-	static Image backGroundOptions = new ImageIcon(Controller.class.getResource("images/backbroundmenuv2.jpg")).getImage();
-	static Image backGroundGame = new ImageIcon(Controller.class.getResource("images/background.png")).getImage();
-	static Image newBackGround = new ImageIcon(Controller.class.getResource("images/newbackground.png")).getImage();
-	static Image newBackGround2 = new ImageIcon(Controller.class.getResource("images/newbackground2.png")).getImage();
-	static Image battle = new ImageIcon(Controller.class.getResource("images/battle.png")).getImage();
+	static Image backGround = new ImageIcon("images/backbroundmenuv3.jpg").getImage();
+	static Image backGroundOptions = new ImageIcon("images/backbroundmenuv2.jpg").getImage();
+	static Image backGroundGame = new ImageIcon("images/background.png").getImage();
+	static Image newBackGround = new ImageIcon("images/newbackground.png").getImage();
+	static Image newBackGround2 = new ImageIcon("images/newbackground2.png").getImage();
+	static Image battle = new ImageIcon("images/battle.png").getImage();
 
 	
 	protected void paintComponent(Graphics g) {

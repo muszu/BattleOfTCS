@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package Model;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.ImageIcon;
+
 
 public class Game implements java.io.Serializable{
 	/**
@@ -31,12 +32,9 @@ public class Game implements java.io.Serializable{
 	public LinkedList<Unit> turnList;
 	public HexMap map = new HexMap(this);
 
-	public final static Image imgBoard150 = new ImageIcon(
-			Controller.class.getResource("images/board150.png")).getImage();
-	public final static Image imgBoard200 = new ImageIcon(
-			Controller.class.getResource("images/board200.png")).getImage();
-	public final static Image imgBoard250 = new ImageIcon(
-			Controller.class.getResource("images/board250.png")).getImage();
+	public final static Image imgBoard150 = new ImageIcon("images/board150.png").getImage();
+	public final static Image imgBoard200 = new ImageIcon("images/board200.png").getImage();
+	public final static Image imgBoard250 = new ImageIcon("images/board250.png").getImage();
 
 	private static Font smallFont = new Font("Arial", Font.BOLD, 15);
 	private static Font mediumFont = new Font("Arial", Font.BOLD, 25);
@@ -63,7 +61,7 @@ public class Game implements java.io.Serializable{
 		}
 		turn = 1;
 		for (Unit unit : units) {
-			if (unit.getOwner() == 1)
+			if (unit.owner == 1)
 				turnList.add(unit);
 		}
 	}
@@ -75,14 +73,14 @@ public class Game implements java.io.Serializable{
 		}
 		turn = 1;
 		for (Unit unit : units) {
-			if (unit.getOwner() == 1)
+			if (unit.owner == 1)
 				turnList.add(unit);
 		}
 	}
 
 	public void refresh() { // need to refresh panel
 		for (Unit unit : units) {
-			if (unit.getHealth() <= 0) {
+			if (unit.health <= 0) {
 				unit.getMyHex().occupied = false;
 				unit.getMyHex().unit = null;
 				units.remove(unit);
@@ -96,21 +94,21 @@ public class Game implements java.io.Serializable{
 			if (turn == 1) {
 				turn = 2;
 				for (Unit addme : units)
-					if (addme.getOwner() == 2)
+					if (addme.owner == 2)
 						turnList.add(addme);
 				if (turnList.isEmpty())
 					win = 1;
 			} else {
 				turn = 1;
 				for (Unit addme : units)
-					if (addme.getOwner() == 1)
+					if (addme.owner == 1)
 						turnList.add(addme);
 				if (turnList.isEmpty())
 					win = 2;
 			}
 			if(flagHex!=null){
 				if(flagHex.unit!=null){
-					ownerOfFlag = flagHex.unit.getOwner();
+					ownerOfFlag = flagHex.unit.owner;
 					if(lastOwnerOfFlag!=ownerOfFlag){
 						turnToWin=10;
 						lastOwnerOfFlag=ownerOfFlag;
@@ -134,9 +132,9 @@ public class Game implements java.io.Serializable{
 		winA = 1;
 		winB = 1;
 		for (Unit unit : units) {
-			if (unit.getOwner() == 1)
+			if (unit.owner == 1)
 				winB = 0;
-			if (unit.getOwner() == 2)
+			if (unit.owner == 2)
 				winA = 0;
 		}
 		if (winA == 1)
@@ -147,7 +145,7 @@ public class Game implements java.io.Serializable{
 		for (Unit unit : turnList) {
 			for (HexMapElement hex : map.hexes)
 				if (hex.unit != null && hex.unit.equals(unit))
-					hex.green(true);
+					hex.isGreen = true;
 		}
 	}
 
@@ -155,7 +153,7 @@ public class Game implements java.io.Serializable{
 		turnList.clear();
 		for (HexMapElement hexik : map.hexes) {
 			hexik.clearColor();
-			hexik.shadow(false);
+			hexik.isShadow = false;
 		}
 		refresh();
 	}
@@ -200,15 +198,15 @@ public class Game implements java.io.Serializable{
 		g.setColor(new Color(255, 255, 255));
 		if (selectedUnit != null) {
 			g.drawString(
-					"Unit owner " + (selectedUnit.getOwner() == 1  ? playerA : playerB),
+					"Unit owner " + (selectedUnit.owner == 1  ? playerA : playerB),
 					30, 30);
-			g.drawString("Atack: " + selectedUnit.getAttack(), 30, 40);
+			g.drawString("Atack: " + selectedUnit.attack, 30, 40);
 			g.drawString("Move: " + selectedUnit.getMaxMovePoint(), 30, 50);
 			g.drawString("Shot range: " + selectedUnit.getRange(), 30, 60);
 		}
 		if (selectedHex != null) {
 			String terrain;
-			switch (selectedHex.getTerrainType()) {
+			switch (selectedHex.terrainType) {
 			case 1:
 				terrain = "grass";
 				break;
@@ -223,9 +221,9 @@ public class Game implements java.io.Serializable{
 			}
 			g.drawString("Terrain type: " + terrain,
 					(int) HexMap.width * 4 / 5, 30);
-			g.drawString("Distance: " + selectedHex.getDistance(),
+			g.drawString("Distance: " + selectedHex.distance,
 					(int) HexMap.width * 4 / 5, 40);
-			if(selectedHex.isFlag())
+			if(selectedHex.isFlag)
 				g.drawString("Flag",(int) HexMap.width * 4 / 5, 50);
 			
 		}

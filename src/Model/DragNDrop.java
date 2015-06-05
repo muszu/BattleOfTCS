@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package Model;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -65,14 +65,14 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 		if (dragUnit != null) {
 			// move
 			for (HexMapElement hex : map.hexes) {
-				if (hex.contains(x, y) && hex.isShadowLight()) {
+				if (hex.contains(x, y) && hex.isShadowLight) {
 					if (lastHex != null) {
 						if (lastHexPosition != hex) {
-							dragUnit.move(hex.getDistance());
+							dragUnit.move(hex.distance);
 							if (dragUnit.getMovePoint() <= 0)
 								game.turnList.remove(dragUnit);
 						}
-						lastHexPosition.shadow(false);
+						lastHexPosition.isShadow = false;
 						lastHexPosition.unit = null;
 						lastHexPosition.occupied = false;
 						lastHexPosition = null;
@@ -90,8 +90,8 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			if (dragUnit != null) {
 				for (HexMapElement hex : map.hexes) {
 					if (hex.contains(x, y) && hex.unit != null) {
-						if (hex.isInRangeOfShot() && hex.isRed()
-								&& hex.unit.getOwner() != dragUnit.getOwner()) {
+						if (hex.inRangeOfShot && hex.isRed
+								&& hex.unit.owner != dragUnit.owner) {
 							hex.unit.attack(dragUnit);
 							hex.unit.setMyHex(hex);
 							game.turnList.remove(dragUnit);
@@ -108,7 +108,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			}
 			for (HexMapElement hexik : map.hexes) {
 				hexik.clearColor();
-				hexik.shadow(false);
+				hexik.isShadow = false;
 			}
 			game.refresh();
 			panel.repaint();
@@ -130,11 +130,11 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					if (lastHex != null) {
 						game.selectedUnit = hex.unit;
 						game.selectedHex = hex;
-						hex.shadow(true);
-						lastHex.shadow(false);
+						hex.isShadow = true;
+						lastHex.isShadow = false;
 						lastHex = hex;
 					} else {
-						hex.shadow(true);
+						hex.isShadow = true;
 						lastHex = hex;
 					}
 					this.panel.repaint();
@@ -153,13 +153,13 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			lastHexPosition = null;
 			for (HexMapElement hexik : map.hexes) {
 				hexik.clearColor();
-				hexik.shadow(false);
+				hexik.isShadow = false;
 			}
 		}
 		// move
 		if (clickUnit != null) {
 			for (HexMapElement hex : map.hexes) {
-				if (hex.contains(x, y) && hex.isShadowLight()) {
+				if (hex.contains(x, y) && hex.isShadowLight) {
 					if (lastHexPosition != null) {
 						lastHexPosition.occupied = false;
 						lastHexPosition.unit = null;
@@ -167,7 +167,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					lastHexPosition = null;
 					hex.unit = clickUnit;
 					hex.occupied = true;
-					clickUnit.move(hex.getDistance());
+					clickUnit.move(hex.distance);
 					if (clickUnit.getMovePoint() <= 0)
 						game.turnList.remove(hex.unit);
 					clickUnit.setX(hex.getCenterX() - clickUnit.getWidth() / 2);
@@ -177,7 +177,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					clickUnit = null;
 					for (HexMapElement hexik : map.hexes) {
 						hexik.clearColor();
-						hexik.shadow(false);
+						hexik.isShadow = false;
 					}
 					break;
 				}
@@ -186,8 +186,8 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			if (clickUnit != null) {
 				for (HexMapElement hex : map.hexes) {
 					if (hex.contains(x, y) && hex.unit != null) {
-						if (hex.isInRangeOfShot() && hex.isRed()
-								&& hex.unit.getOwner() != clickUnit.getOwner()) {
+						if (hex.inRangeOfShot && hex.isRed
+								&& hex.unit.owner != clickUnit.owner) {
 							hex.unit.attack(clickUnit);
 							hex.unit.setMyHex(hex);
 							game.turnList.remove(clickUnit);
@@ -199,7 +199,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				}
 				for (HexMapElement hexik : map.hexes) {
 					hexik.clearColor();
-					hexik.shadow(false);
+					hexik.isShadow = false;
 				}
 			}
 			if (clickUnit != null) {
@@ -210,7 +210,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				clickUnit = null;
 			}
 			for (HexMapElement hex : map.hexes)
-				hex.setInRangeOfShot(false);
+				hex.inRangeOfShot = false;
 		} else { // select unit
 			for (HexMapElement hex : map.hexes) {
 				if (hex.contains(x, y) && hex.unit != null) {
@@ -252,11 +252,11 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 					game.selectedUnit = hex.unit;
 					game.selectedHex = hex;
 					if (lastHex != null) {
-						hex.shadow(true);
-						lastHex.shadow(false);
+						hex.isShadow = true;
+						lastHex.isShadow = false;
 						lastHex = hex;
 					} else {
-						hex.shadow(true);
+						hex.isShadow = true;
 						lastHex = hex;
 					}
 					panel.repaint();

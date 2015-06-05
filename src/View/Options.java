@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package View;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Control.Controller;
+import Model.HexMap;
+import Model.HexMapElement;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -122,7 +125,7 @@ public class Options {
 		HexMap.width = frame.getWidth();
 		HexMap.height = frame.getHeight();
 		HexMap.firstHexCenterX = (int) (HexMap.width - HexMapElement.width
-				* HexMap.getAmountInOddRow()) / 2;
+				* HexMap.amountInOddRow) / 2;
 		controller.setOptionsMode();
 	}
 }

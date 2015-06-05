@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package View;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -21,6 +21,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
+import Control.Controller;
+import Model.DragNDrop;
+import Model.Game;
+import Model.HexMap;
+import Model.HexMapElement;
+import Model.Unit;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -83,7 +89,7 @@ public class GameMode {
 
 	
 	
-	protected void loadGame() {
+	public void loadGame() {
 		try
 	      {
 			 FileInputStream loadGame = new  FileInputStream("saveGame.ser");
@@ -129,14 +135,14 @@ public class GameMode {
 		map = new HexMap(game);
 		for (HexMapElement hex : map.hexes) {
 			hex.setRandomTerrainType();
-			hex.setFlag(false);
+			hex.isFlag = false;
 		}
 		
 		game.map = map;
 		
 		if(game.modeOfGame){
 			game.flagHex = map.hexes.get( 6 + (new Random().nextInt(9)) * 13 );
-			game.flagHex.setFlag(true);
+			game.flagHex.isFlag = true;
 		}
 	}
 	
@@ -165,7 +171,7 @@ public class GameMode {
 		HexMapElement tempHex;
 		
 		for (Unit setUnit : game.units) {
-			if (setUnit.getOwner() == 1) {
+			if (setUnit.owner == 1) {
 				tempHex = listOfHexA.getFirst();
 				listOfHexA.remove();
 				tempHex.unit = setUnit;

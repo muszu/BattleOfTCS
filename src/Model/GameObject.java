@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package Model;
 
 import java.awt.Image;
 

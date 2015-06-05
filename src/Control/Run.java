@@ -1,4 +1,4 @@
-package battleOfTCS.game;
+package Control;
 
 import java.awt.EventQueue;
 

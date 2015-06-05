@@ -1,7 +1,6 @@
-package battleOfTCS.game;
+package View;
 
 import java.awt.Color;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -9,10 +8,14 @@ import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import Control.Controller;
+import Model.Game;
+import Model.Unit;
 import net.miginfocom.swing.MigLayout;
 
 public class ChooseUnitsMode {
@@ -25,7 +28,7 @@ public class ChooseUnitsMode {
 	private JButton btnBack = new JButton("Back");
 	private JButton[] btnChosenUnit = new JButton[5];
 	private JButton[] btnUnit = new JButton[10];
-	private JButton[] btnParameters = new JButton[10];
+	private JLabel[] labParameters = new JLabel[10];
 	
 	
 	JFrame frame;
@@ -46,7 +49,7 @@ public class ChooseUnitsMode {
 		this.setBtnChosenUnit();
 		this.setBtnReady();
 		this.setBtnUnit();
-		this.setBtnParameters();
+		this.setLabParameters();
 	}
 	
 	private void setBtnReady() {
@@ -63,9 +66,9 @@ public class ChooseUnitsMode {
 				else {
 					for (int i = 0; i < chosenUnits.size(); i++) {
 						if (player1Ready) {
-							chosenUnits.get(i).setOwner(2);
+							chosenUnits.get(i).owner = 2;
 						} else {
-							chosenUnits.get(i).setOwner(1);
+							chosenUnits.get(i).owner = 1;
 						}
 					}
 					game.units.addAll(chosenUnits);
@@ -125,19 +128,20 @@ public class ChooseUnitsMode {
 		}
 	}
 	
-	private void setBtnParameters() {
+	private void setLabParameters() {
 		for (int i = 0; i < 10; i++) {
-			btnParameters[i] = new JButton();
-			btnParameters[i].setBackground(new Color(0.7f, 0.7f, 0.7f));
-			btnParameters[i].setHorizontalAlignment(SwingConstants.LEFT);
-			btnParameters[i].setMargin(new Insets(0,0,0,0));
+			labParameters[i] = new JLabel();
+			labParameters[i].setBackground(new Color(0.7f, 0.7f, 0.7f));
+			labParameters[i].setHorizontalAlignment(SwingConstants.CENTER);
+			labParameters[i].setForeground(Color.black);
+			labParameters[i].setOpaque(true);
 			
-			String param = "Health " + unitsToChoose.get(i).getHealth() + "\n" +
-							"Attack " + unitsToChoose.get(i).getAttack() + "\n" + 
+			String param = "Health " + unitsToChoose.get(i).health + "\n" +
+							"Attack " + unitsToChoose.get(i).attack + "\n" + 
 							"Move " + unitsToChoose.get(i).getMaxMovePoint() + "\n" +
 							"ShotRange " + unitsToChoose.get(i).getRange();
 			
-			btnParameters[i].setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
+			labParameters[i].setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
 		}
 	}
 	
@@ -168,9 +172,9 @@ public class ChooseUnitsMode {
 		for (int i = 5; i < 10; i++)
 			panel.add(btnUnit[i], "cell " + ((i / 5) + 3) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
 		for (int i = 0; i < 5; i++)
-			panel.add(btnParameters[i], "cell " + ((i / 5) + 2) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
+			panel.add(labParameters[i], "cell " + ((i / 5) + 2) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
 		for (int i = 5; i < 10; i++)
-			panel.add(btnParameters[i], "cell " + ((i / 5) + 3) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
+			panel.add(labParameters[i], "cell " + ((i / 5) + 3) + " " + i % 5 + ", width 80:80:80, height 80:80:80");
 		panel.add(btnReady, "cell 1 5, width 100:150:200, height 20:30:40");
 		panel.add(btnBack, "cell 2 5, width 100:150:200, height 20:30:40");
 		

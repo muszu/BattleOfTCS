@@ -1,10 +1,11 @@
-package battleOfTCS.game;
+package Model;
 
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.LinkedList;
 import java.util.Random;
 import javax.swing.ImageIcon;
+
 
 public class HexMapElement implements GameObject,java.io.Serializable {
 
@@ -15,38 +16,27 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 
 	Random generator = new Random();
 
-	private boolean isShadow;
-	private boolean isShadowLight;
-	private boolean isRed;
-	private boolean isGreen;
-	private boolean isYellow;
-	private boolean inRangeOfShot;
-	private boolean isFlag;
+	public boolean isShadow;
+	public boolean isShadowLight;
+	public boolean isRed;
+	public boolean isGreen;
+	public boolean isYellow;
+	public boolean inRangeOfShot;
+	public boolean isFlag;
 	
 	public int tacticSet;
 
-	public final static ImageIcon imgHex = new ImageIcon(
-			Controller.class.getResource("images/hex.png"));
-	public final static ImageIcon imgHexShadow = new ImageIcon(
-			Controller.class.getResource("images/hexshadow.png"));
-	public final static ImageIcon imgHexShadowLight = new ImageIcon(
-			Controller.class.getResource("images/hexshadowlight.png"));
-	public final static ImageIcon imgHexRed = new ImageIcon(
-			Controller.class.getResource("images/hexred.png"));
-	public final static ImageIcon imgHexYellow = new ImageIcon(
-			Controller.class.getResource("images/hexyellow.png"));
-	public final static ImageIcon imgHexGreen = new ImageIcon(
-			Controller.class.getResource("images/hexgreen.png"));
-	public final static ImageIcon imgHexForest = new ImageIcon(
-			Controller.class.getResource("images/hex_forest1.png"));
-	public final static ImageIcon imgHexHill = new ImageIcon(
-			Controller.class.getResource("images/hex_hill.png"));
-	public final static ImageIcon imgHexGrass1 = new ImageIcon(
-			Controller.class.getResource("images/hex_grass6.png"));
-	public final static ImageIcon imgHexGrass2 = new ImageIcon(
-			Controller.class.getResource("images/hex_grass6.png"));
-	public final static ImageIcon imgHexFlag = new ImageIcon(
-			Controller.class.getResource("images/flag_90red.png"));
+	public final static ImageIcon imgHex = new ImageIcon("images/hex.png");
+	public final static ImageIcon imgHexShadow = new ImageIcon("images/hexshadow.png");
+	public final static ImageIcon imgHexShadowLight = new ImageIcon("images/hexshadowlight.png");
+	public final static ImageIcon imgHexRed = new ImageIcon("images/hexred.png");
+	public final static ImageIcon imgHexYellow = new ImageIcon("images/hexyellow.png");
+	public final static ImageIcon imgHexGreen = new ImageIcon("images/hexgreen.png");
+	public final static ImageIcon imgHexForest = new ImageIcon("images/hex_forest1.png");
+	public final static ImageIcon imgHexHill = new ImageIcon("images/hex_hill.png");
+	public final static ImageIcon imgHexGrass1 = new ImageIcon("images/hex_grass6.png");
+	public final static ImageIcon imgHexGrass2 = new ImageIcon("images/hex_grass6.png");
+	public final static ImageIcon imgHexFlag = new ImageIcon("images/flag_90red.png");
 
 	private static int idCounter = 0;
 	public static int width = imgHex.getIconWidth();
@@ -56,19 +46,19 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 	public Unit unit;
 	public int id;
 	private ImageIcon img;
-	private int x;
-	private int y;
-	private int centerX;
-	private int centerY;
+	public int x;
+	public int y;
+	public int centerX;
+	public int centerY;
 	public LinkedList<HexMapElement> Neighbours;
 	public boolean occupied;
-	private int distance;
+	public int distance;
 
 	final int GRASS = 1;
 	final int HILL = 2;
 	final int FOREST = 3;
 
-	private int terrainType;
+	public int terrainType;
 
 	public HexMapElement(boolean center, int centerX, int centerY) {
 		isFlag = false;
@@ -113,48 +103,13 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 		if (x <= this.x + 2 || x >= this.x + width - 2 || y <= this.y + 2
 				|| y >= this.y + height - 2)
 			return false;
-		int a = (x - this.x > width / 2) ? this.x + width - x : x - this.x;
+		int a = (x - this.x > width / 2) ? (this.x + width - x) : (x - this.x);
 		int b = a * side / width;
 
 		if (y <= centerY + side / 2 + b - 2 && y >= centerY - side / 2 - b + 2)
 			return true;
 		else
 			return false;
-	}
-
-	public void shadow(boolean yesOrNo) {
-		if (yesOrNo)
-			isShadow = true;
-		else
-			isShadow = false;
-	}
-
-	public void shadowLight(boolean yesOrNo) {
-		if (yesOrNo)
-			isShadowLight = true;
-		else
-			isShadowLight = false;
-	}
-
-	public void red(boolean yesOrNo) {
-		if (yesOrNo)
-			isRed = true;
-		else
-			isRed = false;
-	}
-
-	public void green(boolean yesOrNo) {
-		if (yesOrNo)
-			isGreen = true;
-		else
-			isGreen = false;
-	}
-
-	public void yellow(boolean yesOrNo) {
-		if (yesOrNo)
-			isYellow = true;
-		else
-			isYellow = false;
 	}
 
 	public void clearColor() {
@@ -177,11 +132,11 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 	}
 
 	public int getCenterX() {
-		return this.centerX;
+		return centerX;
 	}
 
 	public int getCenterY() {
-		return this.centerY;
+		return centerY;
 	}
 
 	public void setX(int x) {
@@ -222,9 +177,8 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 			if (isShadowLight)
 				g.drawImage(HexMapElement.imgHexShadowLight.getImage(), x, y, null);
 		}
-		if(isFlag){
+		if(isFlag)
 			g.drawImage(imgHexFlag.getImage(), x+4, y, null);
-		}
 	}
 
 	public void setRandomTerrainType(){
@@ -253,80 +207,8 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 		}
 	}
 	
-	public int getDistance() {
-		return distance;
-	}
-
-	public void setDistance(int distance) {
-		this.distance = distance;
-	}
-	
-	public int getTerrainType() {
-		return terrainType;
-	}
-
-	public void setTerrainType(int terrainType) {
-		this.terrainType = terrainType;
-	}
-	
 	public static void resetIdCounter() {
 		idCounter = 0;
-	}
-	
-	public boolean isShadow() {
-		return isShadow;
-	}
-
-	public void setShadow(boolean isShadow) {
-		this.isShadow = isShadow;
-	}
-
-	public boolean isShadowLight() {
-		return isShadowLight;
-	}
-
-	public void setShadowLight(boolean isShadowLight) {
-		this.isShadowLight = isShadowLight;
-	}
-
-	public boolean isRed() {
-		return isRed;
-	}
-
-	public void setRed(boolean isRed) {
-		this.isRed = isRed;
-	}
-
-	public boolean isGreen() {
-		return isGreen;
-	}
-
-	public void setGreen(boolean isGreen) {
-		this.isGreen = isGreen;
-	}
-
-	public boolean isYellow() {
-		return isYellow;
-	}
-
-	public void setYellow(boolean isYellow) {
-		this.isYellow = isYellow;
-	}
-
-	public boolean isInRangeOfShot() {
-		return inRangeOfShot;
-	}
-	
-	public void setInRangeOfShot(boolean inRangeOfShot) {
-		this.inRangeOfShot = inRangeOfShot;
-	}
-
-	public boolean isFlag() {
-		return isFlag;
-	}
-
-	public void setFlag(boolean isFlag) {
-		this.isFlag = isFlag;
 	}
 
 	public void recenter(int centerX2, int centerY2) {
@@ -334,7 +216,7 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 		centerY = centerY2;
 		x = centerX - width / 2;
 		y = centerY - side;
-		if(unit!=null){
+		if(unit != null){
 			unit.setX(centerX - unit.getWidth() / 2);
 			unit.setY(centerY - unit.getHeight() / 2);
 		}	

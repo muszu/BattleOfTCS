@@ -1,14 +1,25 @@
-package battleOfTCS.game;
+package Control;
 
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
+
+import Model.Game;
+import Model.HexMap;
+import Model.HexMapElement;
+import View.ChooseColorAndNameMode;
+import View.ChooseUnitsMode;
+import View.GameMode;
+import View.JPanelBackground;
+import View.MainMenu;
+import View.Options;
 
 
 public class Controller {
@@ -30,7 +41,7 @@ public class Controller {
 		HexMap.width = frame.getWidth();
 		HexMap.height = frame.getHeight();
 		HexMap.firstHexCenterX = (int) (HexMap.width - HexMapElement.width
-				* HexMap.getAmountInOddRow()) / 2;
+				* HexMap.amountInOddRow) / 2;
 		
 		KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
 		@SuppressWarnings("serial")
