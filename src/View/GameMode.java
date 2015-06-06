@@ -14,6 +14,7 @@ import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import Control.Controller;
@@ -199,14 +200,28 @@ public class GameMode {
 				
 				switch((String) commandsBox.getSelectedItem()) {
 				case "Back to menu":
+					
 					controller.setMainMenuMode();
 					break;
+					
 				case "Save game":
-					saveGame();
+					
+					if (JOptionPane.showConfirmDialog(frame,
+							"Are you sure to save your game?", "Save",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
+						saveGame();
 					break;
+					
 				case "Load game":
-					loadGame();
+					
+					if (JOptionPane.showConfirmDialog(frame,
+							"Are you sure to load your game?", "Load",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
+						loadGame();
 					break;
+					
 				}
 			}
 		});
