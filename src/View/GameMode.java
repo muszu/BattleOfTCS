@@ -58,7 +58,6 @@ public class GameMode {
 	
 	
 	public void loadGame() {
-		
 		try {
 		
 			FileInputStream loadGame = new  FileInputStream("saveGame.ser");
@@ -78,8 +77,10 @@ public class GameMode {
 			System.out.println("Game loaded");
  
 		} catch(IOException i) {
+			JOptionPane.showMessageDialog(null, "Loading failed", "ok", JOptionPane.ERROR_MESSAGE);
 			i.printStackTrace();
 		} catch (ClassNotFoundException e1) {
+			JOptionPane.showMessageDialog(null, "Loading failed", "ok", JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
 		}
 			
@@ -97,6 +98,7 @@ public class GameMode {
 			System.out.println("Game saved");
 	      
 		} catch(IOException i) {
+			JOptionPane.showMessageDialog(null, "Saving failed", "ok", JOptionPane.ERROR_MESSAGE);
 			i.printStackTrace();
 		}
 	}
@@ -199,9 +201,9 @@ public class GameMode {
 			public void actionPerformed(ActionEvent e) {
 				
 				switch((String) commandsBox.getSelectedItem()) {
-				case "Back to menu":
+				case "Back to menu": 
 					if (JOptionPane.showConfirmDialog(frame,
-							"Are you sure to go back to menu?", "Yes",
+							"Are you sure to go back to menu without saving your game?", "Yes",
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
 						controller.setMainMenuMode();
