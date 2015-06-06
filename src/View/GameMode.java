@@ -3,7 +3,6 @@ package View;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,14 +11,10 @@ import java.io.ObjectOutputStream;
 import java.util.LinkedList;
 import java.util.Random;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
 import javax.swing.JButton;
-import javax.swing.JComponent;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
 import Control.Controller;
 import Model.DragNDrop;
@@ -39,7 +34,9 @@ public class GameMode {
 	private LinkedList<HexMapElement> listOfHexB = new LinkedList<>();
 	
 	private JButton btnEndTurn = new JButton("End Turn");
-	private JButton btnBack = new JButton("Back");
+	
+	private final String[] commands = {"Back to menu", "Save game", "Load game"};
+	private final JComboBox<String> commandsBox = new JComboBox<String>(commands);
 	
 	JFrame frame;
 	JPanel panel;
@@ -52,83 +49,55 @@ public class GameMode {
 		this.game = game;
 		this.controller = controller;
 		
-		KeyStroke saveKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, 0, false);
-		@SuppressWarnings("serial")
-		Action saveAction = new AbstractAction() {
-			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(frame,
-								"Are you sure to save your game?", "Save",
-								JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-					saveGame();
-				}
-			}
-		};
-		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(saveKeyStroke, "S");
-		frame.getRootPane().getActionMap().put("S", saveAction);
-		
-		KeyStroke loadKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_L, 0, false);
-		@SuppressWarnings("serial")
-		Action loadAction = new AbstractAction() {
-			public void actionPerformed(ActionEvent e) {
-				if (JOptionPane.showConfirmDialog(frame,
-								"Are you sure to load your game?", "Load",
-								JOptionPane.YES_NO_OPTION,
-								JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
-					 loadGame();
-				}
-			}
-		};
-		frame.getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(loadKeyStroke, "L");
-		frame.getRootPane().getActionMap().put("L", loadAction);
-		
-		
-		setButtons();
+		setButton();
+		setComboBox();
 		prepareGame();
 	}
 
 	
 	
 	public void loadGame() {
-		try
-	      {
-			 FileInputStream loadGame = new  FileInputStream("saveGame.ser");
-	         ObjectInputStream in = new ObjectInputStream(loadGame);
-	         game = null;
-	         game = (Game) in.readObject();
-	         map = game.map;
-	         controller.game = game;
-	         in.close();
-	         loadGame.close();
-	         panel.removeMouseListener(listener);
-	         panel.removeMouseMotionListener(listener);
-	         listener = new DragNDrop(game.units, panel, map, game);
-	 			panel.addMouseListener(listener);
-	 			panel.addMouseMotionListener(listener);
-	 			game.refresh();
-	         System.out.println("Game loaded");
-	      }catch(IOException i)
-	      {
-	          i.printStackTrace();
-	      } catch (ClassNotFoundException e1) {
+		
+		try {
+		
+			FileInputStream loadGame = new  FileInputStream("saveGame.ser");
+			ObjectInputStream in = new ObjectInputStream(loadGame);
+			game = null;
+			game = (Game) in.readObject();
+			map = game.map;
+			controller.game = game;
+			in.close();
+			loadGame.close();
+			panel.removeMouseListener(listener);
+			panel.removeMouseMotionListener(listener);
+			listener = new DragNDrop(game.units, panel, map, game);
+			panel.addMouseListener(listener);
+			panel.addMouseMotionListener(listener);
+			game.refresh();
+			System.out.println("Game loaded");
+ 
+		} catch(IOException i) {
+			i.printStackTrace();
+		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
-	      }
-			map.recenter(frame.getWidth(),frame.getHeight() );
+		}
+			
+		map.recenter(frame.getWidth(), frame.getHeight());
 	}
 
 	protected void saveGame() {
-		 try
-	      {
-	         FileOutputStream saveGame = new FileOutputStream("saveGame.ser");
-	         ObjectOutputStream out = new ObjectOutputStream(saveGame);
-	         out.writeObject(game);
-	         out.close();
-	         saveGame.close();
-	         System.out.println("Game saved");
-	      }catch(IOException i)
-	      {
-	          i.printStackTrace();
-	      }
+		
+		try {
+			FileOutputStream saveGame = new FileOutputStream("saveGame.ser");
+			ObjectOutputStream out = new ObjectOutputStream(saveGame);
+			out.writeObject(game);
+			out.close();
+			saveGame.close();
+			System.out.println("Game saved");
+	      
+		} catch(IOException i) {
+			i.printStackTrace();
+		}
 	}
 
 	private void createMap() {
@@ -196,7 +165,8 @@ public class GameMode {
 		game.refresh();
 	}
 	
-	private void setButtons() {
+	private void setButton() {
+		
 		btnEndTurn.setForeground(new Color(0f, 0f, 0f));
 		btnEndTurn.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnEndTurn.addActionListener(new ActionListener() {
@@ -217,15 +187,30 @@ public class GameMode {
 			}
 		});
 		
-		btnBack.setForeground(new Color(0f, 0f, 0f));
-		btnBack.setBackground(new Color(0.7f, 0.7f, 0.7f));
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e){ 
-				frame.getRootPane().getActionMap().remove("S");
-				frame.getRootPane().getActionMap().remove("L");;
-				controller.setMainMenuMode();
+	}
+	
+	private void setComboBox() {
+
+		commandsBox.setForeground(new Color(0f, 0f, 0f));
+		commandsBox.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		commandsBox.setSelectedIndex(0);
+		commandsBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				switch((String) commandsBox.getSelectedItem()) {
+				case "Back to menu":
+					controller.setMainMenuMode();
+					break;
+				case "Save game":
+					saveGame();
+					break;
+				case "Load game":
+					loadGame();
+					break;
+				}
 			}
 		});
+
 	}
 	
 
@@ -236,7 +221,7 @@ public class GameMode {
 				frame.getHeight()-80  + "[]2[]"));
 		
 		panel.add(btnEndTurn, "cell 0 0, width 150:250:300, height 20:30:40");
-		panel.add(btnBack, "cell 1 0, width 150:250:300, height 20:30:40");
+		panel.add(commandsBox, "cell 1 0, width 150:250:300, height 20:30:40");
 		
 		panel.invalidate();
 		panel.validate();
