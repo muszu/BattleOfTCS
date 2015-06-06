@@ -203,7 +203,7 @@ public class GameMode {
 				switch((String) commandsBox.getSelectedItem()) {
 				case "Back to menu": 
 					if (JOptionPane.showConfirmDialog(frame,
-							"Are you sure to go back to menu without saving your game?", "Yes",
+							"Are you sure to go back to menu. \n If You didn't save your game all progress will be lost.", "Yes",
 							JOptionPane.YES_NO_OPTION,
 							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
 						controller.setMainMenuMode();
