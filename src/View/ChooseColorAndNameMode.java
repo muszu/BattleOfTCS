@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -29,8 +30,8 @@ public class ChooseColorAndNameMode {
 	private JButton btnChooseUnits = new JButton("Choose Units");
 	private JButton btnBack = new JButton("Back");
 	
-	private JTextField nameA = new JTextField("Player's A name", 1);
-	private JTextField nameB = new JTextField("Player's B name", 1);
+	private JTextField nameA = new JTextField("Player A", 1);
+	private JTextField nameB = new JTextField("Player B", 1);
 	
 	private String colorA = "black";
 	private String colorB = "red";
@@ -129,13 +130,22 @@ public class ChooseColorAndNameMode {
 		btnChooseUnits.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				getNames();
-				game.playerA = playerAname;
-				game.playerB = playerBname;
-				game.modeOfGame = flagOrNot;
-				game.colorA = colorA;
-				game.colorB = colorB;
-				game.points = points;
-				controller.setChooseUnitsMode();
+				if (playerAname.length()<1 || playerAname.length()>10 ||
+					 playerBname.length()<1 || playerBname.length()>10)
+						nameLengthError();
+				else if (playerAname.equals(playerBname))
+					nameDistinctionError();
+				else if (colorA.equals(colorB))
+					colorDistinctionError();
+				else{		
+					game.playerA = playerAname;
+					game.playerB = playerBname;
+					game.modeOfGame = flagOrNot;
+					game.colorA = colorA;
+					game.colorB = colorB;
+					game.points = points;
+					controller.setChooseUnitsMode();
+				}
 			}
 		});
 	}
@@ -146,7 +156,23 @@ public class ChooseColorAndNameMode {
 		playerBname = nameB.getText();
 	}
 	
+	private void nameLengthError(){
+		JOptionPane.showConfirmDialog(frame, "Player's name should be 1-10 characters long", 
+				"Error", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.INFORMATION_MESSAGE);
+	}
 	
+	private void nameDistinctionError(){
+		JOptionPane.showConfirmDialog(frame, "Players' names should be different", 
+				"Error", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	private void colorDistinctionError(){
+		JOptionPane.showConfirmDialog(frame, "Colors should be different", 
+				"Error", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.INFORMATION_MESSAGE);		
+	}
 	private void setTextFields() {
 		nameA.setForeground(new Color(0f, 0f, 0f));
 		nameA.setBackground(new Color(0.7f, 0.7f, 0.7f));

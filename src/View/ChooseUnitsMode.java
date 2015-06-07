@@ -23,12 +23,14 @@ public class ChooseUnitsMode {
 	private List<Unit> unitsToChoose;
 	private List<Unit> chosenUnits = new ArrayList<Unit>();
 	private boolean player1Ready;
+	private Integer points;
 	
 	private JButton btnReady = new JButton("Ready!");
 	private JButton btnBack = new JButton("Back");
 	private JButton[] btnChosenUnit = new JButton[10];
 	private JButton[] btnUnit = new JButton[10];
 	private JLabel[] labParameters = new JLabel[10];
+	private JLabel labPoints = new JLabel();
 	
 	
 	JFrame frame;
@@ -44,6 +46,7 @@ public class ChooseUnitsMode {
 		this.controller = controller;
 		
 		unitsToChoose = Unit.createUnitLists(game.colorA);
+		points = game.points;
 		
 		this.setBtnBack();
 		this.setBtnChosenUnit();
@@ -77,6 +80,7 @@ public class ChooseUnitsMode {
 						controller.setGameMode(); // true == capture flag mode
 					else {
 						player1Ready = true;
+						points = game.points;
 						unitsToChoose = Unit.createUnitLists(game.colorB);
 						paintChooseUnitsMode();
 					}
@@ -94,12 +98,22 @@ public class ChooseUnitsMode {
 			btnUnit[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (chosenUnits.size() < 10) {
-						chosenUnits.add(new Unit(unitsToChoose.get(ii)));
-						paintChooseUnitsMode();
+						if (points-unitsToChoose.get(ii).cost < 0) pointsError();
+						else{
+							points -= unitsToChoose.get(ii).cost;
+							chosenUnits.add(new Unit(unitsToChoose.get(ii)));
+							paintChooseUnitsMode();
+						}
 					}
 				}
 			});
 		}
+	}
+	
+	private void pointsError(){
+		JOptionPane.showConfirmDialog(frame, "Not enough points", 
+				"Error", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.INFORMATION_MESSAGE);		
 	}
 	
 	private void setBtnChosenUnit() {
@@ -120,6 +134,7 @@ public class ChooseUnitsMode {
 			btnChosenUnit[i].addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					if (chosenUnits.size() > ii) {
+						points += chosenUnits.get(ii).cost;
 						chosenUnits.remove(ii);
 						paintChooseUnitsMode();
 					}
@@ -136,13 +151,26 @@ public class ChooseUnitsMode {
 			labParameters[i].setForeground(Color.black);
 			labParameters[i].setOpaque(true);
 			
-			String param = "Health " + unitsToChoose.get(i).health + "\n" +
+			String param = "Cost " + unitsToChoose.get(i).cost + "\n" +
+							"Health " + unitsToChoose.get(i).health + "\n" +
 							"Attack " + unitsToChoose.get(i).attack + "\n" + 
 							"Move " + unitsToChoose.get(i).getMaxMovePoint() + "\n" +
 							"ShotRange " + unitsToChoose.get(i).getRange();
 			
 			labParameters[i].setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
 		}
+	}
+	
+	private void setPointsLab(){
+		labPoints.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		labPoints.setHorizontalAlignment(SwingConstants.CENTER);
+		labPoints.setForeground(Color.black);
+		labPoints.setOpaque(true);
+	
+		String param = "Points: " + points;
+
+		labPoints.setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
+
 	}
 	
 	private void setBtnBack() {
@@ -159,24 +187,26 @@ public class ChooseUnitsMode {
 		
 		this.setBtnChosenUnit();
 		this.setBtnUnit();
+		this.setPointsLab();
 		
 		panel.removeAll();
 		panel.setLayout(new MigLayout(
 				"", 
 				(frame.getWidth() / 2 - 810/2) 
 				+ "[]5[][]10[][]5[]60[]5[]", 
-				(frame.getHeight() / 2 - 530/2) 
-				+"[]5[]5[]5[]5[]80[]"
+				(frame.getHeight() / 2 - 590/2) 
+				+"[]5[]5[]5[]5[]5[]80[]"
 			));
 		
 		for (int i = 0; i < 10; i++)
-			panel.add(btnChosenUnit[i], "cell " + ( i / 5) + " " + i%5 + ", width 80:80:80, height 80:80:80");
+			panel.add(btnChosenUnit[i], "cell " + ( i / 5) + " " + (i%5 + 1) + ", width 80:80:80, height 80:80:80");
 		for (int i = 0; i < 10; i++)
-			panel.add(btnUnit[i], "cell " + (( i / 5)*2 + 4) + " " + i%5 +  ", width 80:80:80, height 80:80:80");
+			panel.add(btnUnit[i], "cell " + (( i / 5)*2 + 4) + " " + (i%5 + 1) +  ", width 80:80:80, height 80:80:80");
 		for (int i = 0; i < 10; i++)
-			panel.add(labParameters[i], "cell " + ((i / 5)*2 + 5) + " " + i%5 + ", width 80:80:80, height 80:80:80");
-		panel.add(btnReady, "cell 2 5, width 80:120:150, height 20:30:40");
-		panel.add(btnBack, "cell 3 5, width 80:120:150, height 20:30:40");
+			panel.add(labParameters[i], "cell " + ((i / 5)*2 + 5) + " " + (i%5 + 1) + ", width 80:80:80, height 80:80:80");
+		panel.add(labPoints, "cell 3 0, width 80:120:150, height 20:30:40");
+		panel.add(btnReady, "cell 2 6, width 80:120:150, height 20:30:40");
+		panel.add(btnBack, "cell 3 6, width 80:120:150, height 20:30:40");
 		
 		panel.invalidate();
 		panel.validate();

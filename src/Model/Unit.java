@@ -24,6 +24,7 @@ public class Unit implements GameObject, java.io.Serializable {
 	private int maxMovePoint;
 	private int movePoint;
 	private int range;
+	public int cost;
 	private HexMapElement myHex;
 
 	final int GRASS = 1;
@@ -39,6 +40,7 @@ public class Unit implements GameObject, java.io.Serializable {
 		this.maxMovePoint = unit.maxMovePoint;
 		this.attack = unit.attack;
 		this.owner = unit.owner;
+		this.cost = unit.cost;
 	}
 
 	public Unit(ImageIcon img, int x, int y, int maxHealth, int range,
@@ -55,7 +57,7 @@ public class Unit implements GameObject, java.io.Serializable {
 	}
 
 	public Unit(ImageIcon icon, int maxHealth, int range, int maxMovePoint,
-			int attack) {
+			int attack, int cost) {
 		this.icon = icon;
 		this.img = icon;
 		this.maxHealth = maxHealth;
@@ -63,6 +65,7 @@ public class Unit implements GameObject, java.io.Serializable {
 		this.range = range;
 		this.maxMovePoint = maxMovePoint;
 		this.attack = attack;
+		this.cost = cost;
 	}
 
 	public ImageIcon getIcon() {
@@ -197,25 +200,25 @@ public class Unit implements GameObject, java.io.Serializable {
 		
 		ImageIcon testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Griffin.png");
 		
-		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 4, 60));
+		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 4, 60, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Gnoll.png");
-		unitsToChoose.add(new Unit(testImgIcon, 100, 1, 2, 30));
+		unitsToChoose.add(new Unit(testImgIcon, 100, 1, 2, 30, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/hus1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 120, 1, 3, 40));
+		unitsToChoose.add(new Unit(testImgIcon, 120, 1, 3, 40, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Scimitar2.png");
-		unitsToChoose.add(new Unit(testImgIcon, 140, 1, 2, 25));
+		unitsToChoose.add(new Unit(testImgIcon, 140, 1, 2, 25, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Lantern2.png");
-		unitsToChoose.add(new Unit(testImgIcon, 160, 1, 2, 40));
+		unitsToChoose.add(new Unit(testImgIcon, 160, 1, 2, 40, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Ogre.png");
-		unitsToChoose.add(new Unit(testImgIcon, 180, 1, 2, 50));
+		unitsToChoose.add(new Unit(testImgIcon, 180, 1, 2, 50, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/swordnshield1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 150, 1, 2, 30));
+		unitsToChoose.add(new Unit(testImgIcon, 150, 1, 2, 30, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Bow.png");
-		unitsToChoose.add(new Unit(testImgIcon, 100, 7, 2, 20));
+		unitsToChoose.add(new Unit(testImgIcon, 100, 7, 2, 20, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Mage1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 100, 8, 2, 50));
+		unitsToChoose.add(new Unit(testImgIcon, 100, 8, 2, 50, 100));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Hydra.png");
-		unitsToChoose.add(new Unit(testImgIcon, 200, 2, 2, 50));
+		unitsToChoose.add(new Unit(testImgIcon, 200, 2, 2, 50, 100));
 		
 		return unitsToChoose;
 	}
