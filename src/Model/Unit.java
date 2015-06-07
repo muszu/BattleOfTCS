@@ -198,28 +198,27 @@ public class Unit implements GameObject, java.io.Serializable {
 	public static List<Unit> createUnitLists(String colorOfUnit) {
 		List<Unit> unitsToChoose = new LinkedList<>();
 		
+		
 		ImageIcon testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Griffin.png");
-		
-		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 4, 60, 100));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Gnoll.png");
-		unitsToChoose.add(new Unit(testImgIcon, 100, 1, 2, 30, 100));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/hus1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 120, 1, 3, 40, 100));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Scimitar2.png");
-		unitsToChoose.add(new Unit(testImgIcon, 140, 1, 2, 25, 100));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Lantern2.png");
-		unitsToChoose.add(new Unit(testImgIcon, 160, 1, 2, 40, 100));
+		unitsToChoose.add(new Unit(testImgIcon, 600, 1, 5, 200, 600));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Ogre.png");
-		unitsToChoose.add(new Unit(testImgIcon, 180, 1, 2, 50, 100));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/swordnshield1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 150, 1, 2, 30, 100));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Bow.png");
-		unitsToChoose.add(new Unit(testImgIcon, 100, 7, 2, 20, 100));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Mage1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 100, 8, 2, 50, 100));
+		unitsToChoose.add(new Unit(testImgIcon, 1000, 1, 2, 200, 800));
 		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Hydra.png");
-		unitsToChoose.add(new Unit(testImgIcon, 200, 2, 2, 50, 100));
-		
+		unitsToChoose.add(new Unit(testImgIcon, 600, 2, 2, 180, 500));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/hus1.png");
+		unitsToChoose.add(new Unit(testImgIcon, 300, 1, 3, 120, 250));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Lantern2.png");
+		unitsToChoose.add(new Unit(testImgIcon, 250, 1, 2, 140, 200));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Gnoll.png");
+		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 2, 120, 150));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Scimitar2.png");
+		unitsToChoose.add(new Unit(testImgIcon, 250, 1, 2, 100, 150));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/swordnshield1.png");
+		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 2, 50, 100));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Mage1.png");
+		unitsToChoose.add(new Unit(testImgIcon, 250, 8, 3, 100, 300));
+		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Bow.png");
+		unitsToChoose.add(new Unit(testImgIcon, 100, 7, 2, 40, 100));
 		return unitsToChoose;
 	}
 }

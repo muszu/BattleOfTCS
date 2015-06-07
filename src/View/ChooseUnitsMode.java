@@ -204,7 +204,7 @@ public class ChooseUnitsMode {
 			panel.add(btnUnit[i], "cell " + (( i / 5)*2 + 4) + " " + (i%5 + 1) +  ", width 80:80:80, height 80:80:80");
 		for (int i = 0; i < 10; i++)
 			panel.add(labParameters[i], "cell " + ((i / 5)*2 + 5) + " " + (i%5 + 1) + ", width 80:80:80, height 80:80:80");
-		panel.add(labPoints, "cell 3 0, width 80:120:150, height 20:30:40");
+		panel.add(labPoints, "cell 2 0 3 0, width 160:240:300, height 20:30:40");
 		panel.add(btnReady, "cell 2 6, width 80:120:150, height 20:30:40");
 		panel.add(btnBack, "cell 3 6, width 80:120:150, height 20:30:40");
 		
