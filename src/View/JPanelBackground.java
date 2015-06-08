@@ -27,6 +27,7 @@ public class JPanelBackground extends JPanel {
 	static Image tutorialImg2 = new ImageIcon("images/tutorial2.png").getImage();
 	static Image tutorialImg3 = new ImageIcon("images/tutorial3.png").getImage();
 	static Image tutorialImg4 = new ImageIcon("images/tutorial4.png").getImage();
+	static Image tutorialImg5 = new ImageIcon("images/tutorial5.png").getImage();
 	private Image tutorialImg;
 
 	
@@ -68,6 +69,9 @@ public class JPanelBackground extends JPanel {
 					break;
 				case 4:
 					tutorialImg=tutorialImg4;
+					break;
+				case 5:
+					tutorialImg=tutorialImg5;
 					break;
 				default:
 					break;
