@@ -45,7 +45,7 @@ public class ChooseColorAndNameMode {
 	private String playerAname = "Player's A Name";
 	private String playerBname = "Player's B Name";
 	private Integer points = 500;
-	private boolean flagOrNot = true;
+	private boolean flagOrNot = false;
 	
 	JPanel panel;
 	Controller controller;
