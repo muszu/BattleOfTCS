@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 import Control.Controller;
 import Model.Game;
@@ -33,6 +35,11 @@ public class ChooseColorAndNameMode {
 	private JTextField nameA = new JTextField("Player A", 1);
 	private JTextField nameB = new JTextField("Player B", 1);
 	
+	private JLabel labMode = new JLabel();
+	private JLabel labPoints = new JLabel();
+	private JLabel labNames = new JLabel();
+	private JLabel labColors = new JLabel();
+	
 	private String colorA = "black";
 	private String colorB = "red";
 	private String playerAname = "Player's A Name";
@@ -55,6 +62,10 @@ public class ChooseColorAndNameMode {
 		this.setButtons();
 		this.setComboBoxes();
 		this.setTextFields();
+		this.setPointsLab();
+		this.setModeLab();
+		this.setColorsLab();
+		this.setNamesLab();
 	}
 
 	
@@ -149,7 +160,6 @@ public class ChooseColorAndNameMode {
 			}
 		});
 	}
-
 	
 	private void getNames() {
 		playerAname = nameA.getText();
@@ -180,21 +190,69 @@ public class ChooseColorAndNameMode {
 		nameB.setForeground(new Color(0f, 0f, 0f));
 		nameB.setBackground(new Color(0.7f, 0.7f, 0.7f));
 	}
+	private void setPointsLab(){
+		labPoints.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		labPoints.setHorizontalAlignment(SwingConstants.CENTER);
+		labPoints.setForeground(Color.black);
+		labPoints.setOpaque(true);
+	
+		String param = "Points";
+
+		labPoints.setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
+	}
+	private void setModeLab(){
+		labMode.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		labMode.setHorizontalAlignment(SwingConstants.CENTER);
+		labMode.setForeground(Color.black);
+		labMode.setOpaque(true);
+	
+		String param = "Game Mode";
+
+		labMode.setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
+
+	}
+	private void setNamesLab(){
+		labNames.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		labNames.setHorizontalAlignment(SwingConstants.CENTER);
+		labNames.setForeground(Color.black);
+		labNames.setOpaque(true);
+	
+		String param = "Players' names";
+
+		labNames.setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
+
+	}
+	private void setColorsLab(){
+		labColors.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		labColors.setHorizontalAlignment(SwingConstants.CENTER);
+		labColors.setForeground(Color.black);
+		labColors.setOpaque(true);
+	
+		String param = "Players' colors";
+
+		labColors.setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
+
+	}
+
 	
 	
 	public void paintChooseColorAndNameMode() {
 		panel.removeAll();
-		panel.setLayout(new MigLayout("", (frame.getWidth()/ 2 - 580/2)+"[][]20[][]", 
-			(frame.getHeight()/2 - 340/2)+"[]30[]50[]100[]"));
+		panel.setLayout(new MigLayout("", (frame.getWidth()/ 2 - 580/2)+"[]30[]20[]30[]", 
+			(frame.getHeight()/2 - 340/2)+"[]20[]50[]20[]100[]"));
 		
-		panel.add(gameModeList, "cell 1 0, width 100:140:150, height 20:40:40");
-		panel.add(gamePointsList, "cell 2 0, width 100:140:150, height 20:40:40");
-		panel.add(nameA, "cell 0 1, width 100:140:150, height 20:40:40");
-		panel.add(nameB, "cell 3 1, width 100:140:150, height 20:40:40");
-		panel.add(colorListA, "cell 0 2, width 100:140:150, height 20:40:40");
-		panel.add(colorListB, "cell 3 2, width 100:140:150, height 20:40:40");
-		panel.add(btnBack, "cell 1 3, width 100:140:150, height 20:40:40");
-		panel.add(btnChooseUnits, "cell 2 3, width 100:140:150, height 20:40:40");
+		panel.add(labMode, "cell 1 0, width 100:140:150, height 20:40:40");
+		panel.add(labPoints, "cell 1 1, width 100:140:150, height 20:40:40");
+		panel.add(gameModeList, "cell 2 0, width 100:140:150, height 20:40:40");
+		panel.add(gamePointsList, "cell 2 1, width 100:140:150, height 20:40:40");
+		panel.add(nameA, "cell 0 2, width 100:140:150, height 20:40:40");
+		panel.add(nameB, "cell 3 2, width 100:140:150, height 20:40:40");
+		panel.add(labNames, "cell 1 2 2 2, width 200:300:300, height 20:40:40");
+		panel.add(colorListA, "cell 0 3, width 100:140:150, height 20:40:40");
+		panel.add(colorListB, "cell 3 3, width 100:140:150, height 20:40:40");
+		panel.add(labColors, "cell 1 3 2 3, width 200:300:300, height 20:40:40");
+		panel.add(btnBack, "cell 1 4, width 100:140:150, height 20:40:40");
+		panel.add(btnChooseUnits, "cell 2 4, width 100:140:150, height 20:40:40");
 		
 		panel.invalidate();
 		panel.validate();
