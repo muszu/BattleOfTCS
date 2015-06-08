@@ -247,10 +247,10 @@ public class ChooseColorAndNameMode {
 		panel.add(gamePointsList, "cell 2 1, width 100:140:150, height 20:40:40");
 		panel.add(nameA, "cell 0 2, width 100:140:150, height 20:40:40");
 		panel.add(nameB, "cell 3 2, width 100:140:150, height 20:40:40");
-		panel.add(labNames, "cell 1 2 2 2, width 200:300:300, height 20:40:40");
+		panel.add(labNames, "cell 1 2 2 1, width 200:300:300, height 20:40:40");
 		panel.add(colorListA, "cell 0 3, width 100:140:150, height 20:40:40");
 		panel.add(colorListB, "cell 3 3, width 100:140:150, height 20:40:40");
-		panel.add(labColors, "cell 1 3 2 3, width 200:300:300, height 20:40:40");
+		panel.add(labColors, "cell 1 3 2 1, width 200:300:300, height 20:40:40");
 		panel.add(btnBack, "cell 1 4, width 100:140:150, height 20:40:40");
 		panel.add(btnChooseUnits, "cell 2 4, width 100:140:150, height 20:40:40");
 		
