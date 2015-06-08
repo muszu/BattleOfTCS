@@ -77,7 +77,7 @@ public class MainMenu {
 		btnRules.setBackground(new Color(0.7f, 0.7f, 0.7f));
 		btnRules.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//controller.setRuleMode();
+				controller.setTutorialMode();
 			}
 		});
 

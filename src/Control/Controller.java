@@ -21,6 +21,7 @@ import View.GameMode;
 import View.JPanelBackground;
 import View.MainMenu;
 import View.Options;
+import View.Tutorial;
 
 
 public class Controller {
@@ -28,6 +29,7 @@ public class Controller {
 	public JPanelBackground panel = new JPanelBackground();
 	public JFrame frame = new JFrame();
 	public Game game = new Game();
+	public int tutorialImgNumber;
 	
 	
 	public Controller() {
@@ -117,9 +119,13 @@ public class Controller {
 	}
 	
 	public void setCreditsMode() {
-		panel.mode = 4;
-		
+		panel.mode = 4;	
 		Credits credits = new Credits(panel, frame, this);
 		credits.paintCredits();
+	}
+	public void setTutorialMode() {
+		panel.mode = 5;
+		Tutorial tutorial = new Tutorial(panel, frame, this);
+		tutorial.paintTutorial();
 	}
 }
