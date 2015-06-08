@@ -193,8 +193,8 @@ public class ChooseColorAndNameMode {
 		panel.add(nameB, "cell 3 1, width 100:140:150, height 20:40:40");
 		panel.add(colorListA, "cell 0 2, width 100:140:150, height 20:40:40");
 		panel.add(colorListB, "cell 3 2, width 100:140:150, height 20:40:40");
-		panel.add(btnBack, "cell 2 3, width 100:140:150, height 20:40:40");
-		panel.add(btnChooseUnits, "cell 1 3, width 100:140:150, height 20:40:40");
+		panel.add(btnBack, "cell 1 3, width 100:140:150, height 20:40:40");
+		panel.add(btnChooseUnits, "cell 2 3, width 100:140:150, height 20:40:40");
 		
 		panel.invalidate();
 		panel.validate();

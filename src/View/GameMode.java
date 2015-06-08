@@ -231,7 +231,7 @@ public class GameMode {
 		panel.removeAll();
 		panel.setLayout(new MigLayout("",
 				frame.getWidth() / 2 - (150*4+3*20)/2 + "[]30[]30[]30[]", 
-				frame.getHeight()-60  + "[]2[]"));
+				(int) HexMap.firstHexCenterY+7*HexMapElement.height+20 + "[]"));
 		
 		panel.add(btnBackToMenu, "cell 0 0, width 150:150:300, height 20:30:40");
 		panel.add(btnLoadGame, "cell 1 0, width 150:150:300, height 20:30:40");

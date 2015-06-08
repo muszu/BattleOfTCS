@@ -170,12 +170,12 @@ public class Game implements java.io.Serializable{
 				g.drawString(
 						playerA + " win!",
 						(int) (HexMap.width - g.getFontMetrics().stringWidth(
-								playerA + "win!")) / 2, 50);
+								playerA + "won!")) / 2, 50);
 			else
 				g.drawString(
 						playerB + " win!",
 						(int) (HexMap.width - g.getFontMetrics().stringWidth(
-								playerB + "win!")) / 2, 50);
+								playerB + "won!")) / 2, 50);
 		} else {
 			g.setFont(bigFont);
 			if (turn == 1)
@@ -187,11 +187,11 @@ public class Game implements java.io.Serializable{
 			if(turnToWin<=10){
 				g.setFont(smallFont);
 				if(ownerOfFlag==1)
-					g.drawString("Left " + turnToWin + " turn to " + playerA + " win", (int) (HexMap.width - g.getFontMetrics()
-						.stringWidth("Left " + turnToWin + " turn to " + playerA + " win")) / 2, 70);
+					g.drawString("Left " + turnToWin + " turns to " + playerA + " victory", (int) (HexMap.width - g.getFontMetrics()
+						.stringWidth("Left " + turnToWin + " turns to " + playerA + " victory")) / 2, 70);
 				else
-					g.drawString("Left " + turnToWin + " turn to " + playerB + " win", (int) (HexMap.width - g.getFontMetrics()
-							.stringWidth("Left " + turnToWin + " turn to " + playerB + " win")) / 2, 70);
+					g.drawString("Left " + turnToWin + " turns to " + playerB + " victory", (int) (HexMap.width - g.getFontMetrics()
+							.stringWidth("Left " + turnToWin + " turns to " + playerB + " victory")) / 2, 70);
 			}
 		}
 		g.drawImage(imgBoard200, 5, 5, null);

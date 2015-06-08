@@ -31,6 +31,7 @@ public class ChooseUnitsMode {
 	private JButton[] btnUnit = new JButton[10];
 	private JLabel[] labParameters = new JLabel[10];
 	private JLabel labPoints = new JLabel();
+	private JLabel labPlayer = new JLabel();
 	
 	
 	JFrame frame;
@@ -172,6 +173,20 @@ public class ChooseUnitsMode {
 		labPoints.setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
 
 	}
+
+	private void setPlayerLab(){
+		labPlayer.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		labPlayer.setHorizontalAlignment(SwingConstants.CENTER);
+		labPlayer.setForeground(Color.black);
+		labPlayer.setOpaque(true);
+	
+		String param = new String();
+		if(player1Ready) param = game.playerB; 
+		else param = game.playerA;
+		
+		labPlayer.setText("<html>" + param.replaceAll("\\n", "<br>") + "</html>");
+
+	}
 	
 	private void setBtnBack() {
 		btnBack.setForeground(new Color(0f, 0f, 0f));
@@ -188,6 +203,7 @@ public class ChooseUnitsMode {
 		this.setBtnChosenUnit();
 		this.setBtnUnit();
 		this.setPointsLab();
+		this.setPlayerLab();
 		
 		panel.removeAll();
 		panel.setLayout(new MigLayout(
@@ -204,9 +220,10 @@ public class ChooseUnitsMode {
 			panel.add(btnUnit[i], "cell " + (( i / 5)*2 + 4) + " " + (i%5 + 1) +  ", width 80:80:80, height 80:80:80");
 		for (int i = 0; i < 10; i++)
 			panel.add(labParameters[i], "cell " + ((i / 5)*2 + 5) + " " + (i%5 + 1) + ", width 80:80:80, height 80:80:80");
-		panel.add(labPoints, "cell 2 0 3 0, width 160:240:300, height 20:30:40");
-		panel.add(btnReady, "cell 2 6, width 80:120:150, height 20:30:40");
-		panel.add(btnBack, "cell 3 6, width 80:120:150, height 20:30:40");
+		panel.add(labPlayer, "cell 2 0, width 80:120:150, height 20:30:40");
+		panel.add(labPoints, "cell 3 0, width 80:120:150, height 20:30:40");
+		panel.add(btnReady, "cell 3 6, width 80:120:150, height 20:30:40");
+		panel.add(btnBack, "cell 2 6, width 80:120:150, height 20:30:40");
 		
 		panel.invalidate();
 		panel.validate();
