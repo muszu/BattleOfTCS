@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.Random;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,10 +33,10 @@ public class GameMode {
 	private LinkedList<HexMapElement> listOfHexA = new LinkedList<>();
 	private LinkedList<HexMapElement> listOfHexB = new LinkedList<>();
 	
+	private JButton btnBackToMenu = new JButton("Back to menu");
+	private JButton btnLoadGame = new JButton("Load game");
+	private JButton btnSaveGame = new JButton("Save game");
 	private JButton btnEndTurn = new JButton("End Turn");
-	
-	private final String[] commands = {"Back to menu", "Save game", "Load game"};
-	private final JComboBox<String> commandsBox = new JComboBox<String>(commands);
 	
 	JFrame frame;
 	JPanel panel;
@@ -50,8 +49,7 @@ public class GameMode {
 		this.game = game;
 		this.controller = controller;
 		
-		setButton();
-		setComboBox();
+		setButtons();
 		prepareGame();
 	}
 
@@ -168,7 +166,7 @@ public class GameMode {
 		game.refresh();
 	}
 	
-	private void setButton() {
+	private void setButtons() {
 		
 		btnEndTurn.setForeground(new Color(0f, 0f, 0f));
 		btnEndTurn.setBackground(new Color(0.7f, 0.7f, 0.7f));
@@ -190,58 +188,55 @@ public class GameMode {
 			}
 		});
 		
-	}
-	
-	private void setComboBox() {
-
-		commandsBox.setForeground(new Color(0f, 0f, 0f));
-		commandsBox.setBackground(new Color(0.7f, 0.7f, 0.7f));
-		commandsBox.setSelectedIndex(0);
-		commandsBox.addActionListener(new ActionListener() {
+		btnSaveGame.setForeground(new Color(0f, 0f, 0f));
+		btnSaveGame.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnSaveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				switch((String) commandsBox.getSelectedItem()) {
-				case "Back to menu": 
-					if (JOptionPane.showConfirmDialog(frame,
-							"Are you sure to go back to menu. \n If You didn't save your game all progress will be lost.", "Yes",
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
-						controller.setMainMenuMode();
-					break;
-					
-				case "Save game":
-					
-					if (JOptionPane.showConfirmDialog(frame,
-							"Are you sure to save your game?", "Save",
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
-						saveGame();
-					break;
-					
-				case "Load game":
-					
-					if (JOptionPane.showConfirmDialog(frame,
-							"Are you sure to load your game?", "Load",
-							JOptionPane.YES_NO_OPTION,
-							JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
-						loadGame();
-					break;
-					
-				}
+				if (JOptionPane.showConfirmDialog(frame,
+						"Are you sure to save your game? It will override last save.", "Save",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
+					saveGame();
 			}
 		});
-
+		
+		btnLoadGame.setForeground(new Color(0f, 0f, 0f));
+		btnLoadGame.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnLoadGame.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(frame,
+						"Are you sure to load your game?", "Load",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
+					loadGame();
+			}
+		});
+		
+		btnBackToMenu.setForeground(new Color(0f, 0f, 0f));
+		btnBackToMenu.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnBackToMenu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (JOptionPane.showConfirmDialog(frame,
+						"Are you sure to go back to menu. \n If You didn't save your game all progress will be lost.", "Yes",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
+					controller.setMainMenuMode();
+			}
+		});
 	}
+	
 	
 
 	public void paintGameMode() {
 		panel.removeAll();
 		panel.setLayout(new MigLayout("",
-				frame.getWidth() / 2 - 260 + "[]20[]", 
-				frame.getHeight()-80  + "[]2[]"));
+				frame.getWidth() / 2 - (150*4+3*20)/2 + "[]30[]30[]30[]", 
+				frame.getHeight()-60  + "[]2[]"));
 		
-		panel.add(btnEndTurn, "cell 0 0, width 150:250:300, height 20:30:40");
-		panel.add(commandsBox, "cell 1 0, width 150:250:300, height 20:30:40");
+		panel.add(btnBackToMenu, "cell 0 0, width 150:150:300, height 20:30:40");
+		panel.add(btnLoadGame, "cell 1 0, width 150:150:300, height 20:30:40");
+		panel.add(btnSaveGame, "cell 2 0, width 150:150:300, height 20:30:40");
+		panel.add(btnEndTurn, "cell 3 0, width 150:150:300, height 20:30:40");
 		
 		panel.invalidate();
 		panel.validate();
