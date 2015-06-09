@@ -17,7 +17,7 @@ public class MainMenu {
 	
 	private JButton btnNewGame = new JButton("New game");
 	private JButton btnLoadGame = new JButton("Load game");
-	private JButton btnRules = new JButton("Rules");
+	private JButton btnTutorial = new JButton("Tutorial");
 	private JButton btnOptions = new JButton("Options");
 	private JButton btnCredits = new JButton("Credits");
 	private JButton btnExit = new JButton("Exit");
@@ -45,7 +45,7 @@ public class MainMenu {
 		
 		panel.add(btnNewGame, "cell 0 0, width 150:250:300, height 30:40:60");
 		panel.add(btnLoadGame, "cell 0 1, width 150:250:300, height 30:40:60");
-		panel.add(btnRules, "cell 0 2, width 150:250:300, height 30:40:60");
+		panel.add(btnTutorial, "cell 0 2, width 150:250:300, height 30:40:60");
 		panel.add(btnOptions, "cell 0 3, width 150:250:300, height 30:40:60");
 		panel.add(btnCredits, "cell 0 4, width 150:250:300, height 30:40:60");
 		panel.add(btnExit, "cell 0 5, width 150:250:300, height 30:40:60");
@@ -73,9 +73,9 @@ public class MainMenu {
 			}
 		});
 		
-		btnRules.setForeground(new Color(0f, 0f, 0f));
-		btnRules.setBackground(new Color(0.7f, 0.7f, 0.7f));
-		btnRules.addActionListener(new ActionListener() {
+		btnTutorial.setForeground(new Color(0f, 0f, 0f));
+		btnTutorial.setBackground(new Color(0.7f, 0.7f, 0.7f));
+		btnTutorial.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.setTutorialMode();
 			}
