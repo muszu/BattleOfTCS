@@ -114,8 +114,12 @@ public class Controller {
 	public void setLoadGameMode() {
 		panel.mode = 3;
 		GameMode gameMode = new GameMode(frame, panel, game, this);
-		gameMode.loadGame();
-		gameMode.paintGameMode();
+		if(gameMode.loadGame()){
+			gameMode.paintGameMode();
+		}
+		else{
+			setMainMenuMode();
+		}
 	}
 	
 	public void setCreditsMode() {

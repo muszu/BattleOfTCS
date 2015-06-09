@@ -271,6 +271,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 			panel.removeMouseListener(this);
 			panel.removeMouseMotionListener(this);
 			gameMode.victoryMessage();
+			game.win=0;
 		}
 	}
 

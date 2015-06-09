@@ -55,7 +55,7 @@ public class GameMode {
 
 	
 	
-	public void loadGame() {
+	public boolean loadGame() {
 		try {
 		
 			FileInputStream loadGame = new  FileInputStream("saveGame.ser");
@@ -73,32 +73,32 @@ public class GameMode {
 			panel.addMouseListener(listener);
 			panel.addMouseMotionListener(listener);
 			game.refresh();
-			System.out.println("Game loaded");
- 
 		} catch(IOException i) {
+			game.win=0;
 			JOptionPane.showMessageDialog(null, "Loading failed", "ok", JOptionPane.ERROR_MESSAGE);
-			i.printStackTrace();
+			//i.printStackTrace();
+			return false;
 		} catch (ClassNotFoundException e1) {
+			game.win=0;
 			JOptionPane.showMessageDialog(null, "Loading failed", "ok", JOptionPane.ERROR_MESSAGE);
-			e1.printStackTrace();
+			//e1.printStackTrace();
+			return false;
 		}
-			
 		map.recenter(frame.getWidth(), frame.getHeight());
+		return true;
 	}
 
 	protected void saveGame() {
-		
 		try {
 			FileOutputStream saveGame = new FileOutputStream("saveGame.ser");
 			ObjectOutputStream out = new ObjectOutputStream(saveGame);
 			out.writeObject(game);
 			out.close();
 			saveGame.close();
-			System.out.println("Game saved");
 	      
 		} catch(IOException i) {
 			JOptionPane.showMessageDialog(null, "Saving failed", "ok", JOptionPane.ERROR_MESSAGE);
-			i.printStackTrace();
+			//i.printStackTrace();
 		}
 	}
 
@@ -226,6 +226,10 @@ public class GameMode {
 	}
 	
 	public void victoryMessage(){
+		if(game.playerA == null || game.playerB == null){
+			controller.setMainMenuMode();
+			return;
+		}
 		Object options[] = {"End Game"};
 		String message;
 		if (game.win == 1)
