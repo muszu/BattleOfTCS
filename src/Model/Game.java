@@ -27,7 +27,7 @@ public class Game implements java.io.Serializable{
 	public HexMapElement flagHex;
 	public HexMapElement selectedHex;
 	public boolean modeOfGame;
-	private int win;
+	public int win;
 	public List<Unit> units = new LinkedList<>();
 	public LinkedList<Unit> turnList;
 	public HexMap map = new HexMap(this);
@@ -127,6 +127,9 @@ public class Game implements java.io.Serializable{
 					win = ownerOfFlag;
 				
 				}
+			}
+			if(win!=0){
+				
 			}
 			
 		}

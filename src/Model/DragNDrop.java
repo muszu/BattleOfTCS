@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import View.GameMode;
+
 public class DragNDrop implements MouseListener, MouseMotionListener {
 
 	private List<Unit> units;
@@ -20,6 +22,7 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 	private HexMapElement lastHex, lastHexPosition;
 	private HexMap map;
 	private static Game game;
+	public static GameMode gameMode;
 
 	public DragNDrop(List<Unit> units, JPanel panel, HexMap map, Game games) {
 		this.map = map;
@@ -264,7 +267,11 @@ public class DragNDrop implements MouseListener, MouseMotionListener {
 				}
 			}
 		}
-
+		if(game.win!=0){
+			panel.removeMouseListener(this);
+			panel.removeMouseMotionListener(this);
+			gameMode.victoryMessage();
+		}
 	}
 
 }

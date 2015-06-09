@@ -48,7 +48,7 @@ public class GameMode {
 		this.panel = panel;
 		this.game = game;
 		this.controller = controller;
-		
+		DragNDrop.gameMode = this;
 		setButtons();
 		prepareGame();
 	}
@@ -64,6 +64,7 @@ public class GameMode {
 			game = (Game) in.readObject();
 			map = game.map;
 			controller.game = game;
+			DragNDrop.gameMode = this;
 			in.close();
 			loadGame.close();
 			panel.removeMouseListener(listener);
@@ -120,7 +121,6 @@ public class GameMode {
 		
 		createMap();
 		game.prepareTurnList();
-		
 		game.tacticSet = 2;
 		
 		int i = 0;
@@ -225,7 +225,20 @@ public class GameMode {
 		});
 	}
 	
-	
+	public void victoryMessage(){
+		Object options[] = {"End Game"};
+		String message;
+		if (game.win == 1)
+			message = game.playerA + " won!";
+		else
+			message = game.playerB + " won!";
+		int jOptionResult = JOptionPane.showOptionDialog(frame, message, 
+				"Victory!", JOptionPane.DEFAULT_OPTION,
+				JOptionPane.INFORMATION_MESSAGE, null, 
+				options, options[0]);
+		if(jOptionResult == -1 || jOptionResult == 0)
+			controller.setMainMenuMode();
+	}
 
 	public void paintGameMode() {
 		panel.removeAll();
