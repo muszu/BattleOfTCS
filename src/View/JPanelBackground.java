@@ -2,8 +2,9 @@ package View;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import Control.Controller;
@@ -15,21 +16,34 @@ public class JPanelBackground extends JPanel {
 	
 	public int mode = 1;
 	public Controller controller;
-	
-	static Image backGround = new ImageIcon("images/backbroundmenuv3.jpg").getImage();
-	static Image backGroundOptions = new ImageIcon("images/backbroundmenuv2.jpg").getImage();
-	static Image backGroundGame = new ImageIcon("images/background.png").getImage();
-	static Image newBackGround = new ImageIcon("images/newbackground.png").getImage();
-	static Image newBackGround2 = new ImageIcon("images/newbackground2.png").getImage();
-	static Image battle = new ImageIcon("images/battle.png").getImage();
-	static Image credits = new ImageIcon("images/credits.png").getImage();
-	static Image tutorialImg1 = new ImageIcon("images/tutorial1.png").getImage();
-	static Image tutorialImg2 = new ImageIcon("images/tutorial2.png").getImage();
-	static Image tutorialImg3 = new ImageIcon("images/tutorial3.png").getImage();
-	static Image tutorialImg4 = new ImageIcon("images/tutorial4.png").getImage();
-	static Image tutorialImg5 = new ImageIcon("images/tutorial5.png").getImage();
+	static Image backGround;
+	static Image backGroundGame;
+	static Image newBackGround;
+	static Image battle;
+	static Image credits;
+	static Image tutorialImg1;
+	static Image tutorialImg2;
+	static Image tutorialImg3;
+	static Image tutorialImg4;
+	static Image tutorialImg5;
 	private Image tutorialImg;
-
+	
+	static {
+		try {
+			backGround = ImageIO.read(JPanelBackground.class.getResource("/backbroundmenuv2.jpg"));
+			newBackGround = ImageIO.read(JPanelBackground.class.getResource("/newbackground.png"));
+			backGroundGame = ImageIO.read(JPanelBackground.class.getResource("/background.png"));
+			battle = ImageIO.read(JPanelBackground.class.getResource("/battle.png"));
+			credits = ImageIO.read(JPanelBackground.class.getResource("/credits.png"));
+			tutorialImg1 = ImageIO.read(JPanelBackground.class.getResource("/tutorial1.png"));
+			tutorialImg2 = ImageIO.read(JPanelBackground.class.getResource("/tutorial2.png"));
+			tutorialImg3 = ImageIO.read(JPanelBackground.class.getResource("/tutorial3.png"));
+			tutorialImg4 = ImageIO.read(JPanelBackground.class.getResource("/tutorial4.png"));
+			tutorialImg5 = ImageIO.read(JPanelBackground.class.getResource("/tutorial5.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

@@ -4,10 +4,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.swing.ImageIcon;
+import javax.imageio.ImageIO;
 
 
 public class Game implements java.io.Serializable{
@@ -33,16 +34,27 @@ public class Game implements java.io.Serializable{
 	public HexMap map = new HexMap(this);
 	public Integer points;
 
-	public final static Image imgBoard150 = new ImageIcon("images/board150.png").getImage();
-	public final static Image imgBoard200 = new ImageIcon("images/board200.png").getImage();
-	public final static Image imgBoard250 = new ImageIcon("images/board250.png").getImage();
-	public final static Image imgBoard360 = new ImageIcon("images/board360.png").getImage();
-
+	public static Image imgBoard150;
+	public static Image imgBoard200;
+	public static Image imgBoard250;
+	public static Image imgBoard360;
+	
+	static {
+		try {
+			imgBoard150 = ImageIO.read(Game.class.getResource("/board150.png"));
+			imgBoard200 = ImageIO.read(Game.class.getResource("/board200.png"));
+			imgBoard250 = ImageIO.read(Game.class.getResource("/board250.png"));
+			imgBoard360 = ImageIO.read(Game.class.getResource("/board360.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private static Font smallFont = new Font("Arial", Font.BOLD, 15);
 	private static Font mediumFont = new Font("Arial", Font.BOLD, 25);
 	private static Font bigFont = new Font("Arial", Font.BOLD, 40);
-	
 	public Game() {
+		
 		win = 0;
 		turnToWin = 42;
 		ownerOfFlag = 42;

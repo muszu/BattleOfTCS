@@ -3,9 +3,14 @@ package Model;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import View.JPanelBackground;
 
 
 public class Unit implements GameObject, java.io.Serializable {
@@ -197,28 +202,31 @@ public class Unit implements GameObject, java.io.Serializable {
 	
 	public static List<Unit> createUnitLists(String colorOfUnit) {
 		List<Unit> unitsToChoose = new LinkedList<>();
-		
-		
-		ImageIcon testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Griffin.png");
-		unitsToChoose.add(new Unit(testImgIcon, 600, 1, 5, 200, 600));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Ogre.png");
-		unitsToChoose.add(new Unit(testImgIcon, 1000, 1, 2, 200, 800));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Hydra.png");
-		unitsToChoose.add(new Unit(testImgIcon, 600, 2, 2, 180, 500));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/hus1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 300, 1, 3, 120, 250));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Lantern2.png");
-		unitsToChoose.add(new Unit(testImgIcon, 250, 1, 2, 140, 200));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/M - Gnoll.png");
-		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 2, 120, 150));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Scimitar2.png");
-		unitsToChoose.add(new Unit(testImgIcon, 250, 1, 2, 100, 150));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/swordnshield1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 200, 1, 2, 50, 100));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Mage1.png");
-		unitsToChoose.add(new Unit(testImgIcon, 250, 8, 3, 100, 300));
-		testImgIcon = new ImageIcon("images/units/small/" + colorOfUnit + "/Fighter - Bow.png");
-		unitsToChoose.add(new Unit(testImgIcon, 100, 7, 2, 40, 100));
+		ImageIcon testImgIcon;
+		try {
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/M - Griffin.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 600, 1, 5, 200, 600));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/M - Ogre.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 1000, 1, 2, 200, 800));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/M - Hydra.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 600, 2, 2, 180, 500));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/hus1.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 300, 1, 3, 120, 250));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/Lantern2.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 250, 1, 2, 140, 200));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/M - Gnoll.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 200, 1, 2, 120, 150));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/Fighter - Scimitar2.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 250, 1, 2, 100, 150));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/swordnshield1.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 200, 1, 2, 50, 100));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/Mage1.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 250, 8, 3, 100, 300));
+			testImgIcon = new ImageIcon(ImageIO.read(JPanelBackground.class.getResource("/units/small/" + colorOfUnit + "/Fighter - Bow.png")));
+			unitsToChoose.add(new Unit(testImgIcon, 100, 7, 2, 40, 100));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return unitsToChoose;
 	}
 }

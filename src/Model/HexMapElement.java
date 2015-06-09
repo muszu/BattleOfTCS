@@ -2,9 +2,13 @@ package Model;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
 
 
 public class HexMapElement implements GameObject,java.io.Serializable {
@@ -26,22 +30,23 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 	
 	public int tacticSet;
 
-	public final static ImageIcon imgHex = new ImageIcon("images/hex.png");
-	public final static ImageIcon imgHexShadow = new ImageIcon("images/hexshadow.png");
-	public final static ImageIcon imgHexShadowLight = new ImageIcon("images/hexshadowlight.png");
-	public final static ImageIcon imgHexRed = new ImageIcon("images/hexred.png");
-	public final static ImageIcon imgHexYellow = new ImageIcon("images/hexyellow.png");
-	public final static ImageIcon imgHexGreen = new ImageIcon("images/hexgreen.png");
-	public final static ImageIcon imgHexForest = new ImageIcon("images/hex_forest1.png");
-	public final static ImageIcon imgHexHill = new ImageIcon("images/hex_hill.png");
-	public final static ImageIcon imgHexGrass1 = new ImageIcon("images/hex_grass6.png");
-	public final static ImageIcon imgHexGrass2 = new ImageIcon("images/hex_grass6.png");
-	public final static ImageIcon imgHexFlag = new ImageIcon("images/flag_90red.png");
+	public static ImageIcon imgHex;
+	public static ImageIcon imgHexShadow;
+	public static ImageIcon imgHexShadowLight;
+	public static ImageIcon imgHexRed;
+	public static ImageIcon imgHexYellow;
+	public static ImageIcon imgHexGreen;
+	public static ImageIcon imgHexForest;
+	public static ImageIcon imgHexHill;
+	public static ImageIcon imgHexGrass1;
+	public static ImageIcon imgHexGrass2;
+	public static ImageIcon imgHexFlag;
 
-	private static int idCounter = 0;
-	public static int width = imgHex.getIconWidth();
-	public static int height = imgHex.getIconHeight();
-	public static int side = height / 2;
+
+	private static int idCounter;
+	public static int width;
+	public static int height;
+	public static int side;
 
 	public Unit unit;
 	public int id;
@@ -59,7 +64,29 @@ public class HexMapElement implements GameObject,java.io.Serializable {
 	final int FOREST = 3;
 
 	public int terrainType;
-
+	
+	static {
+		try {
+			imgHex = new ImageIcon(ImageIO.read(Unit.class.getResource("/hex.png")));
+			imgHexShadow = new ImageIcon(ImageIO.read(Unit.class.getResource("/hexshadow.png")));
+			imgHexShadowLight = new ImageIcon(ImageIO.read(Unit.class.getResource("/hexshadowlight.png")));
+			imgHexRed = new ImageIcon(ImageIO.read(Unit.class.getResource("/hexred.png")));
+			imgHexYellow = new ImageIcon(ImageIO.read(Unit.class.getResource("/hexyellow.png")));
+			imgHexGreen = new ImageIcon(ImageIO.read(Unit.class.getResource("/hexgreen.png")));
+			imgHexForest = new ImageIcon(ImageIO.read(Unit.class.getResource("/hex_forest1.png")));
+			imgHexHill = new ImageIcon(	ImageIO.read(Unit.class.getResource("/hex_hill.png")));
+			imgHexGrass1 = new ImageIcon(ImageIO.read(Unit.class.getResource("/hex_grass6.png")));
+			imgHexGrass2 = new ImageIcon(ImageIO.read(Unit.class.getResource("/hex_grass6.png")));
+			imgHexFlag = new ImageIcon(ImageIO.read(Unit.class.getResource("/flag_90red.png")));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			idCounter = 0;
+			width = imgHex.getIconWidth();
+			height = imgHex.getIconHeight();
+			side = height / 2;
+	}
+	
 	public HexMapElement(boolean center, int centerX, int centerY) {
 		isFlag = false;
 		this.id = idCounter++;
