@@ -183,14 +183,14 @@ public class Game implements java.io.Serializable{
 			g.setFont(mediumFont);
 			if (win == 1)
 				g.drawString(
-						playerA + " win!",
+						playerA + " wins!",
 						(int) (HexMap.width - g.getFontMetrics().stringWidth(
-								playerA + "won!")) / 2, 50);
+								playerA + "wins!")) / 2, 50);
 			else
 				g.drawString(
-						playerB + " win!",
+						playerB + " wins!",
 						(int) (HexMap.width - g.getFontMetrics().stringWidth(
-								playerB + "won!")) / 2, 50);
+								playerB + "wins!")) / 2, 50);
 		} else {
 			g.setFont(bigFont);
 			if (turn == 1)
