@@ -217,7 +217,7 @@ public class GameMode {
 		btnBackToMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (JOptionPane.showConfirmDialog(frame,
-						"Are you sure to go back to menu. \n If You didn't save your game all progress will be lost.", "Yes",
+						"Are you sure to go back to menu? \n If You didn't save your game all progress will be lost.", "Yes",
 						JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) 
 					controller.setMainMenuMode();

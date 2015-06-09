@@ -124,7 +124,7 @@ public class Game implements java.io.Serializable{
 				if(flagHex.unit!=null){
 					ownerOfFlag = flagHex.unit.owner;
 					if(lastOwnerOfFlag!=ownerOfFlag){
-						turnToWin=10;
+						turnToWin=6;
 						lastOwnerOfFlag=ownerOfFlag;
 					}
 					else{
